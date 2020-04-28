@@ -94,8 +94,8 @@ metadata:
 apiVersion: v1
 data:
   mysql-password: cGFzc3dvcmQ=
-  mysql-replication-password: aEZNMTUwZG9QMw==
-  mysql-root-password: RmpENlk3SjU3Vg==
+  mysql-replication-password: MExUcmJTVGZaeg==
+  mysql-root-password: RGVjbk9WZ1Q4TA==
 kind: Secret
 metadata:
   labels:
