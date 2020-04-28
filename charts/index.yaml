@@ -1,0 +1,75 @@
+apiVersion: v1
+entries:
+  depscloud:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2020-04-28T19:58:28.464744918Z"
+    dependencies:
+    - condition: extractor.enabled
+      name: extractor
+      repository: file://../extractor
+      version: 0.1.4
+    - condition: gateway.enabled
+      name: gateway
+      repository: file://../gateway
+      version: 0.1.4
+    - condition: indexer.enabled
+      name: indexer
+      repository: file://../indexer
+      version: 0.1.5
+    - condition: tracker.enabled
+      name: tracker
+      repository: file://../tracker
+      version: 0.1.5
+    description: A Helm chart for Kubernetes
+    digest: 3e7668437027dc6ffc8400741aa6800fa4b0ebabe0e45c8284cbc443870cfbce
+    name: depscloud
+    type: application
+    urls:
+    - https://deps-cloud.github.io/deploy/charts/depscloud-0.1.1.tgz
+    version: 0.1.1
+  extractor:
+  - apiVersion: v2
+    appVersion: 0.2.7
+    created: "2020-04-28T19:58:28.465115388Z"
+    description: A Helm chart for running the deps-cloud extractor process
+    digest: ebe77876170c020386b800a484e1951314ff4f56c2ac8c59b4524d47535d7449
+    name: extractor
+    type: application
+    urls:
+    - https://deps-cloud.github.io/deploy/charts/extractor-0.1.4.tgz
+    version: 0.1.4
+  gateway:
+  - apiVersion: v2
+    appVersion: 0.2.5
+    created: "2020-04-28T19:58:28.465517984Z"
+    description: A Helm chart for running the deps-cloud gateway process
+    digest: 517ba96b1d28f3f1c493c405507d28bc7eea374a8c768d971991a3535eaec70a
+    name: gateway
+    type: application
+    urls:
+    - https://deps-cloud.github.io/deploy/charts/gateway-0.1.4.tgz
+    version: 0.1.4
+  indexer:
+  - apiVersion: v2
+    appVersion: 0.2.4
+    created: "2020-04-28T19:58:28.465966252Z"
+    description: A Helm chart for running the deps-cloud indexer process
+    digest: 0a1c3e14c0f17dd4ad38e18fcfa177c9a78d2c6a48271cf43b1eefd508b1c661
+    name: indexer
+    type: application
+    urls:
+    - https://deps-cloud.github.io/deploy/charts/indexer-0.1.5.tgz
+    version: 0.1.5
+  tracker:
+  - apiVersion: v2
+    appVersion: 0.2.4
+    created: "2020-04-28T19:58:28.466430138Z"
+    description: A Helm chart for running the deps-cloud tracker process
+    digest: bbd3a3a3f3ca2eb7e400cb3f6a446118f7323cb72953d23a7ae8d4e65790e6a9
+    name: tracker
+    type: application
+    urls:
+    - https://deps-cloud.github.io/deploy/charts/tracker-0.1.5.tgz
+    version: 0.1.5
+generated: "2020-04-28T19:58:28.46257675Z"

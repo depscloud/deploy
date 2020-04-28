@@ -1,0 +1,358 @@
+---
+# Source: depscloud/charts/extractor/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: depscloud-system
+  name: depscloud-extractor
+  labels:
+    helm.sh/chart: extractor-0.1.4
+    app.kubernetes.io/name: extractor
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.7"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: deps.cloud
+    app.kubernetes.io/component: extractor
+---
+# Source: depscloud/charts/gateway/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: depscloud-system
+  name: depscloud-gateway
+  labels:
+    helm.sh/chart: gateway-0.1.4
+    app.kubernetes.io/name: gateway
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.5"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: deps.cloud
+    app.kubernetes.io/component: gateway
+---
+# Source: depscloud/charts/indexer/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: depscloud-system
+  name: depscloud-indexer
+  labels:
+    helm.sh/chart: indexer-0.1.5
+    app.kubernetes.io/name: indexer
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.4"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: deps.cloud
+    app.kubernetes.io/component: indexer
+---
+# Source: depscloud/charts/tracker/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: depscloud-system
+  name: depscloud-tracker
+  labels:
+    helm.sh/chart: tracker-0.1.5
+    app.kubernetes.io/name: tracker
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.4"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: deps.cloud
+    app.kubernetes.io/component: tracker
+---
+# Source: depscloud/charts/extractor/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: depscloud-system
+  name: depscloud-extractor
+  labels:
+    helm.sh/chart: extractor-0.1.4
+    app.kubernetes.io/name: extractor
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.7"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: deps.cloud
+    app.kubernetes.io/component: extractor
+spec:
+  clusterIP: None
+  ports:
+    - port: 8090
+      targetPort: grpc
+      protocol: TCP
+      name: grpclb
+  selector:
+    app.kubernetes.io/name: extractor
+    app.kubernetes.io/instance: depscloud
+---
+# Source: depscloud/charts/gateway/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: depscloud-system
+  name: depscloud-gateway
+  labels:
+    helm.sh/chart: gateway-0.1.4
+    app.kubernetes.io/name: gateway
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.5"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: deps.cloud
+    app.kubernetes.io/component: gateway
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: gateway
+    app.kubernetes.io/instance: depscloud
+---
+# Source: depscloud/charts/tracker/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: depscloud-system
+  name: depscloud-tracker
+  labels:
+    helm.sh/chart: tracker-0.1.5
+    app.kubernetes.io/name: tracker
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.4"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: deps.cloud
+    app.kubernetes.io/component: tracker
+spec:
+  clusterIP: None
+  ports:
+    - port: 8090
+      targetPort: grpc
+      protocol: TCP
+      name: grpclb
+  selector:
+    app.kubernetes.io/name: tracker
+    app.kubernetes.io/instance: depscloud
+---
+# Source: depscloud/charts/extractor/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: depscloud-system
+  name: depscloud-extractor
+  labels:
+    helm.sh/chart: extractor-0.1.4
+    app.kubernetes.io/name: extractor
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.7"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: deps.cloud
+    app.kubernetes.io/component: extractor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: extractor
+      app.kubernetes.io/instance: depscloud
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: extractor
+        app.kubernetes.io/instance: depscloud
+    spec:
+      serviceAccountName: depscloud-extractor
+      securityContext:
+        {}
+      volumes:
+      containers:
+        - name: extractor
+          securityContext:
+            {}
+          image: "depscloud/extractor:0.2.7"
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+          args:
+            - --port=8090
+          ports:
+            - name: grpc
+              containerPort: 8090
+              protocol: TCP
+          livenessProbe:
+            exec:
+              command: ["grpc_health_probe", "-addr=:8090"]
+            initialDelaySeconds: 5
+          readinessProbe:
+            exec:
+              command: ["grpc_health_probe", "-addr=:8090"]
+            initialDelaySeconds: 5
+          resources:
+            {}
+---
+# Source: depscloud/charts/gateway/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: depscloud-system
+  name: depscloud-gateway
+  labels:
+    helm.sh/chart: gateway-0.1.4
+    app.kubernetes.io/name: gateway
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.5"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: deps.cloud
+    app.kubernetes.io/component: gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gateway
+      app.kubernetes.io/instance: depscloud
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: gateway
+        app.kubernetes.io/instance: depscloud
+    spec:
+      serviceAccountName: depscloud-gateway
+      securityContext:
+        {}
+      volumes:
+      containers:
+        - name: gateway
+          securityContext:
+            {}
+          image: "depscloud/gateway:0.2.5"
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+          args:
+            - --extractor-address=dns:///depscloud-extractor:8090
+            - --port=8080
+            - --tracker-address=dns:///depscloud-tracker:8090
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /v1alpha/sources # todo: replace with healthz
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /v1alpha/sources # todo: replace with healthz
+              port: 8080
+          resources:
+            {}
+---
+# Source: depscloud/charts/tracker/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: depscloud-system
+  name: depscloud-tracker
+  labels:
+    helm.sh/chart: tracker-0.1.5
+    app.kubernetes.io/name: tracker
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.4"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: deps.cloud
+    app.kubernetes.io/component: tracker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tracker
+      app.kubernetes.io/instance: depscloud
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: tracker
+        app.kubernetes.io/instance: depscloud
+    spec:
+      serviceAccountName: depscloud-tracker
+      securityContext:
+        {}
+      volumes:
+      containers:
+        - name: tracker
+          securityContext:
+            {}
+          image: "depscloud/tracker:0.2.4"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: depscloud-tracker
+          volumeMounts:
+          args:
+            - --port=8090
+            - --storage-driver=$(STORAGE_DRIVER)
+            - --storage-address=$(STORAGE_ADDRESS)
+            - --storage-readonly-address=$(STORAGE_READ_ONLY_ADDRESS)
+          ports:
+            - name: grpc
+              containerPort: 8090
+              protocol: TCP
+          livenessProbe:
+            exec:
+              command: ["grpc_health_probe", "-addr=:8090"]
+            initialDelaySeconds: 5
+          readinessProbe:
+            exec:
+              command: ["grpc_health_probe", "-addr=:8090"]
+            initialDelaySeconds: 5
+          resources:
+            {}
+---
+# Source: depscloud/charts/indexer/templates/cronjob.yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  namespace: depscloud-system
+  name: depscloud-indexer
+  labels:
+    helm.sh/chart: indexer-0.1.5
+    app.kubernetes.io/name: indexer
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.4"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: deps.cloud
+    app.kubernetes.io/component: indexer
+spec:
+  schedule: "@daily"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: depscloud-indexer
+          securityContext:
+            {}
+          volumes:
+            - name: tmp
+              emptyDir: {}
+            - name: rds-config
+              secret:
+                secretName:  depscloud-indexer
+          containers:
+            - name: indexer
+              securityContext:
+                {}
+              image: "depscloud/indexer:0.2.4"
+              imagePullPolicy: IfNotPresent
+              volumeMounts:
+                - mountPath: /etc/rds
+                  name: rds-config
+                - mountPath: /tmp
+                  name: tmp
+                  readOnly: false
+              args:
+                - --cron
+                - --extractor-address=dns:///depscloud-extractor:8090
+                - --rds-config=/etc/rds/config.yaml
+                - --ssh-keypath=
+                - --ssh-user=
+                - --tracker-address=dns:///depscloud-tracker:8090
+                - --workers=5
+              resources:
+                {}
