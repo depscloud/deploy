@@ -1,443 +1,445 @@
+---
+# Source: mysql/templates/serviceaccount.yml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  labels:
-    app: mysql
-    chart: mysql-6.11.5
-    heritage: Helm
-    release: mysql
   name: mysql
-  namespace: depscloud-system
+  labels:
+    app: mysql
+    chart: mysql-6.11.5
+    release: "mysql"
+    heritage: "Helm"
 secrets:
-- name: mysql
+  - name: mysql
 ---
+# Source: mysql/templates/secrets.yaml
 apiVersion: v1
-data:
-  my.cnf: |-
-    [mysqld]
-    default_authentication_plugin=mysql_native_password
-    skip-name-resolve
-    explicit_defaults_for_timestamp
-    basedir=/opt/bitnami/mysql
-    plugin_dir=/opt/bitnami/mysql/plugin
-    port=3306
-    socket=/opt/bitnami/mysql/tmp/mysql.sock
-    datadir=/bitnami/mysql/data
-    tmpdir=/opt/bitnami/mysql/tmp
-    max_allowed_packet=16M
-    bind-address=0.0.0.0
-    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
-    log-error=/opt/bitnami/mysql/logs/mysqld.log
-    character-set-server=UTF8
-    collation-server=utf8_general_ci
-
-    [client]
-    port=3306
-    socket=/opt/bitnami/mysql/tmp/mysql.sock
-    default-character-set=UTF8
-    plugin_dir=/opt/bitnami/mysql/plugin
-
-    [manager]
-    port=3306
-    socket=/opt/bitnami/mysql/tmp/mysql.sock
-    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
-kind: ConfigMap
-metadata:
-  labels:
-    app: mysql
-    chart: mysql-6.11.5
-    component: master
-    heritage: Helm
-    release: mysql
-  name: mysql-master
-  namespace: depscloud-system
----
-apiVersion: v1
-data:
-  my.cnf: |-
-    [mysqld]
-    default_authentication_plugin=mysql_native_password
-    skip-name-resolve
-    explicit_defaults_for_timestamp
-    basedir=/opt/bitnami/mysql
-    port=3306
-    socket=/opt/bitnami/mysql/tmp/mysql.sock
-    datadir=/bitnami/mysql/data
-    tmpdir=/opt/bitnami/mysql/tmp
-    max_allowed_packet=16M
-    bind-address=0.0.0.0
-    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
-    log-error=/opt/bitnami/mysql/logs/mysqld.log
-    character-set-server=UTF8
-    collation-server=utf8_general_ci
-
-    [client]
-    port=3306
-    socket=/opt/bitnami/mysql/tmp/mysql.sock
-    default-character-set=UTF8
-
-    [manager]
-    port=3306
-    socket=/opt/bitnami/mysql/tmp/mysql.sock
-    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
-kind: ConfigMap
-metadata:
-  labels:
-    app: mysql
-    chart: mysql-6.11.5
-    component: slave
-    heritage: Helm
-    release: mysql
-  name: mysql-slave
-  namespace: depscloud-system
----
-apiVersion: v1
-data:
-  mysql-password: cGFzc3dvcmQ=
-  mysql-replication-password: SXNubnkzV0xzbQ==
-  mysql-root-password: bEpVMVI3TFRuQw==
 kind: Secret
 metadata:
+  name: mysql
   labels:
     app: mysql
     chart: mysql-6.11.5
-    heritage: Helm
     release: mysql
-  name: mysql
-  namespace: depscloud-system
+    heritage: Helm
 type: Opaque
+data:
+  mysql-root-password: "aXBVa2IxbFlqNg=="
+  
+  mysql-password: "cGFzc3dvcmQ="
+  mysql-replication-password: "MUR6Wkc4NGlFWg=="
 ---
+# Source: mysql/templates/master-configmap.yaml
 apiVersion: v1
-kind: Service
+kind: ConfigMap
 metadata:
-  annotations:
-    prometheus.io/port: "9104"
-    prometheus.io/scrape: "true"
-  labels:
-    app: mysql
-    chart: mysql-6.11.5
-    component: slave
-    heritage: Helm
-    release: mysql
-  name: mysql-slave
-  namespace: depscloud-system
-spec:
-  ports:
-  - name: mysql
-    nodePort: null
-    port: 3306
-    targetPort: mysql
-  selector:
-    app: mysql
-    component: slave
-    release: mysql
-  type: ClusterIP
----
-apiVersion: v1
-kind: Service
-metadata:
-  annotations:
-    prometheus.io/port: "9104"
-    prometheus.io/scrape: "true"
-  labels:
-    app: mysql
-    chart: mysql-6.11.5
-    component: master
-    heritage: Helm
-    release: mysql
-  name: mysql
-  namespace: depscloud-system
-spec:
-  ports:
-  - name: mysql
-    nodePort: null
-    port: 3306
-    targetPort: mysql
-  selector:
-    app: mysql
-    component: master
-    release: mysql
-  type: ClusterIP
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  labels:
-    app: mysql
-    chart: mysql-6.11.5
-    component: master
-    heritage: Helm
-    release: mysql
   name: mysql-master
-  namespace: depscloud-system
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: mysql
-      component: master
-      release: mysql
-  serviceName: mysql-master
-  template:
-    metadata:
-      labels:
-        app: mysql
-        chart: mysql-6.11.5
-        component: master
-        heritage: Helm
-        release: mysql
-    spec:
-      containers:
-      - env:
-        - name: BITNAMI_DEBUG
-          value: "false"
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: mysql-root-password
-              name: mysql
-        - name: MYSQL_USER
-          value: user
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: mysql-password
-              name: mysql
-        - name: MYSQL_DATABASE
-          value: depscloud
-        - name: MYSQL_REPLICATION_MODE
-          value: master
-        - name: MYSQL_REPLICATION_USER
-          value: replicator
-        - name: MYSQL_REPLICATION_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: mysql-replication-password
-              name: mysql
-        image: docker.io/bitnami/mysql:8.0.19-debian-10-r94
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          exec:
-            command:
-            - sh
-            - -c
-            - |
-              password_aux="${MYSQL_ROOT_PASSWORD:-}"
-              if [ -f "${MYSQL_ROOT_PASSWORD_FILE:-}" ]; then
-                  password_aux=$(cat $MYSQL_ROOT_PASSWORD_FILE)
-              fi
-              mysqladmin status -uroot -p$password_aux
-          failureThreshold: 3
-          initialDelaySeconds: 120
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
-        name: mysql
-        ports:
-        - containerPort: 3306
-          name: mysql
-        readinessProbe:
-          exec:
-            command:
-            - sh
-            - -c
-            - |
-              password_aux="${MYSQL_ROOT_PASSWORD:-}"
-              if [ -f "${MYSQL_ROOT_PASSWORD_FILE:-}" ]; then
-                  password_aux=$(cat $MYSQL_ROOT_PASSWORD_FILE)
-              fi
-              mysqladmin status -uroot -p$password_aux
-          failureThreshold: 3
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
-        resources:
-          limits: {}
-          requests: {}
-        volumeMounts:
-        - mountPath: /bitnami/mysql
-          name: data
-        - mountPath: /opt/bitnami/mysql/conf/my.cnf
-          name: config
-          subPath: my.cnf
-      initContainers:
-      - command:
-        - /bin/bash
-        - -ec
-        - |
-          chown -R 1001:1001 /bitnami/mysql
-        image: docker.io/bitnami/minideb:buster
-        imagePullPolicy: Always
-        name: volume-permissions
-        resources:
-          limits: {}
-          requests: {}
-        securityContext:
-          runAsUser: 0
-        volumeMounts:
-        - mountPath: /bitnami/mysql
-          name: data
-      securityContext:
-        fsGroup: 1001
-        runAsUser: 1001
-      serviceAccountName: mysql
-      volumes:
-      - configMap:
-          name: mysql-master
-        name: config
-  updateStrategy:
-    type: RollingUpdate
-  volumeClaimTemplates:
-  - metadata:
-      labels:
-        app: mysql
-        component: master
-        heritage: Helm
-        release: mysql
-      name: data
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 8Gi
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
   labels:
     app: mysql
     chart: mysql-6.11.5
-    component: slave
-    heritage: Helm
     release: mysql
+    heritage: Helm
+    component: master
+data:
+  my.cnf: |-
+    [mysqld]
+    default_authentication_plugin=mysql_native_password
+    skip-name-resolve
+    explicit_defaults_for_timestamp
+    basedir=/opt/bitnami/mysql
+    plugin_dir=/opt/bitnami/mysql/plugin
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    datadir=/bitnami/mysql/data
+    tmpdir=/opt/bitnami/mysql/tmp
+    max_allowed_packet=16M
+    bind-address=0.0.0.0
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+    log-error=/opt/bitnami/mysql/logs/mysqld.log
+    character-set-server=UTF8
+    collation-server=utf8_general_ci
+    
+    [client]
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    default-character-set=UTF8
+    plugin_dir=/opt/bitnami/mysql/plugin
+    
+    [manager]
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+---
+# Source: mysql/templates/slave-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
   name: mysql-slave
-  namespace: depscloud-system
+  labels:
+    app: mysql
+    chart: mysql-6.11.5
+    release: mysql
+    heritage: Helm
+    component: slave
+data:
+  my.cnf: |-
+    [mysqld]
+    default_authentication_plugin=mysql_native_password
+    skip-name-resolve
+    explicit_defaults_for_timestamp
+    basedir=/opt/bitnami/mysql
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    datadir=/bitnami/mysql/data
+    tmpdir=/opt/bitnami/mysql/tmp
+    max_allowed_packet=16M
+    bind-address=0.0.0.0
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+    log-error=/opt/bitnami/mysql/logs/mysqld.log
+    character-set-server=UTF8
+    collation-server=utf8_general_ci
+    
+    [client]
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    default-character-set=UTF8
+    
+    [manager]
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+---
+# Source: mysql/templates/master-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+    chart: mysql-6.11.5
+    release: mysql
+    heritage: Helm
+    component: master
+  annotations:
+    prometheus.io/port: '9104'
+    prometheus.io/scrape: "true"
 spec:
-  replicas: 1
+  type: ClusterIP
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: mysql
+      nodePort: null
+  selector:
+    app: mysql
+    release: mysql
+    component: master
+---
+# Source: mysql/templates/slave-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-slave
+  labels:
+    app: mysql
+    chart: mysql-6.11.5
+    release: mysql
+    heritage: Helm
+    component: slave
+  annotations:
+    prometheus.io/port: '9104'
+    prometheus.io/scrape: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: mysql
+      nodePort: null
+  selector:
+    app: mysql
+    release: mysql
+    component: slave
+---
+# Source: mysql/templates/master-statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql-master
+  labels:
+    app: mysql
+    chart: mysql-6.11.5
+    release: mysql
+    heritage: Helm
+    component: master
+spec:
   selector:
     matchLabels:
       app: mysql
-      component: slave
       release: mysql
-  serviceName: mysql-slave
+      component: master
+  serviceName: mysql-master
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
         app: mysql
         chart: mysql-6.11.5
-        component: slave
-        heritage: Helm
         release: mysql
-    spec:
-      containers:
-      - env:
-        - name: MYSQL_REPLICATION_MODE
-          value: slave
-        - name: MYSQL_MASTER_HOST
-          value: mysql
-        - name: MYSQL_MASTER_PORT_NUMBER
-          value: "3306"
-        - name: MYSQL_MASTER_ROOT_USER
-          value: root
-        - name: MYSQL_MASTER_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: mysql-root-password
-              name: mysql
-        - name: MYSQL_REPLICATION_USER
-          value: replicator
-        - name: MYSQL_REPLICATION_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: mysql-replication-password
-              name: mysql
-        image: docker.io/bitnami/mysql:8.0.19-debian-10-r94
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          exec:
-            command:
-            - sh
-            - -c
-            - |
-              password_aux="${MYSQL_MASTER_ROOT_PASSWORD:-}"
-              if [ -f "${MYSQL_MASTER_ROOT_PASSWORD_FILE:-}" ]; then
-                  password_aux=$(cat $MYSQL_MASTER_ROOT_PASSWORD_FILE)
-              fi
-              mysqladmin status -uroot -p$password_aux
-          failureThreshold: 3
-          initialDelaySeconds: 120
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
-        name: mysql
-        ports:
-        - containerPort: 3306
-          name: mysql
-        readinessProbe:
-          exec:
-            command:
-            - sh
-            - -c
-            - |
-              password_aux="${MYSQL_MASTER_ROOT_PASSWORD:-}"
-              if [ -f "${MYSQL_MASTER_ROOT_PASSWORD_FILE:-}" ]; then
-                  password_aux=$(cat $MYSQL_MASTER_ROOT_PASSWORD_FILE)
-              fi
-              mysqladmin status -uroot -p$password_aux
-          failureThreshold: 3
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
-        resources:
-          limits: {}
-          requests: {}
-        volumeMounts:
-        - mountPath: /bitnami/mysql
-          name: data
-        - mountPath: /opt/bitnami/mysql/conf/my.cnf
-          name: config
-          subPath: my.cnf
-      initContainers:
-      - command:
-        - /bin/bash
-        - -ec
-        - |
-          chown -R 1001:1001 /bitnami/mysql
-        image: docker.io/bitnami/minideb:buster
-        imagePullPolicy: Always
-        name: volume-permissions
-        resources:
-          limits: {}
-          requests: {}
-        securityContext:
-          runAsUser: 0
-        volumeMounts:
-        - mountPath: /bitnami/mysql
-          name: data
+        heritage: Helm
+        component: master
+    spec:      
       securityContext:
         fsGroup: 1001
         runAsUser: 1001
       serviceAccountName: mysql
+      initContainers:
+        - name: volume-permissions
+          image: docker.io/bitnami/minideb:buster
+          imagePullPolicy: "Always"
+          command:
+            - /bin/bash
+            - -ec
+            - |
+              chown -R 1001:1001 /bitnami/mysql
+          securityContext:
+            runAsUser: 0
+          resources:
+            limits: {}
+            requests: {}
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami/mysql
+      containers:
+        - name: mysql
+          image: docker.io/bitnami/mysql:8.0.19-debian-10-r94
+          imagePullPolicy: "IfNotPresent"
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-root-password
+            - name: MYSQL_USER
+              value: "user"
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-password
+            - name: MYSQL_DATABASE
+              value: "depscloud"
+            - name: MYSQL_REPLICATION_MODE
+              value: "master"
+            - name: MYSQL_REPLICATION_USER
+              value: "replicator"
+            - name: MYSQL_REPLICATION_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-replication-password
+          ports:
+            - name: mysql
+              containerPort: 3306
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  password_aux="${MYSQL_ROOT_PASSWORD:-}"
+                  if [ -f "${MYSQL_ROOT_PASSWORD_FILE:-}" ]; then
+                      password_aux=$(cat $MYSQL_ROOT_PASSWORD_FILE)
+                  fi
+                  mysqladmin status -uroot -p$password_aux
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  password_aux="${MYSQL_ROOT_PASSWORD:-}"
+                  if [ -f "${MYSQL_ROOT_PASSWORD_FILE:-}" ]; then
+                      password_aux=$(cat $MYSQL_ROOT_PASSWORD_FILE)
+                  fi
+                  mysqladmin status -uroot -p$password_aux
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          resources:
+            limits: {}
+            requests: {}
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami/mysql
+            - name: config
+              mountPath: /opt/bitnami/mysql/conf/my.cnf
+              subPath: my.cnf
       volumes:
-      - configMap:
-          name: mysql-slave
-        name: config
+        - name: config
+          configMap:
+            name: mysql-master
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        labels:
+          app: mysql
+          component: master
+          release: mysql
+          heritage: Helm
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "8Gi"
+---
+# Source: mysql/templates/slave-statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql-slave
+  labels:
+    app: mysql
+    chart: mysql-6.11.5
+    release: mysql
+    heritage: Helm
+    component: slave
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+      release: mysql
+      component: slave
+  serviceName: "mysql-slave"
+  replicas: 1
   updateStrategy:
     type: RollingUpdate
-  volumeClaimTemplates:
-  - metadata:
+  template:
+    metadata:
       labels:
         app: mysql
-        component: slave
-        heritage: Helm
+        chart: mysql-6.11.5
         release: mysql
-      name: data
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 8Gi
+        heritage: Helm
+        component: slave
+    spec:      
+      securityContext:
+        fsGroup: 1001
+        runAsUser: 1001
+      serviceAccountName: mysql
+      initContainers:
+        - name: volume-permissions
+          image: docker.io/bitnami/minideb:buster
+          imagePullPolicy: "Always"
+          command:
+            - /bin/bash
+            - -ec
+            - |
+              chown -R 1001:1001 /bitnami/mysql
+          securityContext:
+            runAsUser: 0
+          resources:
+            limits: {}
+            requests: {}
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami/mysql
+      containers:
+        - name: mysql
+          image: docker.io/bitnami/mysql:8.0.19-debian-10-r94
+          imagePullPolicy: "IfNotPresent"
+          env:
+            - name: MYSQL_REPLICATION_MODE
+              value: "slave"
+            - name: MYSQL_MASTER_HOST
+              value: mysql
+            - name: MYSQL_MASTER_PORT_NUMBER
+              value: "3306"
+            - name: MYSQL_MASTER_ROOT_USER
+              value: "root"
+            - name: MYSQL_MASTER_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-root-password
+            - name: MYSQL_REPLICATION_USER
+              value: "replicator"
+            - name: MYSQL_REPLICATION_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-replication-password
+          ports:
+            - name: mysql
+              containerPort: 3306
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  password_aux="${MYSQL_MASTER_ROOT_PASSWORD:-}"
+                  if [ -f "${MYSQL_MASTER_ROOT_PASSWORD_FILE:-}" ]; then
+                      password_aux=$(cat $MYSQL_MASTER_ROOT_PASSWORD_FILE)
+                  fi
+                  mysqladmin status -uroot -p$password_aux
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  password_aux="${MYSQL_MASTER_ROOT_PASSWORD:-}"
+                  if [ -f "${MYSQL_MASTER_ROOT_PASSWORD_FILE:-}" ]; then
+                      password_aux=$(cat $MYSQL_MASTER_ROOT_PASSWORD_FILE)
+                  fi
+                  mysqladmin status -uroot -p$password_aux
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          resources:
+            limits: {}
+            requests: {}
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami/mysql
+            - name: config
+              mountPath: /opt/bitnami/mysql/conf/my.cnf
+              subPath: my.cnf
+      volumes:
+        - name: config
+          configMap:
+            name: mysql-slave
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        labels:
+          app: mysql
+          component: slave
+          release: mysql
+          heritage: Helm
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "8Gi"
