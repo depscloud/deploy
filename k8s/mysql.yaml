@@ -1,12 +1,12 @@
 ---
-# Source: mysql/templates/serviceaccount.yml
+# Source: mysql/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: mysql
   labels:
     app: mysql
-    chart: mysql-6.14.0
+    chart: mysql-6.14.2
     release: "mysql"
     heritage: "Helm"
 secrets:
@@ -19,15 +19,15 @@ metadata:
   name: mysql
   labels:
     app: mysql
-    chart: mysql-6.14.0
+    chart: mysql-6.14.2
     release: mysql
     heritage: Helm
 type: Opaque
 data:
-  mysql-root-password: "ZllrVGdFbFA4MQ=="
+  mysql-root-password: "b3FISjJLWG5tag=="
   
   mysql-password: "cGFzc3dvcmQ="
-  mysql-replication-password: "NWgzbmczRHBQWg=="
+  mysql-replication-password: "cm1ibjE5eHM0Ug=="
 ---
 # Source: mysql/templates/master-configmap.yaml
 apiVersion: v1
@@ -36,7 +36,7 @@ metadata:
   name: mysql-master
   labels:
     app: mysql
-    chart: mysql-6.14.0
+    chart: mysql-6.14.2
     release: mysql
     heritage: Helm
     component: master
@@ -77,7 +77,7 @@ metadata:
   name: mysql-slave
   labels:
     app: mysql
-    chart: mysql-6.14.0
+    chart: mysql-6.14.2
     release: mysql
     heritage: Helm
     component: slave
@@ -116,7 +116,7 @@ metadata:
   name: mysql
   labels:
     app: mysql
-    chart: mysql-6.14.0
+    chart: mysql-6.14.2
     release: mysql
     heritage: Helm
     component: master
@@ -142,7 +142,7 @@ metadata:
   name: mysql-slave
   labels:
     app: mysql
-    chart: mysql-6.14.0
+    chart: mysql-6.14.2
     release: mysql
     heritage: Helm
     component: slave
@@ -168,7 +168,7 @@ metadata:
   name: mysql-master
   labels:
     app: mysql
-    chart: mysql-6.14.0
+    chart: mysql-6.14.2
     release: mysql
     heritage: Helm
     component: master
@@ -186,7 +186,7 @@ spec:
     metadata:
       labels:
         app: mysql
-        chart: mysql-6.14.0
+        chart: mysql-6.14.2
         release: mysql
         heritage: Helm
         component: master
@@ -214,7 +214,7 @@ spec:
               mountPath: /bitnami/mysql
       containers:
         - name: mysql
-          image: docker.io/bitnami/mysql:8.0.20-debian-10-r29
+          image: docker.io/bitnami/mysql:8.0.20-debian-10-r37
           imagePullPolicy: "IfNotPresent"
           env:
             - name: BITNAMI_DEBUG
@@ -312,7 +312,7 @@ metadata:
   name: mysql-slave
   labels:
     app: mysql
-    chart: mysql-6.14.0
+    chart: mysql-6.14.2
     release: mysql
     heritage: Helm
     component: slave
@@ -330,7 +330,7 @@ spec:
     metadata:
       labels:
         app: mysql
-        chart: mysql-6.14.0
+        chart: mysql-6.14.2
         release: mysql
         heritage: Helm
         component: slave
@@ -358,7 +358,7 @@ spec:
               mountPath: /bitnami/mysql
       containers:
         - name: mysql
-          image: docker.io/bitnami/mysql:8.0.20-debian-10-r29
+          image: docker.io/bitnami/mysql:8.0.20-debian-10-r37
           imagePullPolicy: "IfNotPresent"
           env:
             - name: MYSQL_REPLICATION_MODE
