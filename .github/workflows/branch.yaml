@@ -17,6 +17,7 @@ jobs:
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
           helm version
           bash scripts/generate.sh
+          find public/charts
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
