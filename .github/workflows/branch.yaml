@@ -8,13 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: debian:buster
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          submodules: 'recursive'
 
       - name: Build
         run: |
