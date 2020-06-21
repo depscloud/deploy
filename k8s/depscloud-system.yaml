@@ -47,10 +47,10 @@ kind: ServiceAccount
 metadata:
   name: depscloud-tracker
   labels:
-    helm.sh/chart: tracker-0.1.9
+    helm.sh/chart: tracker-0.1.10
     app.kubernetes.io/name: tracker
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.10"
+    app.kubernetes.io/version: "0.2.11"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: tracker
@@ -109,10 +109,10 @@ kind: Service
 metadata:
   name: depscloud-tracker
   labels:
-    helm.sh/chart: tracker-0.1.9
+    helm.sh/chart: tracker-0.1.10
     app.kubernetes.io/name: tracker
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.10"
+    app.kubernetes.io/version: "0.2.11"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: tracker
@@ -241,10 +241,10 @@ kind: Deployment
 metadata:
   name: depscloud-tracker
   labels:
-    helm.sh/chart: tracker-0.1.9
+    helm.sh/chart: tracker-0.1.10
     app.kubernetes.io/name: tracker
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.10"
+    app.kubernetes.io/version: "0.2.11"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: tracker
@@ -268,7 +268,7 @@ spec:
         - name: tracker
           securityContext:
             {}
-          image: "depscloud/tracker:0.2.10"
+          image: "depscloud/tracker:0.2.11"
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
