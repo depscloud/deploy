@@ -33,7 +33,7 @@ kind: ServiceAccount
 metadata:
   name: depscloud-indexer
   labels:
-    helm.sh/chart: indexer-0.1.7
+    helm.sh/chart: indexer-0.1.8
     app.kubernetes.io/name: indexer
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.10"
@@ -300,7 +300,7 @@ kind: CronJob
 metadata:
   name: depscloud-indexer
   labels:
-    helm.sh/chart: indexer-0.1.7
+    helm.sh/chart: indexer-0.1.8
     app.kubernetes.io/name: indexer
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.10"
@@ -320,7 +320,7 @@ spec:
           volumes:
             - name: tmp
               emptyDir: {}
-            - name: rds-config
+            - name: config
               secret:
                 secretName:  depscloud-indexer
           containers:
@@ -330,14 +330,14 @@ spec:
               image: "depscloud/indexer:0.2.10"
               imagePullPolicy: IfNotPresent
               volumeMounts:
-                - mountPath: /etc/rds
-                  name: rds-config
+                - mountPath: /etc/indexer
+                  name: config
                 - mountPath: /tmp
                   name: tmp
                   readOnly: false
               args:
                 - --extractor-address=dns:///depscloud-extractor:8090
-                - --config=/etc/rds/config.yaml
+                - --config=/etc/indexer/config.yaml
                 - --ssh-keypath=
                 - --ssh-user=
                 - --tracker-address=dns:///depscloud-tracker:8090
