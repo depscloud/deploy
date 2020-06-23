@@ -5,7 +5,7 @@ kind: ServiceAccount
 metadata:
   name: depscloud-extractor
   labels:
-    helm.sh/chart: extractor-0.1.7
+    helm.sh/chart: extractor-0.1.8
     app.kubernetes.io/name: extractor
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.15"
@@ -19,7 +19,7 @@ kind: ServiceAccount
 metadata:
   name: depscloud-gateway
   labels:
-    helm.sh/chart: gateway-0.1.6
+    helm.sh/chart: gateway-0.1.7
     app.kubernetes.io/name: gateway
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.10"
@@ -33,7 +33,7 @@ kind: ServiceAccount
 metadata:
   name: depscloud-indexer
   labels:
-    helm.sh/chart: indexer-0.1.8
+    helm.sh/chart: indexer-0.1.9
     app.kubernetes.io/name: indexer
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.10"
@@ -47,7 +47,7 @@ kind: ServiceAccount
 metadata:
   name: depscloud-tracker
   labels:
-    helm.sh/chart: tracker-0.1.10
+    helm.sh/chart: tracker-0.1.11
     app.kubernetes.io/name: tracker
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.11"
@@ -61,13 +61,14 @@ kind: Service
 metadata:
   name: depscloud-extractor
   labels:
-    helm.sh/chart: extractor-0.1.7
+    helm.sh/chart: extractor-0.1.8
     app.kubernetes.io/name: extractor
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.15"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: extractor
+    
 spec:
   clusterIP: None
   ports:
@@ -85,13 +86,14 @@ kind: Service
 metadata:
   name: depscloud-gateway
   labels:
-    helm.sh/chart: gateway-0.1.6
+    helm.sh/chart: gateway-0.1.7
     app.kubernetes.io/name: gateway
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.10"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: gateway
+    
 spec:
   type: ClusterIP
   ports:
@@ -109,13 +111,14 @@ kind: Service
 metadata:
   name: depscloud-tracker
   labels:
-    helm.sh/chart: tracker-0.1.10
+    helm.sh/chart: tracker-0.1.11
     app.kubernetes.io/name: tracker
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.11"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: tracker
+    
 spec:
   clusterIP: None
   ports:
@@ -133,13 +136,14 @@ kind: Deployment
 metadata:
   name: depscloud-extractor
   labels:
-    helm.sh/chart: extractor-0.1.7
+    helm.sh/chart: extractor-0.1.8
     app.kubernetes.io/name: extractor
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.15"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: extractor
+    
 spec:
   replicas: 1
   selector:
@@ -186,13 +190,14 @@ kind: Deployment
 metadata:
   name: depscloud-gateway
   labels:
-    helm.sh/chart: gateway-0.1.6
+    helm.sh/chart: gateway-0.1.7
     app.kubernetes.io/name: gateway
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.10"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: gateway
+    
 spec:
   replicas: 1
   selector:
@@ -241,13 +246,14 @@ kind: Deployment
 metadata:
   name: depscloud-tracker
   labels:
-    helm.sh/chart: tracker-0.1.10
+    helm.sh/chart: tracker-0.1.11
     app.kubernetes.io/name: tracker
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.11"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: tracker
+    
 spec:
   replicas: 1
   selector:
@@ -294,53 +300,51 @@ spec:
           resources:
             {}
 ---
-# Source: depscloud/charts/indexer/templates/cronjob.yaml
-apiVersion: batch/v1beta1
-kind: CronJob
+# Source: depscloud/charts/indexer/templates/job.yaml
+apiVersion: batch/v1
+kind: Job
 metadata:
   name: depscloud-indexer
   labels:
-    helm.sh/chart: indexer-0.1.8
+    helm.sh/chart: indexer-0.1.9
     app.kubernetes.io/name: indexer
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.10"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: indexer
+    
 spec:
-  schedule: "@daily"
-  jobTemplate:
+  template:
     spec:
-      template:
-        spec:
-          restartPolicy: OnFailure
-          serviceAccountName: depscloud-indexer
+      restartPolicy: OnFailure
+      serviceAccountName: depscloud-indexer
+      securityContext:
+        {}
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: config
+          secret:
+            secretName:  depscloud-indexer
+      containers:
+        - name: indexer
           securityContext:
             {}
-          volumes:
-            - name: tmp
-              emptyDir: {}
-            - name: config
-              secret:
-                secretName:  depscloud-indexer
-          containers:
-            - name: indexer
-              securityContext:
-                {}
-              image: "depscloud/indexer:0.2.10"
-              imagePullPolicy: IfNotPresent
-              volumeMounts:
-                - mountPath: /etc/indexer
-                  name: config
-                - mountPath: /tmp
-                  name: tmp
-                  readOnly: false
-              args:
-                - --extractor-address=dns:///depscloud-extractor:8090
-                - --config=/etc/indexer/config.yaml
-                - --ssh-keypath=
-                - --ssh-user=
-                - --tracker-address=dns:///depscloud-tracker:8090
-                - --workers=5
-              resources:
-                {}
+          image: "depscloud/indexer:0.2.10"
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /etc/indexer
+              name: config
+            - mountPath: /tmp
+              name: tmp
+              readOnly: false
+          args:
+            - --extractor-address=dns:///depscloud-extractor:8090
+            - --config=/etc/indexer/config.yaml
+            - --ssh-keypath=
+            - --ssh-user=
+            - --tracker-address=dns:///depscloud-tracker:8090
+            - --workers=5
+          resources:
+            {}
