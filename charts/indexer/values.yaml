@@ -70,3 +70,5 @@ config:
         strategy: HTTP
         organizations:
           - deps-cloud
+
+labels: {}

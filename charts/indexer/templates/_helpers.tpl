@@ -48,6 +48,9 @@ app.kubernetes.io/version: {{ include "indexer.version" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/part-of: deps.cloud
 app.kubernetes.io/component: indexer
+{{- if .Values.labels }}
+{{ toYaml .Values.labels }}
+{{- end }}
 {{- end -}}
 
 {{/*

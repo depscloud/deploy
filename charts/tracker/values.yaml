@@ -65,3 +65,5 @@ storage:
   address: file::memory:?cache=shared
   driver: sqlite
   readOnlyAddress:
+
+labels: {}

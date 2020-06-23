@@ -57,3 +57,5 @@ tls:
 
 disabledManifests: []
   # Allow manifests to be turned off.
+
+labels: {}

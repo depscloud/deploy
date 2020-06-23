@@ -48,6 +48,9 @@ app.kubernetes.io/version: {{ include "gateway.version" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/part-of: deps.cloud
 app.kubernetes.io/component: gateway
+{{- if .Values.labels }}
+{{ toYaml .Values.labels }}
+{{- end }}
 {{- end -}}
 
 {{/*
