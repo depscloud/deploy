@@ -6,7 +6,7 @@ metadata:
   name: postgres-postgresql
   labels:
     app: postgresql
-    chart: postgresql-8.10.7
+    chart: postgresql-8.10.8
     release: "postgres"
     heritage: "Helm"
 type: Opaque
@@ -20,7 +20,7 @@ metadata:
   name: postgres-postgresql-headless
   labels:
     app: postgresql
-    chart: postgresql-8.10.7
+    chart: postgresql-8.10.8
     release: "postgres"
     heritage: "Helm"
 spec:
@@ -41,7 +41,7 @@ metadata:
   name: postgres-postgresql
   labels:
     app: postgresql
-    chart: postgresql-8.10.7
+    chart: postgresql-8.10.8
     release: "postgres"
     heritage: "Helm"
   annotations:
@@ -63,7 +63,7 @@ metadata:
   name: postgres-postgresql
   labels:
     app: postgresql
-    chart: postgresql-8.10.7
+    chart: postgresql-8.10.8
     release: "postgres"
     heritage: "Helm"
   annotations:
@@ -82,7 +82,7 @@ spec:
       name: postgres-postgresql
       labels:
         app: postgresql
-        chart: postgresql-8.10.7
+        chart: postgresql-8.10.8
         release: "postgres"
         heritage: "Helm"
         role: master
@@ -91,7 +91,7 @@ spec:
         fsGroup: 1001
       containers:
         - name: postgres-postgresql
-          image: docker.io/bitnami/postgresql:11.8.0-debian-10-r39
+          image: docker.io/bitnami/postgresql:11.8.0-debian-10-r41
           imagePullPolicy: "IfNotPresent"
           resources:
             requests:
