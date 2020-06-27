@@ -1,4 +1,5 @@
 ---
+---
 # Source: mysql/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
@@ -24,10 +25,10 @@ metadata:
     heritage: Helm
 type: Opaque
 data:
-  mysql-root-password: "QUFWZllSTDlaUw=="
+  mysql-root-password: "SFlXSjMyRHFXOA=="
   
   mysql-password: "cGFzc3dvcmQ="
-  mysql-replication-password: "WUJvbGRubzF4bw=="
+  mysql-replication-password: "OEFTak1lb1FOcA=="
 ---
 # Source: mysql/templates/master-configmap.yaml
 apiVersion: v1

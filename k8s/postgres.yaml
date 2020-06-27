@@ -1,4 +1,5 @@
 ---
+---
 # Source: postgresql/templates/secrets.yaml
 apiVersion: v1
 kind: Secret

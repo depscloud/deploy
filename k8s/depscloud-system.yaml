@@ -1,4 +1,5 @@
 ---
+---
 # Source: depscloud/charts/extractor/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
