@@ -4,11 +4,11 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: postgres-postgresql
+  name: postgresql
   labels:
     app: postgresql
     chart: postgresql-8.10.10
-    release: "postgres"
+    release: "postgresql"
     heritage: "Helm"
 type: Opaque
 data:
@@ -18,11 +18,11 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-postgresql-headless
+  name: postgresql-headless
   labels:
     app: postgresql
     chart: postgresql-8.10.10
-    release: "postgres"
+    release: "postgresql"
     heritage: "Helm"
 spec:
   type: ClusterIP
@@ -33,17 +33,17 @@ spec:
       targetPort: tcp-postgresql
   selector:
     app: postgresql
-    release: "postgres"
+    release: "postgresql"
 ---
 # Source: postgresql/templates/svc.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-postgresql
+  name: postgresql
   labels:
     app: postgresql
     chart: postgresql-8.10.10
-    release: "postgres"
+    release: "postgresql"
     heritage: "Helm"
   annotations:
 spec:
@@ -54,44 +54,44 @@ spec:
       targetPort: tcp-postgresql
   selector:
     app: postgresql
-    release: "postgres"
+    release: "postgresql"
     role: master
 ---
 # Source: postgresql/templates/statefulset.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgres-postgresql
+  name: postgresql-postgresql
   labels:
     app: postgresql
     chart: postgresql-8.10.10
-    release: "postgres"
+    release: "postgresql"
     heritage: "Helm"
   annotations:
 spec:
-  serviceName: postgres-postgresql-headless
+  serviceName: postgresql-headless
   replicas: 1
   updateStrategy:
     type: RollingUpdate
   selector:
     matchLabels:
       app: postgresql
-      release: "postgres"
+      release: "postgresql"
       role: master
   template:
     metadata:
-      name: postgres-postgresql
+      name: postgresql
       labels:
         app: postgresql
         chart: postgresql-8.10.10
-        release: "postgres"
+        release: "postgresql"
         heritage: "Helm"
         role: master
     spec:      
       securityContext:
         fsGroup: 1001
       containers:
-        - name: postgres-postgresql
+        - name: postgresql
           image: docker.io/bitnami/postgresql:11.8.0-debian-10-r44
           imagePullPolicy: "IfNotPresent"
           resources:
@@ -114,7 +114,7 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-postgresql
+                  name: postgresql
                   key: postgresql-password
             - name: POSTGRES_DB
               value: "depscloud"
