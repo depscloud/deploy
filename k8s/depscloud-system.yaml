@@ -6,10 +6,10 @@ kind: ServiceAccount
 metadata:
   name: depscloud-extractor
   labels:
-    helm.sh/chart: extractor-0.1.10
+    helm.sh/chart: extractor-0.1.11
     app.kubernetes.io/name: extractor
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.18"
+    app.kubernetes.io/version: "0.2.19"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: extractor
@@ -62,10 +62,10 @@ kind: Service
 metadata:
   name: depscloud-extractor
   labels:
-    helm.sh/chart: extractor-0.1.10
+    helm.sh/chart: extractor-0.1.11
     app.kubernetes.io/name: extractor
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.18"
+    app.kubernetes.io/version: "0.2.19"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: extractor
@@ -137,10 +137,10 @@ kind: Deployment
 metadata:
   name: depscloud-extractor
   labels:
-    helm.sh/chart: extractor-0.1.10
+    helm.sh/chart: extractor-0.1.11
     app.kubernetes.io/name: extractor
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.18"
+    app.kubernetes.io/version: "0.2.19"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: extractor
@@ -165,7 +165,7 @@ spec:
         - name: extractor
           securityContext:
             {}
-          image: "depscloud/extractor:0.2.18"
+          image: "depscloud/extractor:0.2.19"
           imagePullPolicy: IfNotPresent
           volumeMounts:
           args:
