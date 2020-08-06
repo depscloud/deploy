@@ -6,13 +6,15 @@ kind: ServiceAccount
 metadata:
   name: depscloud-extractor
   labels:
-    helm.sh/chart: extractor-0.1.11
+    helm.sh/chart: extractor-0.1.12
     app.kubernetes.io/name: extractor
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.19"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: extractor
+    
+automountServiceAccountToken: false
 ---
 # Source: depscloud/charts/gateway/templates/serviceaccount.yaml
 apiVersion: v1
@@ -20,13 +22,15 @@ kind: ServiceAccount
 metadata:
   name: depscloud-gateway
   labels:
-    helm.sh/chart: gateway-0.1.11
+    helm.sh/chart: gateway-0.1.12
     app.kubernetes.io/name: gateway
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.13"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: gateway
+    
+automountServiceAccountToken: false
 ---
 # Source: depscloud/charts/indexer/templates/serviceaccount.yaml
 apiVersion: v1
@@ -34,13 +38,15 @@ kind: ServiceAccount
 metadata:
   name: depscloud-indexer
   labels:
-    helm.sh/chart: indexer-0.1.12
+    helm.sh/chart: indexer-0.1.13
     app.kubernetes.io/name: indexer
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.13"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: indexer
+    
+automountServiceAccountToken: false
 ---
 # Source: depscloud/charts/tracker/templates/serviceaccount.yaml
 apiVersion: v1
@@ -48,13 +54,15 @@ kind: ServiceAccount
 metadata:
   name: depscloud-tracker
   labels:
-    helm.sh/chart: tracker-0.1.16
+    helm.sh/chart: tracker-0.1.17
     app.kubernetes.io/name: tracker
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.16"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: tracker
+    
+automountServiceAccountToken: false
 ---
 # Source: depscloud/charts/extractor/templates/service.yaml
 apiVersion: v1
@@ -62,7 +70,7 @@ kind: Service
 metadata:
   name: depscloud-extractor
   labels:
-    helm.sh/chart: extractor-0.1.11
+    helm.sh/chart: extractor-0.1.12
     app.kubernetes.io/name: extractor
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.19"
@@ -87,7 +95,7 @@ kind: Service
 metadata:
   name: depscloud-gateway
   labels:
-    helm.sh/chart: gateway-0.1.11
+    helm.sh/chart: gateway-0.1.12
     app.kubernetes.io/name: gateway
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.13"
@@ -112,7 +120,7 @@ kind: Service
 metadata:
   name: depscloud-tracker
   labels:
-    helm.sh/chart: tracker-0.1.16
+    helm.sh/chart: tracker-0.1.17
     app.kubernetes.io/name: tracker
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.16"
@@ -137,7 +145,7 @@ kind: Deployment
 metadata:
   name: depscloud-extractor
   labels:
-    helm.sh/chart: extractor-0.1.11
+    helm.sh/chart: extractor-0.1.12
     app.kubernetes.io/name: extractor
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.19"
@@ -191,7 +199,7 @@ kind: Deployment
 metadata:
   name: depscloud-gateway
   labels:
-    helm.sh/chart: gateway-0.1.11
+    helm.sh/chart: gateway-0.1.12
     app.kubernetes.io/name: gateway
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.13"
@@ -247,7 +255,7 @@ kind: Deployment
 metadata:
   name: depscloud-tracker
   labels:
-    helm.sh/chart: tracker-0.1.16
+    helm.sh/chart: tracker-0.1.17
     app.kubernetes.io/name: tracker
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.16"
@@ -307,7 +315,7 @@ kind: Job
 metadata:
   name: depscloud-indexer
   labels:
-    helm.sh/chart: indexer-0.1.12
+    helm.sh/chart: indexer-0.1.13
     app.kubernetes.io/name: indexer
     app.kubernetes.io/instance: depscloud
     app.kubernetes.io/version: "0.2.13"
