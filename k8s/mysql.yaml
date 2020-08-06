@@ -25,10 +25,10 @@ metadata:
     heritage: Helm
 type: Opaque
 data:
-  mysql-root-password: "d1ZMNkloNE1EMQ=="
+  mysql-root-password: "OUZ3eWJraU1zRQ=="
   
   mysql-password: "cGFzc3dvcmQ="
-  mysql-replication-password: "dGRkUkY1QUk5UQ=="
+  mysql-replication-password: "ckgyalIwZ1JaNw=="
 ---
 # Source: mysql/templates/master-configmap.yaml
 apiVersion: v1
