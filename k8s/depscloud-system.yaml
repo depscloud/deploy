@@ -6,10 +6,10 @@ kind: ServiceAccount
 metadata:
   name: depscloud-extractor
   labels:
-    helm.sh/chart: extractor-0.1.12
+    helm.sh/chart: extractor-0.1.13
     app.kubernetes.io/name: extractor
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.19"
+    app.kubernetes.io/version: "0.2.20"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: extractor
@@ -22,10 +22,10 @@ kind: ServiceAccount
 metadata:
   name: depscloud-gateway
   labels:
-    helm.sh/chart: gateway-0.1.12
+    helm.sh/chart: gateway-0.1.13
     app.kubernetes.io/name: gateway
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.13"
+    app.kubernetes.io/version: "0.2.15"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: gateway
@@ -54,10 +54,10 @@ kind: ServiceAccount
 metadata:
   name: depscloud-tracker
   labels:
-    helm.sh/chart: tracker-0.1.17
+    helm.sh/chart: tracker-0.1.18
     app.kubernetes.io/name: tracker
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.16"
+    app.kubernetes.io/version: "0.2.17"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: tracker
@@ -70,10 +70,10 @@ kind: Service
 metadata:
   name: depscloud-extractor
   labels:
-    helm.sh/chart: extractor-0.1.12
+    helm.sh/chart: extractor-0.1.13
     app.kubernetes.io/name: extractor
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.19"
+    app.kubernetes.io/version: "0.2.20"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: extractor
@@ -95,10 +95,10 @@ kind: Service
 metadata:
   name: depscloud-gateway
   labels:
-    helm.sh/chart: gateway-0.1.12
+    helm.sh/chart: gateway-0.1.13
     app.kubernetes.io/name: gateway
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.13"
+    app.kubernetes.io/version: "0.2.15"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: gateway
@@ -120,10 +120,10 @@ kind: Service
 metadata:
   name: depscloud-tracker
   labels:
-    helm.sh/chart: tracker-0.1.17
+    helm.sh/chart: tracker-0.1.18
     app.kubernetes.io/name: tracker
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.16"
+    app.kubernetes.io/version: "0.2.17"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: tracker
@@ -145,10 +145,10 @@ kind: Deployment
 metadata:
   name: depscloud-extractor
   labels:
-    helm.sh/chart: extractor-0.1.12
+    helm.sh/chart: extractor-0.1.13
     app.kubernetes.io/name: extractor
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.19"
+    app.kubernetes.io/version: "0.2.20"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: extractor
@@ -173,7 +173,7 @@ spec:
         - name: extractor
           securityContext:
             {}
-          image: "depscloud/extractor:0.2.19"
+          image: "depscloud/extractor:0.2.20"
           imagePullPolicy: IfNotPresent
           volumeMounts:
           args:
@@ -199,10 +199,10 @@ kind: Deployment
 metadata:
   name: depscloud-gateway
   labels:
-    helm.sh/chart: gateway-0.1.12
+    helm.sh/chart: gateway-0.1.13
     app.kubernetes.io/name: gateway
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.13"
+    app.kubernetes.io/version: "0.2.15"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: gateway
@@ -227,7 +227,7 @@ spec:
         - name: gateway
           securityContext:
             {}
-          image: "depscloud/gateway:0.2.13"
+          image: "depscloud/gateway:0.2.15"
           imagePullPolicy: IfNotPresent
           volumeMounts:
           args:
@@ -255,10 +255,10 @@ kind: Deployment
 metadata:
   name: depscloud-tracker
   labels:
-    helm.sh/chart: tracker-0.1.17
+    helm.sh/chart: tracker-0.1.18
     app.kubernetes.io/name: tracker
     app.kubernetes.io/instance: depscloud
-    app.kubernetes.io/version: "0.2.16"
+    app.kubernetes.io/version: "0.2.17"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: deps.cloud
     app.kubernetes.io/component: tracker
@@ -283,7 +283,7 @@ spec:
         - name: tracker
           securityContext:
             {}
-          image: "depscloud/tracker:0.2.16"
+          image: "depscloud/tracker:0.2.17"
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
