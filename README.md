@@ -1,5 +1,6 @@
 # deps.cloud deployment configuration
 
+![GitHub Pages](https://img.shields.io/github/deployments/depscloud/deploy/github-pages?label=GitHub%20Pages)
 ![license](https://img.shields.io/github/license/depscloud/deploy.svg)
 [![license check](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdepscloud%2Fdeploy.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdepscloud%2Fdeploy?ref=badge_shield)
 
