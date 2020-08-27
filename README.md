@@ -11,6 +11,7 @@ Docker is great for trying the project out or for active development.
 I do not recommend using the docker configuration in this repository for production deployments.
 
 * [CockroachDB](docker/cockroachdb/)
+* [MariaDB](docker/mariadb/)
 * [MySQL](docker/mysql/)
 * [PostgreSQL](docker/postgres/)
 * [SQLite](docker/sqlite/)
