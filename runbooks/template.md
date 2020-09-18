@@ -1,62 +1,29 @@
-<!--
-Author: CatieM20
-Source: https://github.com/CaitieM20/Talks/blob/master/TacklingAlertFatigue/runbook.md
-Accessed: 2020-09-18
-
-From ~ Mya
-
-I really liked the simplicity of CatieM20's runbook. I'm contemplating moving to an
-even more simplified model simply describing production outage scenarios. Especially
-since I don't have any metrics today.
-
--->
-
-
 # Runbook Template
 
-A quick description of the services.  1 to 2 sentences max.  Why does this service matter?  What is it's core functionality?  What Features does it provide users?
+Failure mode and effect analysis ([FMEA]) is a method of failure analysis that helps teams create reliable systems and develop comprehensive on-call response patterns.
 
-## Dashboards
-Links to the Dashboards for this service
+[FMEA]: https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis
 
-## Alerts
+## Symptoms
 
-### Alert Title
-Alert Description:  Why do we have this alert?  What does it mean?  What is typically the cause of this alert?
+Describe the current state of the system.
 
-**Impact to Customers:**
-How does this situation impact our customers?  If the customers are not being impacted, this is a good indicator that the alert can be deleted.
+### Context
 
-**Remediation Steps:**
-Checklist manifesto style steps for how to resolve this alert.  A person who has never worked on our stack should be able to follow these steps and remediate the incident.  If it cannot be remediated, include escalation steps here.
- 1. Do this
- 2. Check this graph
- 3. Do this thing 
- 4. Do this other thing
- 5. Verify service has recovered
- 
-## Contact Info
-Team contact info.  Potentially contact info for who to escalate to.  What services do we have dependencies on?  How do we escalate to them?  Define this information here.  
+Provide context about the systems and the potential impact on the end users.
 
-## Latest Deployments
-We do Production Change Management Deployments via Jira, we included a link of all the latest changes here.  Recent commits, CI log etc... is incredibly helpful in understanding what code is deployed to the system, what recent changes were made.
+### Troubleshooting
 
-## Clusters
-Information on where this service is deployed, and how to access those machines.
+Provide any steps to help users troubleshoot the system and gather any additional information.
 
-## Deployment
-How do you deploy this services.  Favor Checklist manifesto style lists here as well. 
- 1. Do this thing
- 2. Do this other thing
- 3. Finally do this thing 
- 
-### Canary Deploy
-Instructions on how to do a Canary Deployment
- 1. Do this canary thing
- 2. another canary task
- 
-### Rollback Deploy
-Instructions on how to Rollback a Deploy. 
- 1. Get the rollback build here
- 2. Do this thing
- 3. Do this other thing.  
+## Remediation Steps
+
+1. First step to remediation
+2. Second step
+3. ...
+4. Finally, ...
+
+## Next Steps
+
+Branching point.
+If this guide couldn't help the user diagnose or fix the problem, possibly point them at related runbooks to help remediate the problem.
