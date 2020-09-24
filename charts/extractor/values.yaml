@@ -1,7 +1,8 @@
 # Default values for extractor.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-global: {}
+global:
+  service: {}
 
 replicaCount: 1
 
@@ -35,7 +36,12 @@ securityContext: {}
 
 service:
   type: Headless
-  port: 8090
+  # In later versions of kubernetes, you can leverage service topology to control routing.
+  # type: ClusterIP
+  # topology:
+  #   - "kubernetes.io/hostname"
+  #   - "topology.kubernetes.io/zone"
+  #   - "topology.kubernetes.io/region"
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

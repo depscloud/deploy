@@ -11,9 +11,20 @@ spec:
   type: {{ .Values.service.type }}
   {{- end }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
       targetPort: grpc
       protocol: TCP
-      name: grpclb
+      name: grpc
   selector:
     {{- include "tracker.selectorLabels" . | nindent 4 }}
+  {{- if .Values.service.topology }}
+  topologyKeys:
+    {{- toYaml .Values.service.topology | nindent 4 }}
+  {{- else if .Values.global.service.topology }}
+  topologyKeys:
+    {{- toYaml .Values.global.service.topology | nindent 4 }}
+  {{- end }}

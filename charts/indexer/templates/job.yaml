@@ -65,19 +65,19 @@ spec:
           args:
             - --extractor-address={{ include "extractor.address" . }}
             {{- if .Values.extractor.secretName }}
-            - --extractor-ca=/etc/ssl/client/tracker/ca.crt
-            - --extractor-cert=/etc/ssl/client/tracker/tls.crt
-            - --extractor-key=/etc/ssl/client/tracker/tls.key
+            - --extractor-ca=/etc/ssl/client/extractor/ca.crt
+            - --extractor-cert=/etc/ssl/client/extractor/tls.crt
+            - --extractor-key=/etc/ssl/client/extractor/tls.key
             {{- end }}
-            - --config=/etc/indexer/config.yaml
-            - --ssh-keypath=
-            - --ssh-user=
             - --tracker-address={{ include "tracker.address" . }}
             {{- if .Values.tracker.secretName }}
             - --tracker-ca=/etc/ssl/client/tracker/ca.crt
             - --tracker-cert=/etc/ssl/client/tracker/tls.crt
             - --tracker-key=/etc/ssl/client/tracker/tls.key
             {{- end }}
+            - --config=/etc/indexer/config.yaml
+            - --ssh-keypath=
+            - --ssh-user=
             - --workers={{ .Values.workers }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

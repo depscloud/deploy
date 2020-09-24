@@ -2,6 +2,14 @@ global:
   # labels applied to all subcharts
   labels: {}
 
+  # service configuration applied to all subcharts
+  service: {}
+  # In later versions of kubernetes, you can leverage service topology to control routing.
+  #  topology:
+  #    - "kubernetes.io/hostname"
+  #    - "topology.kubernetes.io/zone"
+  #    - "topology.kubernetes.io/region"
+
 mysql:
   enabled: false
 

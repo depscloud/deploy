@@ -59,15 +59,9 @@ spec:
           args:
             - --extractor-address={{ include "extractor.address" . }}
             {{- if .Values.extractor.secretName }}
-            - --extractor-ca=/etc/ssl/client/tracker/ca.crt
-            - --extractor-cert=/etc/ssl/client/tracker/tls.crt
-            - --extractor-key=/etc/ssl/client/tracker/tls.key
-            {{- end }}
-            - --port=8080
-            {{- if .Values.tls.secretName }}
-            - --tls-ca=/etc/ssl/server/ca.crt
-            - --tls-cert=/etc/ssl/server/tls.crt
-            - --tls-key=/etc/ssl/server/tls.key
+            - --extractor-ca=/etc/ssl/client/extractor/ca.crt
+            - --extractor-cert=/etc/ssl/client/extractor/tls.crt
+            - --extractor-key=/etc/ssl/client/extractor/tls.key
             {{- end }}
             - --tracker-address={{ include "tracker.address" . }}
             {{- if .Values.tracker.secretName }}
@@ -75,18 +69,28 @@ spec:
             - --tracker-cert=/etc/ssl/client/tracker/tls.crt
             - --tracker-key=/etc/ssl/client/tracker/tls.key
             {{- end }}
+            {{- if .Values.tls.secretName }}
+            - --tls-ca=/etc/ssl/server/ca.crt
+            - --tls-cert=/etc/ssl/server/tls.crt
+            - --tls-key=/etc/ssl/server/tls.key
+            {{- end }}
           ports:
             - name: http
               containerPort: 8080
               protocol: TCP
+            - name: grpc
+              containerPort: 8090
+              protocol: TCP
           livenessProbe:
             httpGet:
-              path: /v1alpha/sources # todo: replace with healthz
+              path: /healthz
               port: 8080
+            initialDelaySeconds: 5
           readinessProbe:
             httpGet:
-              path: /v1alpha/sources # todo: replace with healthz
+              path: /healthz
               port: 8080
+            initialDelaySeconds: 5
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

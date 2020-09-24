@@ -39,7 +39,6 @@ spec:
               name: server-certs
             {{- end }}
           args:
-            - --port=8090
             {{- if .Values.tls.secretName }}
             - --tls-ca=/etc/ssl/server/ca.crt
             - --tls-cert=/etc/ssl/server/tls.crt
@@ -49,16 +48,21 @@ spec:
             - --disable-manifests={{ $disabledManifest }}
             {{- end }}
           ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
             - name: grpc
               containerPort: 8090
               protocol: TCP
           livenessProbe:
-            exec:
-              command: ["grpc_health_probe", "-addr=:8090"]
+            httpGet:
+              port: 8080
+              path: /healthz
             initialDelaySeconds: 5
           readinessProbe:
-            exec:
-              command: ["grpc_health_probe", "-addr=:8090"]
+            httpGet:
+              port: 8080
+              path: /healthz
             initialDelaySeconds: 5
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

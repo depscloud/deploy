@@ -50,7 +50,6 @@ spec:
               name: server-certs
             {{- end }}
           args:
-            - --port=8090
             - --storage-driver=$(STORAGE_DRIVER)
             - --storage-address=$(STORAGE_ADDRESS)
             - --storage-readonly-address=$(STORAGE_READ_ONLY_ADDRESS)
@@ -60,16 +59,21 @@ spec:
             - --tls-key=/etc/ssl/server/tls.key
             {{- end }}
           ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
             - name: grpc
               containerPort: 8090
               protocol: TCP
           livenessProbe:
-            exec:
-              command: ["grpc_health_probe", "-addr=:8090"]
+            httpGet:
+              path: /healthz
+              port: 8080
             initialDelaySeconds: 5
           readinessProbe:
-            exec:
-              command: ["grpc_health_probe", "-addr=:8090"]
+            httpGet:
+              path: /healthz
+              port: 8080
             initialDelaySeconds: 5
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
