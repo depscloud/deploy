@@ -1,9 +1,23 @@
-# Default values for gateway.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# Configuration shared across all charts. Each chart supports per service and
+# global configuration, making it easy to configure and deploy the system.
 global:
-  service: {}
+  # Common labels added to all resources.
+  labels: {}
 
+  # Common service configuration. Used to configure routing topology.
+  service: {}
+  #  topology:
+  #    - "kubernetes.io/hostname"
+  #    - "topology.kubernetes.io/zone"
+  #    - "topology.kubernetes.io/region"
+
+  # Common metrics configuration.
+  metrics:
+    serviceMonitor:
+      enabled: false
+      interval: 10s
+
+# The number of instances to run.
 replicaCount: 1
 
 image:
@@ -15,9 +29,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  # Specifies whether a service account should be created
+  # Specifies whether a service account should be created.
   create: true
-  # Determine if the token should be automounted.
+  # Determine pods should automount the token.
   automountToken: false
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
@@ -34,20 +48,21 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+# Configure the behavior of the service definition. In newer versions of
+# kubernetes, you can leverage service topology to control routing.
 service:
   type: Headless
-  # In later versions of kubernetes, you can leverage service topology to control routing.
   # type: ClusterIP
   # topology:
   #   - "kubernetes.io/hostname"
   #   - "topology.kubernetes.io/zone"
   #   - "topology.kubernetes.io/region"
 
+# We usually recommend not to specify default resources and to leave this as a conscious
+# choice for the user. This also increases chances charts run on environments with little
+# resources, such as Minikube. If you do want to specify resources, uncomment the following
+# lines, adjust them as necessary, and remove the curly braces after 'resources:'.
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 200m
   #   memory: 128Mi
@@ -61,15 +76,33 @@ tolerations: []
 
 affinity: {}
 
+# Configure the connection information to the extractor service. The
+# `secretName` is used to configure mTLS for extractor. The secret needs 3
+# keys: `tls.crt`, `tls.key`, and `ca.crt`.
 extractor:
   address: "dns:///extractor:8090"
   secretName: ""
 
+# Configure the connection information to the tracker service. The
+# `secretName` is used to configure mTLS for tracker. The secret needs 3
+# keys: `tls.crt`, `tls.key`, and `ca.crt`.
 tracker:
   address: "dns:///tracker:8090"
   secretName: ""
 
+# Configure mTLS for the process. The secret needs 3 keys: `tls.crt`,
+# `tls.key`, and `ca.crt`. This should hook in nicely with services
+# like cert-manager.
 tls:
   secretName: ""
 
+# Labels added to all resources. These are joined with the global
+# configuration for the deployment.
 labels: {}
+
+# Metrics configuration specific to the deployment. This overrides the
+# global configuration for the deployment.
+metrics:
+  serviceMonitor: {}
+#    enabled: false
+#    interval: 10s

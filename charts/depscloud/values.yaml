@@ -1,24 +1,37 @@
+# Configuration shared across all charts. Each chart supports per service and
+# global configuration, making it easy to configure and deploy the system.
 global:
-  # labels applied to all subcharts
+  # Common labels added to all resources.
   labels: {}
 
-  # service configuration applied to all subcharts
+  # Common service configuration. Used to configure routing topology.
   service: {}
-  # In later versions of kubernetes, you can leverage service topology to control routing.
   #  topology:
   #    - "kubernetes.io/hostname"
   #    - "topology.kubernetes.io/zone"
   #    - "topology.kubernetes.io/region"
 
+  # Common metrics configuration.
+  metrics:
+    serviceMonitor:
+      enabled: false
+      interval: 10s
+
+# Deploy a copy of MySQL alongside deps.cloud. Useful for quick testing.
+# Not recommended for production.
 mysql:
   enabled: false
 
+# Deploy a copy of PostgreSQL alongside deps.cloud. Useful for quick testing.
+# Not recommended for production.
 postgres:
   enabled: false
 
+# Deploy and configure the extractor process.
 extractor:
   enabled: true
 
+# Deploy and configure the gateway process.
 gateway:
   enabled: true
   extractor:
@@ -26,6 +39,7 @@ gateway:
   tracker:
     address: ""
 
+# Deploy and configure the indexer process.
 indexer:
   enabled: true
   schedule: ""
@@ -34,5 +48,6 @@ indexer:
   tracker:
     address: ""
 
+# Deploy and configure the tracker process.
 tracker:
   enabled: true

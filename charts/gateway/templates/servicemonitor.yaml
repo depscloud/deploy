@@ -1,0 +1,18 @@
+{{- $enabled := or .Values.global.metrics.serviceMonitor.enabled .Values.metrics.serviceMonitor.enabled -}}
+{{- $interval := default .Values.global.metrics.serviceMonitor.interval .Values.metrics.serviceMonitor.interval -}}
+{{- if $enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "gateway.fullname" . }}
+  labels:
+  {{- include "gateway.labels" . | nindent 4 }}
+spec:
+  endpoints:
+    - interval: {{ $interval }}
+      path: /metrics
+      port: http
+  selector:
+    matchLabels:
+    {{- include "gateway.selectorLabels" . | nindent 6 }}
+{{- end }}

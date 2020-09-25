@@ -1,7 +1,8 @@
-# Default values for indexer.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-global: {}
+# Configuration shared across all charts. Each chart supports per service and
+# global configuration, making it easy to configure and deploy the system.
+global:
+  # Common labels added to all resources.
+  labels: {}
 
 image:
   repository: depscloud/indexer
@@ -12,9 +13,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  # Specifies whether a service account should be created
+  # Specifies whether a service account should be created.
   create: true
-  # Determine if the token should be automounted.
+  # Determine pods should automount the token.
   automountToken: false
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
@@ -31,11 +32,11 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+# We usually recommend not to specify default resources and to leave this as a conscious
+# choice for the user. This also increases chances charts run on environments with little
+# resources, such as Minikube. If you do want to specify resources, uncomment the following
+# lines, adjust them as necessary, and remove the curly braces after 'resources:'.
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
   #   memory: 128Mi
@@ -49,24 +50,30 @@ tolerations: []
 
 affinity: {}
 
+# The schedule to run on. If not set, then the indexer will run as a job
+# instead of on a recurring schedule.
 schedule: "@daily"
 
+# The number of worker threads to index repositories.
+workers: 5
+
+# Configure the connection information to the extractor service. The
+# `secretName` is used to configure mTLS for extractor. The secret needs 3
+# keys: `tls.crt`, `tls.key`, and `ca.crt`.
 extractor:
   address: "dns:///extractor:8090"
   secretName: ""
 
+# Configure the connection information to the tracker service. The
+# `secretName` is used to configure mTLS for tracker. The secret needs 3
+# keys: `tls.crt`, `tls.key`, and `ca.crt`.
 tracker:
   address: "dns:///tracker:8090"
   secretName: ""
 
-workers: 5
-
-externalConfig:
-  configMapRef:
-    name: ""
-  secretRef:
-    name: ""
-
+# Used to generate a config.yaml file that is fed into the indexer.
+# This drives which repositories are indexed and which ones aren't.
+# See https://deps.cloud/docs/deploy/config/indexing/
 config:
   accounts:
     - github:
@@ -74,4 +81,14 @@ config:
         organizations:
           - depscloud
 
+# Indexing private repositories often requires secret tokens. As a result,
+# we support storing the config information in a secret file.
+externalConfig:
+  configMapRef:
+    name: ""
+  secretRef:
+    name: ""
+
+# Labels added to all resources. These are joined with the global
+# configuration for the deployment.
 labels: {}
