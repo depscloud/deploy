@@ -12,6 +12,9 @@ spec:
     - interval: {{ $interval }}
       path: /metrics
       port: http
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
   selector:
     matchLabels:
       {{- include "extractor.selectorLabels" . | nindent 6 }}
