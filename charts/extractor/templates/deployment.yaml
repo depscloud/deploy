@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "extractor.selectorLabels" . | nindent 8 }}
+        {{- include "extractor.labels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

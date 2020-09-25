@@ -8,8 +8,14 @@ metadata:
 spec:
   schedule: {{ .Values.schedule | quote }}
   jobTemplate:
+    metadata:
+      labels:
+        {{- include "indexer.labels" . | nindent 8 }}
     spec:
       template:
+        metadata:
+          labels:
+            {{- include "indexer.labels" . | nindent 12 }}
         spec:
           restartPolicy: OnFailure
         {{- with .Values.imagePullSecrets }}
