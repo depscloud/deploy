@@ -1,8 +1,4 @@
-# Runbook Template
-
-Failure mode and effect analysis ([FMEA]) is a method of failure analysis that helps teams create reliable systems and develop comprehensive on-call response patterns.
-
-[FMEA]: https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis
+# Production Outage Scenario
 
 ## Symptoms
 
