@@ -12,7 +12,7 @@ This process is critical to the functionality of the system.
 
 | Service   | Failure Mode         | Possible Cause       | Effects                           | Probability (P)        | Severity (S)    | Detection (D) | Risk      |
 |:----------|:---------------------|:---------------------|:----------------------------------|:-----------------------|:----------------|:--------------|:----------|
-| DockerHub | Outage / Unreachable | DockerHub DDOSd      | Cannot update or deploy extractor | remote (B)             | no effect (I)   | high          | low       |
+| DockerHub | Outage / Unreachable | DockerHub DDOSd      | Cannot update or deploy tracker   | remote (B)             | no effect (I)   | high          | low       |
 | Tracker   | Not Running / Ready  | Crash loop           | Data cannot be stored or read     | extremely unlikely (A) | critical (IV)   | certain       | low       |
 | Tracker   | Not Running / Ready  | Cluster full         | Data cannot be stored or read     | remote (B)             | critical (IV)   | high          | moderate  |
 | Tracker   | Not Running / Ready  | Unhealthy dependency | Data cannot be stored or read     | remote (B)             | critical (IV)   | high          | moderate  |

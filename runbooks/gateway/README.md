@@ -11,7 +11,7 @@ This system is stateless and provides a single interaction point to the ecosyste
 
 | Service   | Failure Mode         | Possible Cause       | Effects                           | Probability (P)        | Severity (S)    | Detection (D) | Risk      |
 |:----------|:---------------------|:---------------------|:----------------------------------|:-----------------------|:----------------|:--------------|:----------|
-| DockerHub | Outage / Unreachable | DockerHub DDOSd      | Cannot update or deploy extractor | remote (B)             | no effect (I)   | high          | low       |
+| DockerHub | Outage / Unreachable | DockerHub DDOSd      | Cannot update or deploy gateway   | remote (B)             | no effect (I)   | high          | low       |
 | Gateway   | Not Running / Ready  | Crash loop           | Unable to serve user requests     | extremely unlikely (A) | critical (IV)   | certain       | low       |
 | Gateway   | Not Running / Ready  | Cluster full         | Unable to serve user requests     | remote (B)             | critical (IV)   | high          | moderate  |
 | Gateway   | Not Running / Ready  | Unhealthy dependency | Unable to serve user requests     | remote (B)             | critical (IV)   | high          | moderate  |
