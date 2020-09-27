@@ -1,11 +1,12 @@
 # Extractor Runbook
 
-## General
+Extractor is responsible for parsing [manifest fies](https://deps.cloud/docs/concepts/manifests/).
+It matches common manifest files, parses their contents, and returns a standard representation of projects and their dependencies.
+It's used heavily during indexing and sporadically by end users.
 
-This system is responsible for the p
-A quick description of the services.  1 to 2 sentences max.  Why does this service matter?  What is it's core functionality?  What Features does it provide users?
+## Failure Mode and Effect Analysis
 
-## Failure Mode and Effect Analysis ([FMEA])
+[FMEA] is a method of failure analysis that helps teams create reliable systems and develop comprehensive on-call response patterns.
 
 [FMEA]: https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis
 

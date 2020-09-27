@@ -1,9 +1,11 @@
 # Gateway Runbook
 
-## General
-A quick description of the services.  1 to 2 sentences max.  Why does this service matter?  What is it's core functionality?  What Features does it provide users?
+Gateway provides RESTful and gRPC interfaces to the backend services.
+This system is stateless and provides a single interaction point to the ecosystem.
 
-## Failure Mode and Effect Analysis ([FMEA])
+## Failure Mode and Effect Analysis
+
+[FMEA] is a method of failure analysis that helps teams create reliable systems and develop comprehensive on-call response patterns.
 
 [FMEA]: https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis
 

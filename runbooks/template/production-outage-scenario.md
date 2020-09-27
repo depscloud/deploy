@@ -1,4 +1,6 @@
-# Production Outage Scenario
+<!-- https://gist.github.com/mjpitz/985f8562addb8d137cd5b99872e3f5f8 -->
+
+# Production Outage Scenario Template
 
 ## Symptoms
 

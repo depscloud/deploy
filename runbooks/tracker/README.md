@@ -1,11 +1,12 @@
 # Tracker Runbook
 
+Tracker maintains the dependency graph stored within common SQL systems.
+It can be deployed with read-write or read-only capabilities.
+This process is critical to the functionality of the system.
 
+## Failure Mode and Effect Analysis
 
-## General
-A quick description of the services.  1 to 2 sentences max.  Why does this service matter?  What is it's core functionality?  What Features does it provide users?
-
-## Failure Mode and Effect Analysis ([FMEA])
+[FMEA] is a method of failure analysis that helps teams create reliable systems and develop comprehensive on-call response patterns.
 
 [FMEA]: https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis
 
