@@ -7,27 +7,29 @@ else
 endif
 JSONNET_FMT := $(JSONNET_FMT_CMD) $(JSONNET_FMT_ARGS)
 
-all: fmt prometheus_alerts.yaml prometheus_rules.yaml dashboards_out #lint test
+all: fmt alerts rules dashboards lint #test
 
 fmt:
 	find . -name 'vendor' -prune -o -name '*.libsonnet' -print -o -name '*.jsonnet' -print | \
 		xargs -n 1 -- $(JSONNET_FMT) -i
 
-prometheus_alerts.yaml: mixin.libsonnet lib/alerts.jsonnet alerts/*.libsonnet
-	jsonnet -J vendor -S lib/alerts.jsonnet > $@
+alerts: mixin.libsonnet lib/alerts.jsonnet alerts/*.libsonnet
+	@mkdir -p out
+	jsonnet -J vendor -S lib/alerts.jsonnet > out/$@
 
-prometheus_rules.yaml: mixin.libsonnet lib/rules.jsonnet rules/*.libsonnet
-	jsonnet -J vendor -S lib/rules.jsonnet > $@
+rules: mixin.libsonnet lib/rules.jsonnet rules/*.libsonnet
+	@mkdir -p out
+	jsonnet -J vendor -S lib/rules.jsonnet > out/$@
 
-dashboards_out: mixin.libsonnet lib/dashboards.jsonnet dashboards/*.libsonnet
-	@mkdir -p dashboards_out
-	jsonnet -J vendor -m dashboards_out lib/dashboards.jsonnet
+dashboards: mixin.libsonnet lib/dashboards.jsonnet dashboards/*.libsonnet
+	@mkdir -p out
+	jsonnet -J vendor -m out lib/dashboards.jsonnet
 
-# lint: prometheus_alerts.yaml prometheus_rules.yaml
-# 	find . -name 'vendor' -prune -o -name '*.libsonnet' -print -o -name '*.jsonnet' -print | \
-# 		while read f; do \
-# 			$(JSONNET_FMT) "$$f" | diff -u "$$f" -; \
-# 		done
+lint: alerts rules
+	find . -name 'vendor' -prune -o -name '*.libsonnet' -print -o -name '*.jsonnet' -print | \
+		while read f; do \
+			$(JSONNET_FMT) "$$f" | diff -u "$$f" -; \
+		done
 
 # 	promtool check rules prometheus_rules.yaml
 # 	promtool check rules prometheus_alerts.yaml
