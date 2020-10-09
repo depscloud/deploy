@@ -7,7 +7,7 @@ else
 endif
 JSONNET_FMT := $(JSONNET_FMT_CMD) $(JSONNET_FMT_ARGS)
 
-all: fmt prometheus_alerts.yaml prometheus_rules.yaml dashboards_out lint test
+all: fmt prometheus_alerts.yaml prometheus_rules.yaml dashboards_out #lint test
 
 fmt:
 	find . -name 'vendor' -prune -o -name '*.libsonnet' -print -o -name '*.jsonnet' -print | \

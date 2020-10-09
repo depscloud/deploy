@@ -9,10 +9,49 @@ local singlestat = grafana.singlestat;
 {
   grafanaDashboards+:: {
     'depscloud-extractor.json':
-      local prefix = $._config.dashboard.prefix;
+      local slo_days = 30;
+      local slo_target = 0.99;
+
+      local availability =
+        singlestat.new(
+          'Availability (%dd) > %.3f%%' % [slo_days, 100 * slo_target],
+          datasource='$datasource',
+          span=4,
+          format='percentunit',
+          decimals=3,
+          description='Successfully answered requests over the last %d days' % slo_days
+        )
+        .addTarget(prometheus.target(
+          'sum(rate(grpc_server_handled_total{grpc_code!="Unavailable",grpc_code!="Unknown",%s}[%dd])) / sum(rate(grpc_server_handled_total{%s}[%dd]))' % [
+            $._config.selectors.tracker,
+            slo_days,
+            $._config.selectors.tracker,
+            slo_days,
+          ],
+        ));
+
+      local errorBudget =
+        graphPanel.new(
+          'ErrorBudget (%dd) > %.3f%%' % [slo_days, 100 * slo_target],
+          datasource='$datasource',
+          span=8,
+          format='percentunit',
+          decimals=3,
+          fill=10,
+          description='How much error budget is left looking at our %.3f%% availability guarantees' % [100 * slo_target]
+        )
+        .addTarget(prometheus.target(
+          '100 * (sum(rate(grpc_server_handled_total{grpc_code!="Unavailable",grpc_code!="Unknown",%s}[%dd])) / sum(rate(grpc_server_handled_total{%s}[%dd])) - %f)' % [
+            $._config.selectors.tracker,
+            slo_days,
+            $._config.selectors.tracker,
+            slo_days,
+            slo_target,
+          ],
+        ));
 
       dashboard.new(
-        '%sdeps.cloud / extractor' % prefix,
+        '%sdeps.cloud / extractor' % $._config.dashboard.prefix,
         time_from='now-1h',
         tags=($._config.dashboard.tags),
         refresh=($._config.dashboard.refresh)
@@ -44,6 +83,11 @@ local singlestat = grafana.singlestat;
           x: 0,
           y: 0,
         },
+      )
+      .addRow(
+        row.new()
+        .addPanel(availability)
+        .addPanel(errorBudget)
       ),
   },
 }
