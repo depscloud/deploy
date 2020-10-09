@@ -3,3 +3,8 @@
 /public
 /docker/tls/certs
 *.lock
+monitoring/dashboards_out/
+monitoring/vendor/
+monitoring/prometheus_alerts.yaml
+monitoring/prometheus_rules.yaml
+monitoring/jsonnetfile.lock.json
