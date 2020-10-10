@@ -13,18 +13,6 @@ local generateRules(pkg) = std.manifestYamlDoc(pkg.prometheusRules);
 {
   /**
    */
-  alerts(pkg):: generateAlerts(pkg),
-
-  /**
-   */
-  dashboards(pkg):: generateDashboards(pkg),
-
-  /**
-   */
-  rules(pkg):: generateRules(pkg),
-
-  /**
-   */
   run(pkg)::
     local output = std.extVar('output');
 
