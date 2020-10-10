@@ -13,8 +13,7 @@ local graphPanel = grafana.graphPanel;
     datasource='$datasource',
     span=4,
     format='bytes',
-  )
-      .addTarget(prometheus.target(
+  ).addTarget(prometheus.target(
     'process_resident_memory_bytes{%s}' % [
       selector,
     ],
@@ -31,8 +30,7 @@ local graphPanel = grafana.graphPanel;
     span=4,
     format='short',
     min=0,
-  )
-      .addTarget(prometheus.target(
+  ).addTarget(prometheus.target(
     'rate(process_cpu_seconds_total{%s}[5m])' % [
       selector,
     ],

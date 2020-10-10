@@ -13,8 +13,7 @@ local graphPanel = grafana.graphPanel;
     datasource='$datasource',
     span=4,
     format='short',
-  )
-      .addTarget(prometheus.target(
+  ).addTarget(prometheus.target(
     'nodejs_eventloop_lag_p99_seconds{%s}' % [
       selector,
     ],
