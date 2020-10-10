@@ -7,7 +7,7 @@ on:
       - "charts/**"
   push:
     paths:
-      - ".github/workflows/branch.yaml"
+      - ".github/workflows/charts.yaml"
       - "charts/**"
 
 jobs:
