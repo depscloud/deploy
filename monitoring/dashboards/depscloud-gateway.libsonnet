@@ -1,10 +1,11 @@
+local golang = import 'common/golang.libsonnet';
+local grpc = import 'common/grpc.libsonnet';
+local resources = import 'common/resources.libsonnet';
+
 local grafana = import 'github.com/grafana/grafonnet-lib/grafonnet/grafana.libsonnet';
 local dashboard = grafana.dashboard;
 local row = grafana.row;
-local prometheus = grafana.prometheus;
 local template = grafana.template;
-local graphPanel = grafana.graphPanel;
-local singlestat = grafana.singlestat;
 
 {
   grafanaDashboards+:: {
@@ -13,42 +14,48 @@ local singlestat = grafana.singlestat;
       local slo_target = 0.99;
 
       local availability =
-        singlestat.new(
-          'Availability (%dd) > %.3f%%' % [slo_days, 100 * slo_target],
-          datasource='$datasource',
-          span=4,
-          format='percentunit',
-          decimals=3,
-          description='Successfully answered requests over the last %d days' % slo_days
-        )
-        .addTarget(prometheus.target(
-          'sum(rate(grpc_server_handled_total{grpc_code!="Unavailable",grpc_code!="Unknown",%s}[%dd])) / sum(rate(grpc_server_handled_total{%s}[%dd]))' % [
-            $._config.selectors.tracker,
-            slo_days,
-            $._config.selectors.tracker,
-            slo_days,
-          ],
-        ));
+        grpc.availability(
+          selector=($._config.selectors.gateway),
+          slo_days=slo_days,
+          slo_target=slo_target,
+        );
 
       local errorBudget =
-        graphPanel.new(
-          'ErrorBudget (%dd) > %.3f%%' % [slo_days, 100 * slo_target],
-          datasource='$datasource',
-          span=8,
-          format='percentunit',
-          decimals=3,
-          fill=10,
-          description='How much error budget is left looking at our %.3f%% availability guarantees' % [100 * slo_target]
-        )
-        .addTarget(prometheus.target(
-          '100 * (sum(rate(grpc_server_handled_total{grpc_code!="Unavailable",grpc_code!="Unknown",%s}[%dd])) / sum(rate(grpc_server_handled_total{%s}[%dd])) - %f)' % [
-            $._config.selectors.tracker,
-            slo_days,
-            $._config.selectors.tracker,
-            slo_days,
-            slo_target,
-          ],
-        ));
+        grpc.errorBudget(
+          selector=($._config.selectors.gateway),
+          slo_days=slo_days,
+          slo_target=slo_target,
+        );
+
+      local sliRequestRate =
+        grpc.requestRate(
+          selector=($._config.selectors.gateway),
+        );
+
+      local sliErrorRate =
+        grpc.errorRate(
+          selector=($._config.selectors.gateway),
+        );
+
+      local sliRequestDuration =
+        grpc.requestDuration(
+          selector=($._config.selectors.gateway),
+        );
+
+      local memory =
+        resources.memory(
+          selector=($._config.selectors.gateway),
+        );
+
+      local cpu =
+        resources.cpu(
+          selector=($._config.selectors.gateway),
+        );
+
+      local goroutines =
+        golang.goroutines(
+          selector=($._config.selectors.gateway),
+        );
 
       dashboard.new(
         '%sdeps.cloud / gateway' % $._config.dashboard.prefix,
@@ -88,6 +95,18 @@ local singlestat = grafana.singlestat;
         row.new()
         .addPanel(availability)
         .addPanel(errorBudget)
+      )
+      .addRow(
+        row.new()
+        .addPanel(sliRequestRate)
+        .addPanel(sliErrorRate)
+        .addPanel(sliRequestDuration)
+      )
+      .addRow(
+        row.new()
+        .addPanel(memory)
+        .addPanel(cpu)
+        .addPanel(goroutines)
       ),
   },
 }
