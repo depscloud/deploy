@@ -1,12 +1,12 @@
 {
   _config+:: {
-    SLOs: {},
-
-    // Selectors are inserted between {} in Prometheus queries
-    selectors: {
-      extractor: 'job="depscloud-extractor"',
-      gateway: 'job="depscloud-gateway"',
-      tracker: 'job="depscloud-tracker"',
+    // tracker specific configuration
+    tracker: {
+      selector: 'job="depscloud-tracker"',
+      slos: {
+        days: 30,
+        availability: 0.99,
+      },
     },
 
     dashboard: {
@@ -18,7 +18,6 @@
 
       // The default refresh time for all dashboards
       refresh: '10s',
-      minimumTimeInterval: '1m',
     },
   },
 }

@@ -1,6 +1,6 @@
-local grpc = import 'common/grpc.libsonnet';
-local nodejs = import 'common/nodejs.libsonnet';
-local resources = import 'common/resources.libsonnet';
+local golang = import '../../common/golang.libsonnet';
+local grpc = import '../../common/grpc.libsonnet';
+local resources = import '../../common/resources.libsonnet';
 
 local grafana = import 'github.com/grafana/grafonnet-lib/grafonnet/grafana.libsonnet';
 local dashboard = grafana.dashboard;
@@ -9,56 +9,53 @@ local template = grafana.template;
 
 {
   grafanaDashboards+:: {
-    'depscloud-extractor.json':
-      local slo_days = 30;
-      local slo_target = 0.99;
-
+    'depscloud-gateway.json':
       local availability =
         grpc.availability(
-          selector=($._config.selectors.extractor),
-          slo_days=slo_days,
-          slo_target=slo_target,
+          selector=($._config.gateway.selector),
+          slo_days=($._config.gateway.slos.days),
+          slo_target=($._config.gateway.slos.availability),
         );
 
       local errorBudget =
         grpc.errorBudget(
-          selector=($._config.selectors.extractor),
-          slo_days=slo_days,
-          slo_target=slo_target,
+          selector=($._config.gateway.selector),
+          slo_days=($._config.gateway.slos.days),
+          slo_target=($._config.gateway.slos.availability),
         );
 
       local sliRequestRate =
         grpc.requestRate(
-          selector=($._config.selectors.extractor),
+          selector=($._config.gateway.selector),
         );
 
       local sliErrorRate =
         grpc.errorRate(
-          selector=($._config.selectors.extractor),
+          selector=($._config.gateway.selector),
         );
 
       local sliRequestDuration =
         grpc.requestDuration(
-          selector=($._config.selectors.extractor),
+          selector=($._config.gateway.selector),
         );
 
       local memory =
         resources.memory(
-          selector=($._config.selectors.extractor),
+          selector=($._config.gateway.selector),
         );
 
       local cpu =
         resources.cpu(
-          selector=($._config.selectors.extractor),
+          selector=($._config.gateway.selector),
         );
 
-      local eventLoopLag =
-        nodejs.eventLoopLag(
-          selector=($._config.selectors.extractor),
+      local goroutines =
+        golang.goroutines(
+          selector=($._config.gateway.selector),
         );
 
       dashboard.new(
-        '%sdeps.cloud / extractor' % $._config.dashboard.prefix,
+        '%sdeps.cloud / gateway' % $._config.dashboard.prefix,
         time_from='now-1h',
         tags=($._config.dashboard.tags),
         refresh=($._config.dashboard.refresh)
@@ -106,7 +103,7 @@ local template = grafana.template;
         row.new()
         .addPanel(memory)
         .addPanel(cpu)
-        .addPanel(eventLoopLag)
+        .addPanel(goroutines)
       ),
   },
 }

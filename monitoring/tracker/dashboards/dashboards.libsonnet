@@ -1,6 +1,6 @@
-local golang = import 'common/golang.libsonnet';
-local grpc = import 'common/grpc.libsonnet';
-local resources = import 'common/resources.libsonnet';
+local golang = import '../../common/golang.libsonnet';
+local grpc = import '../../common/grpc.libsonnet';
+local resources = import '../../common/resources.libsonnet';
 
 local grafana = import 'github.com/grafana/grafonnet-lib/grafonnet/grafana.libsonnet';
 local dashboard = grafana.dashboard;
@@ -9,59 +9,56 @@ local template = grafana.template;
 
 {
   grafanaDashboards+:: {
-    'depscloud-gateway.json':
-      local slo_days = 30;
-      local slo_target = 0.99;
-
+    'depscloud-tracker.json':
       local availability =
         grpc.availability(
-          selector=($._config.selectors.gateway),
-          slo_days=slo_days,
-          slo_target=slo_target,
+          selector=($._config.tracker.selector),
+          slo_days=($._config.tracker.slos.days),
+          slo_target=($._config.tracker.slos.availability),
         );
 
       local errorBudget =
         grpc.errorBudget(
-          selector=($._config.selectors.gateway),
-          slo_days=slo_days,
-          slo_target=slo_target,
+          selector=($._config.tracker.selector),
+          slo_days=($._config.tracker.slos.days),
+          slo_target=($._config.tracker.slos.availability),
         );
 
       local sliRequestRate =
         grpc.requestRate(
-          selector=($._config.selectors.gateway),
+          selector=($._config.tracker.selector),
         );
 
       local sliErrorRate =
         grpc.errorRate(
-          selector=($._config.selectors.gateway),
+          selector=($._config.tracker.selector),
         );
 
       local sliRequestDuration =
         grpc.requestDuration(
-          selector=($._config.selectors.gateway),
+          selector=($._config.tracker.selector),
         );
 
       local memory =
         resources.memory(
-          selector=($._config.selectors.gateway),
+          selector=($._config.tracker.selector),
         );
 
       local cpu =
         resources.cpu(
-          selector=($._config.selectors.gateway),
+          selector=($._config.tracker.selector),
         );
 
       local goroutines =
         golang.goroutines(
-          selector=($._config.selectors.gateway),
+          selector=($._config.tracker.selector),
         );
 
       dashboard.new(
-        '%sdeps.cloud / gateway' % $._config.dashboard.prefix,
+        '%sdeps.cloud / tracker' % $._config.dashboard.prefix,
         time_from='now-1h',
         tags=($._config.dashboard.tags),
-        refresh=($._config.dashboard.refresh)
+        refresh=($._config.dashboard.refresh),
       )
       .addTemplate({
         current: {
