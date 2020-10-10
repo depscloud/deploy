@@ -61,5 +61,5 @@ public/monitoring: public .public/monitoring
 .public/monitoring:
 	@mkdir -p public/monitoring/
 	@echo "[monitoring] generating alerts, dashboards, and rules"
-	@cd monitoring && jb install && make 1>/dev/null
+	@cd monitoring && jb install 1>/dev/null && make alerts dashboards rules 1>/dev/null
 	@cp monitoring/out/* public/monitoring/
