@@ -19,6 +19,11 @@ jobs:
         with:
           go-version: '1.14'
 
+      - name: Setup goenv
+        run: |
+          export GOPATH="${HOME}/go"
+          export PATH="${GOPATH}/bin:${PATH}"
+
       - name: Setup helm
         run: |
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
