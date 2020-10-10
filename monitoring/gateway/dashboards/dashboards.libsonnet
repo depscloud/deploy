@@ -9,7 +9,7 @@ local template = grafana.template;
 
 {
   grafanaDashboards+:: {
-    'depscloud-gateway.json':
+    'depscloud-gateway-grafana.json':
       local availability =
         grpc.availability(
           selector=($._config.gateway.selector),

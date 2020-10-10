@@ -8,7 +8,7 @@ local singlestat = grafana.singlestat;
 
 {
   grafanaDashboards+:: {
-    'depscloud-indexer.json':
+    'depscloud-indexer-grafana.json':
       dashboard.new(
         '%sdeps.cloud / indexer' % $._config.dashboard.prefix,
         time_from='now-1h',

@@ -9,7 +9,7 @@ local template = grafana.template;
 
 {
   grafanaDashboards+:: {
-    'depscloud-tracker.json':
+    'depscloud-tracker-grafana.json':
       local availability =
         grpc.availability(
           selector=($._config.tracker.selector),
