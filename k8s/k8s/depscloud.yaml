@@ -1,0 +1,410 @@
+---
+# Source: depscloud/charts/extractor/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: depscloud-extractor
+  labels:
+    helm.sh/chart: extractor-0.2.30
+    app.kubernetes.io/name: extractor
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.30"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: depscloud
+    app.kubernetes.io/component: extractor
+    
+automountServiceAccountToken: false
+---
+# Source: depscloud/charts/gateway/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: depscloud-gateway
+  labels:
+    helm.sh/chart: gateway-0.2.30
+    app.kubernetes.io/name: gateway
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.30"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: depscloud
+    app.kubernetes.io/component: gateway
+    
+automountServiceAccountToken: false
+---
+# Source: depscloud/charts/indexer/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: depscloud-indexer
+  labels:
+    helm.sh/chart: indexer-0.2.30
+    app.kubernetes.io/name: indexer
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.30"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: depscloud
+    app.kubernetes.io/component: indexer
+    
+automountServiceAccountToken: false
+---
+# Source: depscloud/charts/tracker/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: depscloud-tracker
+  labels:
+    helm.sh/chart: tracker-0.2.30
+    app.kubernetes.io/name: tracker
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.30"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: depscloud
+    app.kubernetes.io/component: tracker
+    
+automountServiceAccountToken: false
+---
+# Source: depscloud/charts/extractor/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: depscloud-extractor
+  labels:
+    helm.sh/chart: extractor-0.2.30
+    app.kubernetes.io/name: extractor
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.30"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: depscloud
+    app.kubernetes.io/component: extractor
+    
+spec:
+  clusterIP: None
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: grpc
+      protocol: TCP
+      name: grpc
+  selector:
+    app.kubernetes.io/name: extractor
+    app.kubernetes.io/instance: depscloud
+---
+# Source: depscloud/charts/gateway/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: depscloud-gateway
+  labels:
+    helm.sh/chart: gateway-0.2.30
+    app.kubernetes.io/name: gateway
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.30"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: depscloud
+    app.kubernetes.io/component: gateway
+    
+spec:
+  clusterIP: None
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: grpc
+      protocol: TCP
+      name: grpc
+  selector:
+    app.kubernetes.io/name: gateway
+    app.kubernetes.io/instance: depscloud
+---
+# Source: depscloud/charts/tracker/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: depscloud-tracker
+  labels:
+    helm.sh/chart: tracker-0.2.30
+    app.kubernetes.io/name: tracker
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.30"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: depscloud
+    app.kubernetes.io/component: tracker
+    
+spec:
+  clusterIP: None
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: grpc
+      protocol: TCP
+      name: grpc
+  selector:
+    app.kubernetes.io/name: tracker
+    app.kubernetes.io/instance: depscloud
+---
+# Source: depscloud/charts/extractor/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: depscloud-extractor
+  labels:
+    helm.sh/chart: extractor-0.2.30
+    app.kubernetes.io/name: extractor
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.30"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: depscloud
+    app.kubernetes.io/component: extractor
+    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: extractor
+      app.kubernetes.io/instance: depscloud
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: extractor-0.2.30
+        app.kubernetes.io/name: extractor
+        app.kubernetes.io/instance: depscloud
+        app.kubernetes.io/version: "0.2.30"
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/part-of: depscloud
+        app.kubernetes.io/component: extractor
+        
+    spec:
+      serviceAccountName: depscloud-extractor
+      securityContext:
+        {}
+      volumes:
+      containers:
+        - name: extractor
+          securityContext:
+            {}
+          image: "depscloud/extractor:0.2.30"
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+          args:
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: grpc
+              containerPort: 8090
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /healthz
+            initialDelaySeconds: 5
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /healthz
+            initialDelaySeconds: 5
+          resources:
+            {}
+---
+# Source: depscloud/charts/gateway/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: depscloud-gateway
+  labels:
+    helm.sh/chart: gateway-0.2.30
+    app.kubernetes.io/name: gateway
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.30"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: depscloud
+    app.kubernetes.io/component: gateway
+    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gateway
+      app.kubernetes.io/instance: depscloud
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: gateway-0.2.30
+        app.kubernetes.io/name: gateway
+        app.kubernetes.io/instance: depscloud
+        app.kubernetes.io/version: "0.2.30"
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/part-of: depscloud
+        app.kubernetes.io/component: gateway
+        
+    spec:
+      serviceAccountName: depscloud-gateway
+      securityContext:
+        {}
+      volumes:
+      containers:
+        - name: gateway
+          securityContext:
+            {}
+          image: "depscloud/gateway:0.2.30"
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+          args:
+            - --extractor-address=dns:///depscloud-extractor:8090
+            - --tracker-address=dns:///depscloud-tracker:8090
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: grpc
+              containerPort: 8090
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+          resources:
+            {}
+---
+# Source: depscloud/charts/tracker/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: depscloud-tracker
+  labels:
+    helm.sh/chart: tracker-0.2.30
+    app.kubernetes.io/name: tracker
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.30"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: depscloud
+    app.kubernetes.io/component: tracker
+    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tracker
+      app.kubernetes.io/instance: depscloud
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: tracker-0.2.30
+        app.kubernetes.io/name: tracker
+        app.kubernetes.io/instance: depscloud
+        app.kubernetes.io/version: "0.2.30"
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/part-of: depscloud
+        app.kubernetes.io/component: tracker
+        
+    spec:
+      serviceAccountName: depscloud-tracker
+      securityContext:
+        {}
+      volumes:
+      containers:
+        - name: tracker
+          securityContext:
+            {}
+          image: "depscloud/tracker:0.2.30"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: depscloud-tracker
+          volumeMounts:
+          args:
+            - --storage-driver=$(STORAGE_DRIVER)
+            - --storage-address=$(STORAGE_ADDRESS)
+            - --storage-readonly-address=$(STORAGE_READ_ONLY_ADDRESS)
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: grpc
+              containerPort: 8090
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+          resources:
+            {}
+---
+# Source: depscloud/charts/indexer/templates/job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: depscloud-indexer
+  labels:
+    helm.sh/chart: indexer-0.2.30
+    app.kubernetes.io/name: indexer
+    app.kubernetes.io/instance: depscloud
+    app.kubernetes.io/version: "0.2.30"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: depscloud
+    app.kubernetes.io/component: indexer
+    
+spec:
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: indexer-0.2.30
+        app.kubernetes.io/name: indexer
+        app.kubernetes.io/instance: depscloud
+        app.kubernetes.io/version: "0.2.30"
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/part-of: depscloud
+        app.kubernetes.io/component: indexer
+        
+    spec:
+      restartPolicy: OnFailure
+      serviceAccountName: depscloud-indexer
+      securityContext:
+        {}
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: config
+          secret:
+            secretName:  depscloud-indexer
+      containers:
+        - name: indexer
+          securityContext:
+            {}
+          image: "depscloud/indexer:0.2.30"
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /etc/indexer
+              name: config
+            - mountPath: /tmp
+              name: tmp
+              readOnly: false
+          args:
+            - --extractor-address=dns:///depscloud-extractor:8090
+            - --tracker-address=dns:///depscloud-tracker:8090
+            - --config=/etc/indexer/config.yaml
+            - --ssh-keypath=
+            - --ssh-user=
+            - --workers=5
+          resources:
+            {}
