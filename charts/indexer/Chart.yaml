@@ -1,6 +1,7 @@
 apiVersion: v2
 name: indexer
 description: A Helm chart for running the deps.cloud indexer process
+icon: https://deps.cloud/favicons/android-chrome-512x512.png
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
