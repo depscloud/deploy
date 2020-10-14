@@ -1,5 +1,6 @@
 # deps.cloud deployment configuration
 
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/depscloud)](https://artifacthub.io/packages/search?repo=depscloud)
 ![license](https://img.shields.io/github/license/depscloud/deploy.svg)
 [![license check](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdepscloud%2Fdeploy.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdepscloud%2Fdeploy?ref=badge_shield)
 
