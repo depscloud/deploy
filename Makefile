@@ -1,3 +1,5 @@
+LATEST_VERSION=$(shell (curl -sSL https://api.github.com/repos/depscloud/depscloud/releases/latest | jq -r .tag_name | cut -c 2-))
+
 CHART_REPOSITORY_URL = "https://depscloud.github.io/deploy"
 REPOSITORY_URL = "https://github.com/depscloud/deploy.git"
 
@@ -27,7 +29,7 @@ public/k8s: public .public/k8s
 .public/k8s:
 	@helm repo add bitnami https://charts.bitnami.com/bitnami 1>/dev/null
 	@helm repo update 1>/dev/null
-	
+
 	@echo "[k8s] generating mysql.yaml"
 	@helm template mysql bitnami/mysql \
 		--version 6.14.4 \
@@ -63,3 +65,21 @@ public/monitoring: public .public/monitoring
 	@echo "[monitoring] generating alerts, dashboards, and rules"
 	@cd monitoring && jb install 1>/dev/null && make alerts dashboards rules 1>/dev/null
 	@cp monitoring/out/* public/monitoring/
+
+.sync-chart:
+	@yq w -i ./charts/$(CHART_NAME)/Chart.yaml version $(LATEST_VERSION)
+	@yq w -i ./charts/$(CHART_NAME)/Chart.yaml appVersion $(LATEST_VERSION)
+	@yq w -i ./charts/depscloud/Chart.yaml "dependencies.(name==$(CHART_NAME)).version"  $(LATEST_VERSION)
+
+sync-tag:
+	@make .sync-chart CHART_NAME=extractor
+	@make .sync-chart CHART_NAME=gateway
+	@make .sync-chart CHART_NAME=indexer
+	@make .sync-chart CHART_NAME=tracker
+	@make .sync-chart CHART_NAME=depscloud
+
+tag-release:
+	@git add .
+	@git commit -m "$(LATEST_VERSION)"
+	@git tag -a -m "v$(LATEST_VERSION)" v$(LATEST_VERSION)
+	@echo "tagging complete, please run git push --follow-tags"
