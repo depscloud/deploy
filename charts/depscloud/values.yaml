@@ -3,7 +3,6 @@
 global:
   # Common labels added to all resources.
   labels: {}
-
   # Common service configuration. Used to configure routing topology.
   service: {}
   #  topology:
@@ -16,21 +15,17 @@ global:
     serviceMonitor:
       enabled: false
       interval: 10s
-
 # Deploy a copy of MySQL alongside deps.cloud. Useful for quick testing.
 # Not recommended for production.
 mysql:
   enabled: false
-
 # Deploy a copy of PostgreSQL alongside deps.cloud. Useful for quick testing.
 # Not recommended for production.
 postgres:
   enabled: false
-
 # Deploy and configure the extractor process.
 extractor:
   enabled: true
-
 # Deploy and configure the gateway process.
 gateway:
   enabled: true
@@ -38,7 +33,6 @@ gateway:
     address: ""
   tracker:
     address: ""
-
 # Deploy and configure the indexer process.
 indexer:
   enabled: true
@@ -47,11 +41,9 @@ indexer:
     address: ""
   tracker:
     address: ""
-
 # Deploy and configure the tracker process.
 tracker:
   enabled: true
-
 # Simple Google Analytics tracking beacon. Flip beacon.enabled=false to
 # disable. Note that by disabling this beacon, it makes it harder for us to
 # understand the current products usage. We figured by putting in it's own
