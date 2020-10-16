@@ -6,8 +6,12 @@ description: Track, monitor, and connect project dependencies across languages a
 icon: https://deps.cloud/favicons/android-chrome-192x129.png
 home: https://deps.cloud
 sources:
-- https://github.com/depscloud/depscloud
-- https://github.com/depscloud/deploy
+  - https://github.com/depscloud/depscloud
+  - https://github.com/depscloud/deploy
+maintainers:
+  - name: Mya Pitzeruse
+    email: mjpitz@deps.cloud
+    url: https://mjpitz.com
 
 version: 0.2.30
 appVersion: 0.2.30
