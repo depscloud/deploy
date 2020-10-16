@@ -39,13 +39,19 @@ The command removes all the Kubernetes components associated with the chart and 
 
 The following table lists the configurable parameters of the Extractor chart and their default values.
 
-| Parameter           | Description                                         | Default                       |
-|---------------------|-----------------------------------------------------|-------------------------------|
-| `extractor.enabled` | Whether the `extractor` process should be deployed  | `true`                        |
-| `extractor.*`       | Set configuration for the `extractor` chart         | See the `extractor` chart     |
-| `gateway.enabled`   | Whether the `gateway` process should be deployed    | `true`                        |
-| `gateway.*`         | Set configuration for the `gateway` chart           | See the `gateway` chart       |
-| `indexer.enabled`   | Whether the `indexer` process should be deployed    | `true`                        |
-| `indexer.*`         | Set configuration for the `indexer` chart           | See the `indexer` chart       |
-| `tracker.enabled`   | Whether the `tracker` process should be deployed    | `true`                        |
-| `tracker.*`         | Set configuration for the `tracker` chart           | See the `tracker` chart       |
+| Parameter                                | Description                                                             | Default                       |
+|------------------------------------------|-------------------------------------------------------------------------|-------------------------------|
+| `global.labels`                          | Labels applied to all deps.cloud resources                              | `{}`                          |
+| `global.service.topology`                | Provides control over the network topology for all deps.cloud resources | `[]`                          |
+| `global.metrics.serviceMonitor.enabled`  | Enables Prometheus service monitors for all deps.cloud resources        | `false`                       |
+| `global.metrics.serviceMonitor.interval` | The default interval metrics should be pulled on                        | `10s`                         |
+| `mysql.enabled`                          | (optional) Deploy a copy of MySQL alongside deps.cloud                  | `false`                       |
+| `postgres.enabled`                       | (optional) Deploy a copy of PostgreSQL alongside deps.cloud             | `false`                       |
+| `extractor.enabled`                      | Whether the `extractor` process should be deployed                      | `true`                        |
+| `extractor.*`                            | Set configuration for the `extractor` chart                             | See the `extractor` chart     |
+| `gateway.enabled`                        | Whether the `gateway` process should be deployed                        | `true`                        |
+| `gateway.*`                              | Set configuration for the `gateway` chart                               | See the `gateway` chart       |
+| `indexer.enabled`                        | Whether the `indexer` process should be deployed                        | `true`                        |
+| `indexer.*`                              | Set configuration for the `indexer` chart                               | See the `indexer` chart       |
+| `tracker.enabled`                        | Whether the `tracker` process should be deployed                        | `true`                        |
+| `tracker.*`                              | Set configuration for the `tracker` chart                               | See the `tracker` chart       |
