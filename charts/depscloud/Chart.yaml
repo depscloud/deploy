@@ -3,7 +3,7 @@ type: application
 
 name: depscloud
 description: Track, monitor, and connect project dependencies across languages and toolchains.
-icon: https://deps.cloud/favicons/android-chrome-512x512.png
+icon: https://deps.cloud/favicons/android-chrome-192x129.png
 home: https://deps.cloud
 sources:
 - https://github.com/depscloud/depscloud
