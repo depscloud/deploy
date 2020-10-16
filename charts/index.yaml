@@ -3,8 +3,11 @@ entries:
   depscloud:
   - apiVersion: v2
     appVersion: 0.2.31
-    created: "2020-10-16T04:35:14.847853463Z"
+    created: "2020-10-16T05:49:10.849440424Z"
     dependencies:
+    - name: beacon
+      repository: https://mjpitz.github.io/charts/
+      version: 0.0.1
     - condition: mysql.enabled
       name: mysql
       repository: https://charts.bitnami.com/bitnami
@@ -31,7 +34,7 @@ entries:
       version: 0.2.31
     description: Track, monitor, and connect project dependencies across languages
       and toolchains.
-    digest: 1aa16e9da37339091190ab9deb9992cc98997ec35e5b17208c35f813b705ee0e
+    digest: 9de4e2e569406a36d459fd89d65001384994f02ec48c90873b8c9eff54ba9d75
     home: https://deps.cloud
     icon: https://deps.cloud/favicons/logo-small-rounded.png
     maintainers:
@@ -48,7 +51,7 @@ entries:
     version: 0.2.31
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.839037261Z"
+    created: "2020-10-16T05:49:10.839555859Z"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -83,7 +86,7 @@ entries:
     version: 0.2.30
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.830582375Z"
+    created: "2020-10-16T05:49:10.830125897Z"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -118,7 +121,7 @@ entries:
     version: 0.2.28
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.822365499Z"
+    created: "2020-10-16T05:49:10.822450146Z"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -153,7 +156,7 @@ entries:
     version: 0.2.26
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.814207427Z"
+    created: "2020-10-16T05:49:10.815104897Z"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -188,7 +191,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.807992643Z"
+    created: "2020-10-16T05:49:10.809285459Z"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -223,7 +226,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.799582759Z"
+    created: "2020-10-16T05:49:10.80188351Z"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -258,7 +261,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.793711091Z"
+    created: "2020-10-16T05:49:10.795155266Z"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -293,7 +296,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.785901734Z"
+    created: "2020-10-16T05:49:10.787272714Z"
     dependencies:
     - condition: extractor.enabled
       name: extractor
@@ -320,7 +323,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.784012948Z"
+    created: "2020-10-16T05:49:10.785738004Z"
     dependencies:
     - condition: extractor.enabled
       name: extractor
@@ -347,7 +350,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.782291469Z"
+    created: "2020-10-16T05:49:10.783973492Z"
     dependencies:
     - condition: extractor.enabled
       name: extractor
@@ -374,7 +377,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.778433493Z"
+    created: "2020-10-16T05:49:10.78213158Z"
     dependencies:
     - condition: extractor.enabled
       name: extractor
@@ -401,7 +404,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.776629511Z"
+    created: "2020-10-16T05:49:10.78064177Z"
     dependencies:
     - condition: extractor.enabled
       name: extractor
@@ -428,7 +431,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.774652521Z"
+    created: "2020-10-16T05:49:10.778019253Z"
     dependencies:
     - condition: extractor.enabled
       name: extractor
@@ -455,7 +458,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.772745534Z"
+    created: "2020-10-16T05:49:10.775410235Z"
     dependencies:
     - condition: extractor.enabled
       name: extractor
@@ -482,7 +485,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-16T04:35:14.770861048Z"
+    created: "2020-10-16T05:49:10.773683724Z"
     dependencies:
     - condition: extractor.enabled
       name: extractor
@@ -510,9 +513,9 @@ entries:
   extractor:
   - apiVersion: v2
     appVersion: 0.2.31
-    created: "2020-10-16T04:35:14.855638019Z"
+    created: "2020-10-16T05:49:10.858239782Z"
     description: A Helm chart for running the deps.cloud extractor process
-    digest: 2f5a84c5a1c823c1867ea3aa5c938c04263e718df912b7b6f829af0aab092c24
+    digest: 68a19d4e242e28ae62297df0db0de25a0205247beb21776958d28ca27a0c7b1a
     home: https://deps.cloud
     icon: https://deps.cloud/favicons/logo-small-rounded.png
     maintainers:
@@ -529,7 +532,7 @@ entries:
     version: 0.2.31
   - apiVersion: v2
     appVersion: 0.2.30
-    created: "2020-10-16T04:35:14.855045092Z"
+    created: "2020-10-16T05:49:10.857598078Z"
     description: A Helm chart for running the deps.cloud extractor process
     digest: d5f4ffa38f91602dc346b8e1d3a5f17aad9b9b0b228e90babd8ae1dc5706f009
     name: extractor
@@ -539,7 +542,7 @@ entries:
     version: 0.2.30
   - apiVersion: v2
     appVersion: 0.2.28
-    created: "2020-10-16T04:35:14.854498167Z"
+    created: "2020-10-16T05:49:10.857058474Z"
     description: A Helm chart for running the deps.cloud extractor process
     digest: bfb6c607f8b04a65c3f6c5d6794b549cd1860086c02fde61d3c491dc567f08a5
     name: extractor
@@ -549,7 +552,7 @@ entries:
     version: 0.2.28
   - apiVersion: v2
     appVersion: 0.2.26
-    created: "2020-10-16T04:35:14.853944442Z"
+    created: "2020-10-16T05:49:10.856591871Z"
     description: A Helm chart for running the deps.cloud extractor process
     digest: 62321d275ff9d9635e504713eeee2bcb65c44345c8a99aac961b3cad631b82b2
     name: extractor
@@ -559,7 +562,7 @@ entries:
     version: 0.2.26
   - apiVersion: v2
     appVersion: 0.2.20
-    created: "2020-10-16T04:35:14.850264074Z"
+    created: "2020-10-16T05:49:10.852451244Z"
     description: A Helm chart for running the deps.cloud extractor process
     digest: 6d858bed09d27b47311b17ca3c2be1bc992676204cf6111c6f4e99368a250e3b
     name: extractor
@@ -569,7 +572,7 @@ entries:
     version: 0.1.14
   - apiVersion: v2
     appVersion: 0.2.20
-    created: "2020-10-16T04:35:14.849892357Z"
+    created: "2020-10-16T05:49:10.851973841Z"
     description: A Helm chart for running the deps.cloud extractor process
     digest: dd7384552fa2c82b6b528d38f41daf6c5e3cd7800633c1edc5b6ac44043d041d
     name: extractor
@@ -579,7 +582,7 @@ entries:
     version: 0.1.13
   - apiVersion: v2
     appVersion: 0.2.19
-    created: "2020-10-16T04:35:14.84952274Z"
+    created: "2020-10-16T05:49:10.851501538Z"
     description: A Helm chart for running the deps.cloud extractor process
     digest: 75f43bc880bafd4ce183e36a1badd562480ab47648446c0e1fac8645540dae34
     name: extractor
@@ -589,7 +592,7 @@ entries:
     version: 0.1.12
   - apiVersion: v2
     appVersion: 0.2.19
-    created: "2020-10-16T04:35:14.849134922Z"
+    created: "2020-10-16T05:49:10.851084335Z"
     description: A Helm chart for running the deps.cloud extractor process
     digest: 37468125b673ae8d80fb72d724ba5b2c02207442c807d70faa1271b5d2133d69
     name: extractor
@@ -599,7 +602,7 @@ entries:
     version: 0.1.11
   - apiVersion: v2
     appVersion: 0.2.18
-    created: "2020-10-16T04:35:14.848704602Z"
+    created: "2020-10-16T05:49:10.850657932Z"
     description: A Helm chart for running the deps.cloud extractor process
     digest: 900d19b79841c3495634d47d0947b1f125e2eb47629fd0119bf1db3157659ee2
     name: extractor
@@ -609,7 +612,7 @@ entries:
     version: 0.1.10
   - apiVersion: v2
     appVersion: 0.2.17
-    created: "2020-10-16T04:35:14.853486721Z"
+    created: "2020-10-16T05:49:10.856097168Z"
     description: A Helm chart for running the deps.cloud extractor process
     digest: 4909158d2452e8e148c72fae40174318ee533c8de9f041cd10ab7155ac5ac424
     name: extractor
@@ -619,7 +622,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 0.2.15
-    created: "2020-10-16T04:35:14.853000898Z"
+    created: "2020-10-16T05:49:10.855590865Z"
     description: A Helm chart for running the depscloud extractor process
     digest: 6baf244371b70fdd1dfd1b5de6e1825c70e4c0cb40495b1c02fdc80bc051dac5
     name: extractor
@@ -629,7 +632,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: 0.2.15
-    created: "2020-10-16T04:35:14.852618581Z"
+    created: "2020-10-16T05:49:10.855106661Z"
     description: A Helm chart for running the deps-cloud extractor process
     digest: 9796735b29762e3fd48b5732465c2f7797c39044e9d10dc0f7a5ddc420a65ee7
     name: extractor
@@ -639,7 +642,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.2.15
-    created: "2020-10-16T04:35:14.852227063Z"
+    created: "2020-10-16T05:49:10.854659458Z"
     description: A Helm chart for running the deps-cloud extractor process
     digest: f979a6ff873ea255dc63b675150a60817019da3c238575507d89e303dc268df3
     name: extractor
@@ -649,7 +652,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.2.9
-    created: "2020-10-16T04:35:14.851782043Z"
+    created: "2020-10-16T05:49:10.854228656Z"
     description: A Helm chart for running the deps-cloud extractor process
     digest: 83d44ca408eb2eb3aae138f1f5bfdbcfd0afe0da35dd7fa7294400fa2289b3df
     name: extractor
@@ -659,7 +662,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.2.7
-    created: "2020-10-16T04:35:14.851345123Z"
+    created: "2020-10-16T05:49:10.853778253Z"
     description: A Helm chart for running the deps-cloud extractor process
     digest: 8c6f7ae182e002a62567186b5485c0bf5251f0b606973b8e793bb4902b770004
     name: extractor
@@ -669,7 +672,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.2.7
-    created: "2020-10-16T04:35:14.850960905Z"
+    created: "2020-10-16T05:49:10.85334985Z"
     description: A Helm chart for running the deps-cloud extractor process
     digest: 729daefb2c0baa42d8e47cf4857d7132574cf32de9afa5f2dac8576dad19874d
     name: extractor
@@ -679,7 +682,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.2.6
-    created: "2020-10-16T04:35:14.850612889Z"
+    created: "2020-10-16T05:49:10.852912147Z"
     description: A Helm chart for running the deps-cloud extractor process
     digest: 1712222e42dc40971124493faa643ff651dd103b686e3e1fc2369d06fc4bc7e7
     name: extractor
@@ -689,7 +692,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2020-10-16T04:35:14.848280883Z"
+    created: "2020-10-16T05:49:10.850219329Z"
     description: A Helm chart for running the deps-cloud extractor process
     digest: 7d0c4e690f3508c50adaef123557a809e04e06bccb725237d52b7369db3de2e8
     name: extractor
@@ -700,9 +703,9 @@ entries:
   gateway:
   - apiVersion: v2
     appVersion: 0.2.31
-    created: "2020-10-16T04:35:14.865715679Z"
+    created: "2020-10-16T05:49:10.869873659Z"
     description: A Helm chart for running the deps.cloud gateway process
-    digest: 4ef0e4accb024b9f3914d4a60afe602003c90a60fc127ede054b2aea289fdb3f
+    digest: 96c01285c638d61d51c3de77375cf572e47799387d24027f0b8ad43671337be2
     home: https://deps.cloud
     icon: https://deps.cloud/favicons/logo-small-rounded.png
     maintainers:
@@ -719,7 +722,7 @@ entries:
     version: 0.2.31
   - apiVersion: v2
     appVersion: 0.2.30
-    created: "2020-10-16T04:35:14.865169654Z"
+    created: "2020-10-16T05:49:10.869147754Z"
     description: A Helm chart for running the deps.cloud gateway process
     digest: 6ffd79e5de05c1638bc32e6fa8d122f8a89ff5e8351cb46751660115cbca8571
     name: gateway
@@ -729,7 +732,7 @@ entries:
     version: 0.2.30
   - apiVersion: v2
     appVersion: 0.2.28
-    created: "2020-10-16T04:35:14.864662231Z"
+    created: "2020-10-16T05:49:10.86849375Z"
     description: A Helm chart for running the deps.cloud gateway process
     digest: 8c06b2f8d370d33d396aaceabd5c45b1edb86d70a2cf46cc6f84e4f0e60f2592
     name: gateway
@@ -739,7 +742,7 @@ entries:
     version: 0.2.28
   - apiVersion: v2
     appVersion: 0.2.26
-    created: "2020-10-16T04:35:14.864214411Z"
+    created: "2020-10-16T05:49:10.867905646Z"
     description: A Helm chart for running the deps.cloud gateway process
     digest: 09882bd29859cdeb31911bb072d99918eaf9d2a222ca0f3c41457bc660115d6a
     name: gateway
@@ -749,7 +752,7 @@ entries:
     version: 0.2.26
   - apiVersion: v2
     appVersion: 0.2.15
-    created: "2020-10-16T04:35:14.858691858Z"
+    created: "2020-10-16T05:49:10.861451903Z"
     description: A Helm chart for running the deps.cloud gateway process
     digest: fa75bbc3a83421522115343468b84e91e2439b199a48691419cd8045b373c00b
     name: gateway
@@ -759,7 +762,7 @@ entries:
     version: 0.1.14
   - apiVersion: v2
     appVersion: 0.2.15
-    created: "2020-10-16T04:35:14.858137533Z"
+    created: "2020-10-16T05:49:10.8609387Z"
     description: A Helm chart for running the deps.cloud gateway process
     digest: 189b414dcf88b6d1f085ff4ae2849ad3bef5a27b8def0b6c4d8aed6a59e35168
     name: gateway
@@ -769,7 +772,7 @@ entries:
     version: 0.1.13
   - apiVersion: v2
     appVersion: 0.2.13
-    created: "2020-10-16T04:35:14.857330696Z"
+    created: "2020-10-16T05:49:10.860281796Z"
     description: A Helm chart for running the deps.cloud gateway process
     digest: 1ad35253447bcfb6d7d56ab999b35b59c7e01331d8d61888bd9aecc5087db086
     name: gateway
@@ -779,7 +782,7 @@ entries:
     version: 0.1.12
   - apiVersion: v2
     appVersion: 0.2.13
-    created: "2020-10-16T04:35:14.856932178Z"
+    created: "2020-10-16T05:49:10.859743692Z"
     description: A Helm chart for running the deps.cloud gateway process
     digest: 8ce0f0e339773ffeda802ea3a8c9963a246273838c8cf789d7302567ea187a78
     name: gateway
@@ -789,7 +792,7 @@ entries:
     version: 0.1.11
   - apiVersion: v2
     appVersion: 0.2.12
-    created: "2020-10-16T04:35:14.85654266Z"
+    created: "2020-10-16T05:49:10.859202888Z"
     description: A Helm chart for running the deps.cloud gateway process
     digest: 7b383b385b1f163f6cc9a225442fcf5f08797b6e2b7580b691a353061c29e2b4
     name: gateway
@@ -799,7 +802,7 @@ entries:
     version: 0.1.10
   - apiVersion: v2
     appVersion: 0.2.12
-    created: "2020-10-16T04:35:14.863751689Z"
+    created: "2020-10-16T05:49:10.867333942Z"
     description: A Helm chart for running the deps.cloud gateway process
     digest: 9ca082303dc3cf13d4e2233618e880aa9bee017a75bcd229e87109fba5f07c95
     name: gateway
@@ -809,7 +812,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 0.2.11
-    created: "2020-10-16T04:35:14.863289368Z"
+    created: "2020-10-16T05:49:10.866791239Z"
     description: A Helm chart for running the depscloud gateway process
     digest: c1113f2dfc46f2f1061c36dcbd680d84313280081ad7d326d67a9e22fbe1b925
     name: gateway
@@ -819,7 +822,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: 0.2.10
-    created: "2020-10-16T04:35:14.862552935Z"
+    created: "2020-10-16T05:49:10.866243335Z"
     description: A Helm chart for running the deps-cloud gateway process
     digest: 5f60fbb0f97dc6392b5393b351471c93f43c2e8c513531f105d10999608e43a7
     name: gateway
@@ -829,7 +832,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.2.10
-    created: "2020-10-16T04:35:14.861671194Z"
+    created: "2020-10-16T05:49:10.865671631Z"
     description: A Helm chart for running the deps-cloud gateway process
     digest: ea8cbd333a4cf0cb525567243c05e9d7db160bfa335dbc7d59795e2e0026b69b
     name: gateway
@@ -839,7 +842,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.2.7
-    created: "2020-10-16T04:35:14.861092768Z"
+    created: "2020-10-16T05:49:10.864637624Z"
     description: A Helm chart for running the deps-cloud gateway process
     digest: 19e58d57d638def90a5a075b322ee6fb3d0a21095437efa435a45e803d28dbfc
     name: gateway
@@ -849,7 +852,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.2.5
-    created: "2020-10-16T04:35:14.860555943Z"
+    created: "2020-10-16T05:49:10.863817919Z"
     description: A Helm chart for running the deps-cloud gateway process
     digest: 2228be87aa0809fe39863af2d633a84d70947fc68cdd371111750f53b07f57fe
     name: gateway
@@ -859,7 +862,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.2.5
-    created: "2020-10-16T04:35:14.859986918Z"
+    created: "2020-10-16T05:49:10.863134314Z"
     description: A Helm chart for running the deps-cloud gateway process
     digest: bf24bddbc9ba7187d00461e1bc72ad841fccaf3599c434e74cf798fbac453278
     name: gateway
@@ -869,7 +872,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.2.2
-    created: "2020-10-16T04:35:14.859291486Z"
+    created: "2020-10-16T05:49:10.86247401Z"
     description: A Helm chart for running the deps-cloud gateway process
     digest: b8ebe038f736c1803dff9eeb70a3e850f730c787b06326b66fe194f2bb66d601
     name: gateway
@@ -879,7 +882,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.2.2
-    created: "2020-10-16T04:35:14.856085239Z"
+    created: "2020-10-16T05:49:10.858692685Z"
     description: A Helm chart for running the deps-cloud gateway process
     digest: e569bc6cb792314e777eda630212fefa80bd9e52a21c67f5eb03c3114307167e
     name: gateway
@@ -890,9 +893,9 @@ entries:
   indexer:
   - apiVersion: v2
     appVersion: 0.2.31
-    created: "2020-10-16T04:35:14.876216759Z"
+    created: "2020-10-16T05:49:10.882565343Z"
     description: A Helm chart for running the deps.cloud indexer process
-    digest: 829a55f4161f22c8633403d20dbff3fb88419e8a7bfa0ed66a9b91ad1dfc2c8d
+    digest: 3aa57bb8212d24a5e45ae99c89506d879c8e80b7a5e47bb47b1f95861147b036
     home: https://deps.cloud
     icon: https://deps.cloud/favicons/logo-small-rounded.png
     maintainers:
@@ -909,7 +912,7 @@ entries:
     version: 0.2.31
   - apiVersion: v2
     appVersion: 0.2.30
-    created: "2020-10-16T04:35:14.875178511Z"
+    created: "2020-10-16T05:49:10.881912538Z"
     description: A Helm chart for running the deps.cloud indexer process
     digest: 82d2d982b4e8c6752ca9f6dc8f226f40ac3d9e81d24e7a3733e3002e323fcb79
     name: indexer
@@ -919,7 +922,7 @@ entries:
     version: 0.2.30
   - apiVersion: v2
     appVersion: 0.2.28
-    created: "2020-10-16T04:35:14.874391275Z"
+    created: "2020-10-16T05:49:10.881300034Z"
     description: A Helm chart for running the deps.cloud indexer process
     digest: 72107c622e728b1019cf67e82e3962dc826474dcd539487774bbcad62d5b36a4
     name: indexer
@@ -929,7 +932,7 @@ entries:
     version: 0.2.28
   - apiVersion: v2
     appVersion: 0.2.26
-    created: "2020-10-16T04:35:14.873560837Z"
+    created: "2020-10-16T05:49:10.880738931Z"
     description: A Helm chart for running the deps.cloud indexer process
     digest: e9488dfb66350efb032da7fb38bcbf02fb982c40ca1727675a0ea539d44abf93
     name: indexer
@@ -939,7 +942,7 @@ entries:
     version: 0.2.26
   - apiVersion: v2
     appVersion: 0.2.13
-    created: "2020-10-16T04:35:14.868783819Z"
+    created: "2020-10-16T05:49:10.873510583Z"
     description: A Helm chart for running the deps.cloud indexer process
     digest: 60d0a7b2ddb560e536222e43eacce560fd2fb1c463cd470df3f221c5e9a78e6a
     name: indexer
@@ -949,7 +952,7 @@ entries:
     version: 0.1.14
   - apiVersion: v2
     appVersion: 0.2.13
-    created: "2020-10-16T04:35:14.868240294Z"
+    created: "2020-10-16T05:49:10.872956779Z"
     description: A Helm chart for running the deps.cloud indexer process
     digest: 4a2ee6c825d9923292a53bd1a62bed1f773fc664b9f1741beaf39fe382f50b4c
     name: indexer
@@ -959,7 +962,7 @@ entries:
     version: 0.1.13
   - apiVersion: v2
     appVersion: 0.2.13
-    created: "2020-10-16T04:35:14.86771327Z"
+    created: "2020-10-16T05:49:10.872350575Z"
     description: A Helm chart for running the deps.cloud indexer process
     digest: 3a8d2bf38adcdf6c408210d422bb693dee058dbba522b7c0d76208f4d7c630e2
     name: indexer
@@ -969,7 +972,7 @@ entries:
     version: 0.1.12
   - apiVersion: v2
     appVersion: 0.2.11
-    created: "2020-10-16T04:35:14.867169145Z"
+    created: "2020-10-16T05:49:10.871676371Z"
     description: A Helm chart for running the deps.cloud indexer process
     digest: a292d05cfabb9dfe106742c55b0c8977690bca7bdc8757835ef0c6833723ecb6
     name: indexer
@@ -979,7 +982,7 @@ entries:
     version: 0.1.11
   - apiVersion: v2
     appVersion: 0.2.11
-    created: "2020-10-16T04:35:14.866547717Z"
+    created: "2020-10-16T05:49:10.871030567Z"
     description: A Helm chart for running the deps.cloud indexer process
     digest: 2e1ddff129f89a6f5ec13dc2764ac9135bb8f3aac1c30971319e8504f7405cf3
     name: indexer
@@ -989,7 +992,7 @@ entries:
     version: 0.1.10
   - apiVersion: v2
     appVersion: 0.2.10
-    created: "2020-10-16T04:35:14.872768501Z"
+    created: "2020-10-16T05:49:10.880133027Z"
     description: A Helm chart for running the depscloud indexer process
     digest: 42a7240bbf6f0899c43817f90e505e1214a3df39a89c7bf5cc3042f94543f6d0
     name: indexer
@@ -999,7 +1002,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 0.2.10
-    created: "2020-10-16T04:35:14.872251678Z"
+    created: "2020-10-16T05:49:10.879531323Z"
     description: A Helm chart for running the deps-cloud indexer process
     digest: e964acfed716597587532843bfeaa7bdee42a796bba141e8eef5d532ca4d2a39
     name: indexer
@@ -1009,7 +1012,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: 0.2.10
-    created: "2020-10-16T04:35:14.871735854Z"
+    created: "2020-10-16T05:49:10.878973219Z"
     description: A Helm chart for running the deps-cloud indexer process
     digest: bf2d2f5696cb0d7d451eb844801d0fe7cc63ef7351bab7934ffef1042e1dc3bc
     name: indexer
@@ -1019,7 +1022,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.2.6
-    created: "2020-10-16T04:35:14.871236231Z"
+    created: "2020-10-16T05:49:10.877937512Z"
     description: A Helm chart for running the deps-cloud indexer process
     digest: 85b8897fb14767e2ecb8bbcd403baaa729999bf2f5846a4e74520bf2cdfb8d6c
     name: indexer
@@ -1029,7 +1032,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2020-10-16T04:35:14.87077911Z"
+    created: "2020-10-16T05:49:10.875487696Z"
     description: A Helm chart for running the deps-cloud indexer process
     digest: e4e8ff9e0ed5cbd07b37cd7fa04723b494a75e127ab0bc6cb36f1c4d5876dc9a
     name: indexer
@@ -1039,7 +1042,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2020-10-16T04:35:14.870300388Z"
+    created: "2020-10-16T05:49:10.874978493Z"
     description: A Helm chart for running the deps-cloud indexer process
     digest: 9c378686c0954b283c5b950fc35e115d93789c1207da058996baaa45aa0970cf
     name: indexer
@@ -1049,7 +1052,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2020-10-16T04:35:14.869768864Z"
+    created: "2020-10-16T05:49:10.874465089Z"
     description: A Helm chart for running the deps-cloud indexer process
     digest: 4a1243baba8b93131309c569624ca3a5bf0dd7c9957263c43ed5c5ca28b5c1a3
     name: indexer
@@ -1059,7 +1062,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.2.3
-    created: "2020-10-16T04:35:14.869256641Z"
+    created: "2020-10-16T05:49:10.873960586Z"
     description: A Helm chart for running the deps-cloud indexer process
     digest: 998f74584324a3e16047b077ca447873de7c472f142dbb80c3e0614ec0a1c8ee
     name: indexer
@@ -1069,7 +1072,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.2.3
-    created: "2020-10-16T04:35:14.866112997Z"
+    created: "2020-10-16T05:49:10.870401262Z"
     description: A Helm chart for running the deps-cloud indexer process
     digest: 1fd9d382261550f45d50a9e9ccbbb84d03b22e9f7814a738a5fa8f661af4f355
     name: indexer
@@ -1080,9 +1083,9 @@ entries:
   tracker:
   - apiVersion: v2
     appVersion: 0.2.31
-    created: "2020-10-16T04:35:14.888800933Z"
+    created: "2020-10-16T05:49:10.896080132Z"
     description: A Helm chart for running the deps.cloud tracker process
-    digest: 5097f0bc71a9d968a25ba5752b370a1db6dd7a5f9ec1046c5ad6df0e6d149a2a
+    digest: befc172d5422627badc2257a99b439c9d3b44d5879d941b6a30ecd3e1092703a
     home: https://deps.cloud
     icon: https://deps.cloud/favicons/logo-small-rounded.png
     maintainers:
@@ -1099,7 +1102,7 @@ entries:
     version: 0.2.31
   - apiVersion: v2
     appVersion: 0.2.30
-    created: "2020-10-16T04:35:14.887896092Z"
+    created: "2020-10-16T05:49:10.895434128Z"
     description: A Helm chart for running the deps.cloud tracker process
     digest: 3f51edd35fb1990f37a5233977f530bce8c5747d033d176bf2a1da6dff3285db
     name: tracker
@@ -1109,7 +1112,7 @@ entries:
     version: 0.2.30
   - apiVersion: v2
     appVersion: 0.2.28
-    created: "2020-10-16T04:35:14.887095155Z"
+    created: "2020-10-16T05:49:10.894845724Z"
     description: A Helm chart for running the deps.cloud tracker process
     digest: bfb474fd612ad216a975ba55963a1132fcb4b12d4fc3705ee3729414968a0d1d
     name: tracker
@@ -1119,7 +1122,7 @@ entries:
     version: 0.2.28
   - apiVersion: v2
     appVersion: 0.2.26
-    created: "2020-10-16T04:35:14.886407924Z"
+    created: "2020-10-16T05:49:10.89433052Z"
     description: A Helm chart for running the deps.cloud tracker process
     digest: e34ee8da37dd34425ff00f8edf71c2c2cc0f0e46c03172e2064aa70f6611aaa7
     name: tracker
@@ -1129,7 +1132,7 @@ entries:
     version: 0.2.26
   - apiVersion: v2
     appVersion: 0.2.17
-    created: "2020-10-16T04:35:14.88127769Z"
+    created: "2020-10-16T05:49:10.888381981Z"
     description: A Helm chart for running the deps.cloud tracker process
     digest: 0756a63a0fd22712eeaf6ac3cf275334d639e4493a56ac730b0dc4e2dbd21a7b
     name: tracker
@@ -1139,7 +1142,7 @@ entries:
     version: 0.1.19
   - apiVersion: v2
     appVersion: 0.2.17
-    created: "2020-10-16T04:35:14.880763666Z"
+    created: "2020-10-16T05:49:10.887240074Z"
     description: A Helm chart for running the deps.cloud tracker process
     digest: b7259dbf33f5e322d6f2347a28f55585248e37de87e5fe32433883e4f2d030c3
     name: tracker
@@ -1149,7 +1152,7 @@ entries:
     version: 0.1.18
   - apiVersion: v2
     appVersion: 0.2.16
-    created: "2020-10-16T04:35:14.880272744Z"
+    created: "2020-10-16T05:49:10.88670447Z"
     description: A Helm chart for running the deps.cloud tracker process
     digest: e4aada20d668a8b9a384a1483984196461e0253c202acd0776579c40d40b4a4e
     name: tracker
@@ -1159,7 +1162,7 @@ entries:
     version: 0.1.17
   - apiVersion: v2
     appVersion: 0.2.16
-    created: "2020-10-16T04:35:14.879788422Z"
+    created: "2020-10-16T05:49:10.886201267Z"
     description: A Helm chart for running the deps.cloud tracker process
     digest: 1d582c760e6ae7a51858405d9ed23a5f8c8b8d2d0c49f589f5aaf2d884832551
     name: tracker
@@ -1169,7 +1172,7 @@ entries:
     version: 0.1.16
   - apiVersion: v2
     appVersion: 0.2.15
-    created: "2020-10-16T04:35:14.879276098Z"
+    created: "2020-10-16T05:49:10.885690063Z"
     description: A Helm chart for running the deps.cloud tracker process
     digest: ef5fa69f6d3855baee0f3fa8113526132e6ba361fcfe09c38d0fbb8307c874d4
     name: tracker
@@ -1179,7 +1182,7 @@ entries:
     version: 0.1.15
   - apiVersion: v2
     appVersion: 0.2.14
-    created: "2020-10-16T04:35:14.878803877Z"
+    created: "2020-10-16T05:49:10.88515786Z"
     description: A Helm chart for running the deps.cloud tracker process
     digest: 4a6e47bf123bc82b54b09991f2c7023d125997895118c0c22afdcdda96e09499
     name: tracker
@@ -1189,7 +1192,7 @@ entries:
     version: 0.1.14
   - apiVersion: v2
     appVersion: 0.2.13
-    created: "2020-10-16T04:35:14.878333855Z"
+    created: "2020-10-16T05:49:10.884640856Z"
     description: A Helm chart for running the deps.cloud tracker process
     digest: 1de0e0d593f9b2d3c5be04fe7b0ef05a112f3d09008b01a3ff7f09bb6845d4bd
     name: tracker
@@ -1199,7 +1202,7 @@ entries:
     version: 0.1.13
   - apiVersion: v2
     appVersion: 0.2.12
-    created: "2020-10-16T04:35:14.877843833Z"
+    created: "2020-10-16T05:49:10.884100553Z"
     description: A Helm chart for running the depscloud tracker process
     digest: b884a891bcd0d4b8da1b1d988435eb4596ed058f55f88d4446b725f89ed0ce97
     name: tracker
@@ -1209,7 +1212,7 @@ entries:
     version: 0.1.12
   - apiVersion: v2
     appVersion: 0.2.11
-    created: "2020-10-16T04:35:14.877302308Z"
+    created: "2020-10-16T05:49:10.883571549Z"
     description: A Helm chart for running the deps-cloud tracker process
     digest: bde146725f9da2a30b27394eb85a0493163e47f3db6792517fe9d31a0afb6245
     name: tracker
@@ -1219,7 +1222,7 @@ entries:
     version: 0.1.11
   - apiVersion: v2
     appVersion: 0.2.11
-    created: "2020-10-16T04:35:14.876762884Z"
+    created: "2020-10-16T05:49:10.883068446Z"
     description: A Helm chart for running the deps-cloud tracker process
     digest: f71b0ff4820b7a81e69bf460ea250d74eb4721fa145621fad460808ffff461e4
     name: tracker
@@ -1229,7 +1232,7 @@ entries:
     version: 0.1.10
   - apiVersion: v2
     appVersion: 0.2.10
-    created: "2020-10-16T04:35:14.885723193Z"
+    created: "2020-10-16T05:49:10.893806117Z"
     description: A Helm chart for running the deps-cloud tracker process
     digest: 6be95ea28725725f62a0d589171036cbfdef12729654e68882533c7ca6233572
     name: tracker
@@ -1239,7 +1242,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 0.2.10
-    created: "2020-10-16T04:35:14.885130266Z"
+    created: "2020-10-16T05:49:10.893226013Z"
     description: A Helm chart for running the deps-cloud tracker process
     digest: 969f2973a4d084f5583240a94708559f16664f1125b42c632cd1c745ec8c9f60
     name: tracker
@@ -1249,7 +1252,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: 0.2.9
-    created: "2020-10-16T04:35:14.884581441Z"
+    created: "2020-10-16T05:49:10.892650709Z"
     description: A Helm chart for running the deps-cloud tracker process
     digest: d6b65c1c166e4f26356d1abdf2d7182521e36cb8cd197b86c3ee78bdfa0363e0
     name: tracker
@@ -1259,7 +1262,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.2.6
-    created: "2020-10-16T04:35:14.884028015Z"
+    created: "2020-10-16T05:49:10.892054405Z"
     description: A Helm chart for running the deps-cloud tracker process
     digest: 942b2671568a8f3ecffaa7a96840ee815a13018736601eece42ec3d1e88bd937
     name: tracker
@@ -1269,7 +1272,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2020-10-16T04:35:14.883499391Z"
+    created: "2020-10-16T05:49:10.891468701Z"
     description: A Helm chart for running the deps-cloud tracker process
     digest: 0d62017aa026ae432519018b7445720667a8ff28775ebcfe307660084224cc13
     name: tracker
@@ -1279,7 +1282,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2020-10-16T04:35:14.882943966Z"
+    created: "2020-10-16T05:49:10.890883098Z"
     description: A Helm chart for running the deps-cloud tracker process
     digest: 085ce4d4c48ed6831b9ae02ad4058c5b153459236cf00b0be8af105a01f79311
     name: tracker
@@ -1289,7 +1292,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2020-10-16T04:35:14.882401541Z"
+    created: "2020-10-16T05:49:10.890323594Z"
     description: A Helm chart for running the deps-cloud tracker process
     digest: 8db88caa4da454dd5ed1dfe0be5ffec813f3a30b05d1efc10f8cfcda609f7848
     name: tracker
@@ -1299,7 +1302,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.2.3
-    created: "2020-10-16T04:35:14.881842416Z"
+    created: "2020-10-16T05:49:10.889094786Z"
     description: A Helm chart for running the deps-cloud tracker process
     digest: 1135f537eba8be302e411c9eb09ada9f9a9a317674c24af86294d628d94cd19d
     name: tracker
@@ -1307,4 +1310,4 @@ entries:
     urls:
     - https://depscloud.github.io/deploy/charts/tracker-0.1.2.tgz
     version: 0.1.2
-generated: "2020-10-16T04:35:14.768549442Z"
+generated: "2020-10-16T05:49:10.771912612Z"
