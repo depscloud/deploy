@@ -17,7 +17,7 @@ This chart bootstraps the deps.cloud ecosystem on a [Kubernetes](http://kubernet
 To install the chart with the release name `my-release`:
 
 ```bash
-$ helm install my-release depscloud-incubator/depscloud
+$ helm install my-release depscloud/depscloud
 ```
 
 The command deploys deps.cloud on the Kubernetes cluster in the default configuration.
