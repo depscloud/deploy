@@ -51,3 +51,18 @@ indexer:
 # Deploy and configure the tracker process.
 tracker:
   enabled: true
+
+# Simple Google Analytics tracking beacon. Flip beacon.enabled=false to
+# disable. Note that by disabling this beacon, it makes it harder for us to
+# understand the current products usage. We figured by putting in it's own
+# dedicated process, we weren't hiding it from users and it could easily be
+# shutoff if desired. Since deps.cloud contains several processes, disabling
+# it in each would've been tedious. Only the information below is emit from
+# the beacon (application name and version).
+beacon:
+  enabled: true
+  config:
+    trackingID: UA-143087272-3
+    userID: ""
+    applicationName: depscloud
+    applicationVersion: 0.2.31
