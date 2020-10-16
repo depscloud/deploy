@@ -2,7 +2,7 @@ apiVersion: v2
 type: application
 name: indexer
 description: A Helm chart for running the deps.cloud indexer process
-icon: https://deps.cloud/favicons/android-chrome-192x129.png
+icon: https://deps.cloud/favicons/logo-small-rounded.png
 home: https://deps.cloud
 sources:
   - https://github.com/depscloud/depscloud
