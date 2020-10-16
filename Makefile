@@ -79,7 +79,6 @@ sync-tag:
 	@make .sync-chart CHART_NAME=depscloud
 
 tag-release:
-	@git add .
-	@git commit -m "$(LATEST_VERSION)"
+	@git commit -a -m "$(LATEST_VERSION)"
 	@git tag -a -m "v$(LATEST_VERSION)" v$(LATEST_VERSION)
 	@echo "tagging complete, please run git push --follow-tags"
