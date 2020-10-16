@@ -1,6 +1,5 @@
 apiVersion: v2
 type: application
-
 name: depscloud
 description: Track, monitor, and connect project dependencies across languages and toolchains.
 icon: https://deps.cloud/favicons/android-chrome-192x129.png
@@ -12,10 +11,8 @@ maintainers:
   - name: Mya Pitzeruse
     email: mjpitz@deps.cloud
     url: https://mjpitz.com
-
-version: 0.2.30
-appVersion: 0.2.30
-
+version: 0.2.31
+appVersion: 0.2.31
 dependencies:
   - name: mysql
     repository: https://charts.bitnami.com/bitnami
@@ -27,17 +24,17 @@ dependencies:
     condition: postgres.enabled
   - name: extractor
     repository: file://../extractor
-    version: 0.2.30
+    version: 0.2.31
     condition: extractor.enabled
   - name: gateway
     repository: file://../gateway
-    version: 0.2.30
+    version: 0.2.31
     condition: gateway.enabled
   - name: indexer
     repository: file://../indexer
-    version: 0.2.30
+    version: 0.2.31
     condition: indexer.enabled
   - name: tracker
     repository: file://../tracker
-    version: 0.2.30
+    version: 0.2.31
     condition: tracker.enabled

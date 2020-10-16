@@ -1,6 +1,5 @@
 apiVersion: v2
 type: application
-
 name: extractor
 description: A Helm chart for running the deps.cloud extractor process
 icon: https://deps.cloud/favicons/android-chrome-192x129.png
@@ -12,6 +11,5 @@ maintainers:
   - name: Mya Pitzeruse
     email: mjpitz@deps.cloud
     url: https://mjpitz.com
-
-version: 0.2.30
-appVersion: 0.2.30
+version: 0.2.31
+appVersion: 0.2.31
