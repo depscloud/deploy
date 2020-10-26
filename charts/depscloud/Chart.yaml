@@ -19,7 +19,7 @@ dependencies:
     version: 0.0.2
   - name: mysql
     repository: https://charts.bitnami.com/bitnami
-    version: 6.14.10
+    version: 6.14.11
     condition: mysql.enabled
   - name: postgresql
     repository: https://charts.bitnami.com/bitnami
