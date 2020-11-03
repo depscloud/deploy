@@ -21,7 +21,7 @@ global:
 replicaCount: 1
 
 image:
-  repository: depscloud/gateway
+  repository: ocr.sh/depscloud/gateway
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []

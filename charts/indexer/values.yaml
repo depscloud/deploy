@@ -5,7 +5,7 @@ global:
   labels: {}
 
 image:
-  repository: depscloud/indexer
+  repository: ocr.sh/depscloud/indexer
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []

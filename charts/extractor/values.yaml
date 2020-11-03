@@ -21,7 +21,7 @@ global:
 replicaCount: 1
 
 image:
-  repository: depscloud/extractor
+  repository: ocr.sh/depscloud/extractor
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
