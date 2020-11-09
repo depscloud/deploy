@@ -3,10 +3,15 @@ LATEST_VERSION=$(shell (curl -sSL https://api.github.com/repos/depscloud/depsclo
 CHART_REPOSITORY_URL = "https://depscloud.github.io/deploy"
 REPOSITORY_URL = "https://github.com/depscloud/deploy.git"
 
-all: public/charts public/k8s public/monitoring
+all: public/monitoring public/charts public/k8s public/index.html
 
 clean:
 	rm -rf public
+
+build-deps:
+	go get -u github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
+	go get -u github.com/google/go-jsonnet/cmd/jsonnet
+	go get -u github.com/gomarkdown/mdtohtml
 
 public:
 	git clone -q --depth 1 -b gh-pages $(REPOSITORY_URL) public
@@ -83,3 +88,9 @@ tag-release:
 	@git commit -a -m "$(LATEST_VERSION)"
 	@git tag -a -m "v$(LATEST_VERSION)" v$(LATEST_VERSION)
 	@echo "tagging complete, please run git push --follow-tags"
+
+public/index.html: public .public/index.html
+.public/index.html:
+	@echo "[site] generating"
+	@cp site/style.css public/style.css
+	@mdtohtml -page -css style.css site/README.md public/index.html
