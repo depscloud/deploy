@@ -130,3 +130,10 @@ metrics:
     sidecar:
       # The label used by the sidecar to select the dashboard.
       label: "grafana_dashboard"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
