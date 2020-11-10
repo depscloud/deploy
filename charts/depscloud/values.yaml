@@ -58,3 +58,31 @@ beacon:
     userID: ""
     applicationName: depscloud
     applicationVersion: 0.2.32
+# Enable ingress communication with depscloud.
+ingress:
+  # Enables the creation of the resources.
+  enabled: false
+  # Specify any ingress-controller specific annotations. The CLI
+  # requires gRPC to work properly. Be sure your networking stack
+  # supports it. Should you need help for your provider, don't hesitate
+  # to reach out.
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+    # nginx.ingress.kubernetes.io/enable-cors: "true"
+  hosts:
+    - host: depscloud.example.local
+      paths:
+        - /
+  tls: []
+    # - secretName: depscloud-tls
+    #   hosts:
+    #     - depscloud.example.local
+  # Override the backend configuration for the ingress definition.
+  backend:
+    # The name of the service to target. Defaults to "{{ .Release.Name }}-gateway".
+    serviceName: ""
+    # The port to target.
+    servicePort: "http"
