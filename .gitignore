@@ -3,7 +3,6 @@
 /public
 /docker/tls/certs
 *.lock
-charts/**/monitoring
 monitoring/out/
 monitoring/vendor/
 monitoring/jsonnetfile.lock.json
