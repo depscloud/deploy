@@ -1,5 +1,8 @@
 # deps.cloud deployment configuration
 
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/depscloud)](https://artifacthub.io/packages/search?repo=depscloud)
+![license](https://img.shields.io/github/license/depscloud/deploy.svg)
+
 Please see our [documentation](https://deps.cloud/docs/deploy) for proper use.
 
 ### Kubernetes Manifests
