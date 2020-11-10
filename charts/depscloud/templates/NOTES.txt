@@ -1,0 +1,28 @@
+Thank you for installing {{ .Chart.Name }}!
+
+Check out {{ .Chart.Home }}/docs for more information on how to use {{ .Chart.Name }}.
+
+To inspect the status of your release, try:
+
+  $ helm status {{ .Release.Name }}
+  $ helm get all {{ .Release.Name }}
+
+{{- if .Values.ingress.enabled }}
+{{- $host := first .Values.ingress.hosts -}}
+{{- $scheme := ternary "https" "http" .Values.ingress.tls -}}
+{{- $baseURL := printf "%s://%s" $scheme $host.host -}}
+Once running, deps.cloud will be available at {{ $baseURL }}.
+
+  $ export DEPSCLOUD_BASE_URL="{{ $baseURL }}"
+  $ deps debug
+
+{{- else }}
+Once running, you will need to port-forward the service to access the api.
+
+  $ kubectl port-forward -n {{ .Release.Namespace }} svc/{{ .Release.Name }}-gateway 8080:8080
+  $ export DEPSCLOUD_BASE_URL="http://localhost:8080"
+  $ deps debug
+
+To expose this service, set the `ingress.enabled` field and configure your appropriate `hosts`.
+For more information, take a look at our `values.yaml` file.
+{{- end }}
