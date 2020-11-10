@@ -5,6 +5,21 @@ REPOSITORY_URL = "https://github.com/depscloud/deploy.git"
 
 all: public/monitoring public/charts public/k8s public/index.html
 
+.prepare:
+	@bash -c "if [[ -e public/monitoring/depscloud-$(CHART_NAME)-grafana.json ]]; then \
+              	mkdir -p charts/$(CHART_NAME)/monitoring ; \
+              	cp public/monitoring/depscloud-$(CHART_NAME)-grafana.json charts/$(CHART_NAME)/monitoring/dashboard.json ; \
+              fi"
+
+.lint:
+	@helm lint charts/$(CHART_NAME)
+
+.update:
+	@helm dependency update charts/$(CHART_NAME) 1>/dev/null
+
+.package:
+	@helm package charts/$(CHART_NAME) -d public/charts/ 1>/dev/null
+
 clean:
 	rm -rf public
 
@@ -18,14 +33,17 @@ public:
 
 public/charts: public .public/charts
 .public/charts:
+	@echo "[charts] preparing"
+	@ls -1 charts/ | xargs -I{} make .prepare CHART_NAME={}
+
 	@echo "[charts] linting templates"
-	@ls -1 charts/ | xargs -I{} helm lint charts/{}
+	@ls -1 charts/ | xargs -I{} make .lint CHART_NAME={}
 
 	@echo "[charts] updating dependencies"
-	@ls -1 charts/ | xargs -I{} helm dependency update charts/{} 1>/dev/null
+	@ls -1 charts/ | xargs -I{} make .update CHART_NAME={}
 
 	@echo "[charts] packaging"
-	@ls -1 charts/ | xargs -I{} helm package charts/{} -d public/charts/ 1>/dev/null
+	@ls -1 charts/ | xargs -I{} make .package CHART_NAME={}
 
 	@echo "[charts] indexing"
 	@helm repo index public/charts/ --url "$(CHART_REPOSITORY_URL)/charts"

@@ -114,3 +114,19 @@ metrics:
   serviceMonitor: {}
 #    enabled: false
 #    interval: 10s
+
+  # Deploy and manage the grafana dashboard as configuration using the
+  # grafana sidecar process (default in the kube-prometheus-stack).
+  dashboard:
+    # Enables the creation of the dashboard config map.
+    enabled: false
+
+    # Specify what namespace the config map should be deployed to.
+    # This may differ from your application configuration. Defaults
+    # to the namespace of the release.
+    namespace: ""
+
+    # Configuration specific to the sidecar process.
+    sidecar:
+      # The label used by the sidecar to select the dashboard.
+      label: "grafana_dashboard"

@@ -1,0 +1,16 @@
+{{- if .Values.metrics.dashboard.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  {{- with .Values.metrics.dashboard.namespace }}
+  namespace: {{ . }}
+  {{- end }}
+  name: {{ include "extractor.fullname" . }}-dashboard
+  labels:
+    {{- include "extractor.labels" . | nindent 4 }}
+    {{ .Values.metrics.dashboard.sidecar.label }}: "1"
+data:
+  {{ include "extractor.fullname" . }}.json: |
+    {{- .Files.Get "monitoring/dashboard.json" | nindent 4 }}
+{{- end }}
