@@ -1,11 +1,11 @@
 # Extractor
 
-Extractor encapsulates the logic for extracting dependency information from repositories in the [deps.cloud](https://deps.cloud) ecosystem.
-It provides a gRPC API for matching and extracting contents of dependency manifest files.
+Extractor is one component of the [deps.cloud](https://deps.cloud) ecosystem.
+It handles matching, parsing, and extracting dependency information from manifest files (like `package.json`, `pom.xml`, etc).
 
 ## Introduction
 
-This chart bootstraps a Extractor deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart bootstraps an `extractor` deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
 
@@ -14,30 +14,31 @@ This chart bootstraps a Extractor deployment on a [Kubernetes](http://kubernetes
 
 ## Installing the Chart
 
-To install the chart with the release name `my-release`:
+To install the chart with the release name `extractor`:
 
 ```bash
-$ helm install my-release depscloud/extractor
+$ helm repo add depscloud https://depscloud.github.io/deploy/charts
+$ helm install extractor depscloud/extractor
 ```
 
-The command deploys Extractor on the Kubernetes cluster in the default configuration.
+The command deploys the `extractor` on the Kubernetes cluster in the default configuration.
 The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
-> **Tip**: List all releases using `helm list`
+> **Tip**: List all releases using `helm search repo --versions`
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `my-release` deployment:
+To uninstall/delete the `extractor` deployment:
 
 ```bash
-$ helm delete my-release
+$ helm delete extractor
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
 ## Parameters
 
-The following table lists the configurable parameters of the Extractor chart and their default values.
+The following table lists the configurable parameters of the extractor chart.
 
 | Parameter                                | Description                                                             | Default             |
 |------------------------------------------|-------------------------------------------------------------------------|---------------------|

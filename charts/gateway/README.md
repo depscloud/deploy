@@ -1,11 +1,13 @@
 # Gateway
 
-Gateway is an HTTP proxy to the various gRPC services within the [deps.cloud](https://deps.cloud) ecosystem.
-It translates RESTful API calls into gRPC calls for interacting with modules and their dependencies.
+Gateway provides a single interface to the [deps.cloud](https://deps.cloud) ecosystem.
+It exposes both gRPC and RESTful interfaces for clients to connect to.
+We expose REST primarily for human consumption.
+Any extensions should leverage the gRPC API. 
 
 ## Introduction
 
-This chart bootstraps a Gateway deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart bootstraps a gateway deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
 
@@ -14,23 +16,24 @@ This chart bootstraps a Gateway deployment on a [Kubernetes](http://kubernetes.i
 
 ## Installing the Chart
 
-To install the chart with the release name `my-release`:
+To install the chart with the release name `gateway`:
 
 ```bash
-$ helm install my-release depscloud/gateway
+$ helm repo add depscloud https://depscloud.github.io/deploy/charts
+$ helm install gateway depscloud/gateway
 ```
 
-The command deploys Gateway on the Kubernetes cluster in the default configuration.
+The command deploys the gateway on the Kubernetes cluster in the default configuration.
 The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
-> **Tip**: List all releases using `helm list`
+> **Tip**: List all releases using `helm search repo --versions`
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `my-release` deployment:
+To uninstall/delete the `gateway` deployment:
 
 ```bash
-$ helm delete my-release
+$ helm delete gateway
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.

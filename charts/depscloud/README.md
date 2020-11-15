@@ -1,7 +1,12 @@
 # deps.cloud
 
-deps.cloud is a set of services used to extract, track, and monitor dependencies between systems
-It is comprised of a distinct set of services, each working together to accomplish a task. 
+deps.cloud is a tool to help understand how projects relate to one another.
+It works by detecting dependencies defined in common [manifest files] (`pom.xml`, `package.json`, `go.mod`, etc).
+Using this information, we’re able to answer questions about project dependencies.
+
+* What versions of _k8s.io/client-go_ do we depend on?
+* Which projects use _eslint_ as a non-dev dependency?
+* What open source libraries do we use the most? 
 
 ## Introduction
 
@@ -14,23 +19,24 @@ This chart bootstraps the deps.cloud ecosystem on a [Kubernetes](http://kubernet
 
 ## Installing the Chart
 
-To install the chart with the release name `my-release`:
+To install the chart with the release name `depscloud`:
 
 ```bash
-$ helm install my-release depscloud/depscloud
+$ helm repo add depscloud https://depscloud.github.io/deploy/charts
+$ helm install depscloud depscloud/depscloud
 ```
 
 The command deploys deps.cloud on the Kubernetes cluster in the default configuration.
 The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
-> **Tip**: List all releases using `helm list`
+> **Tip**: List all releases using `helm search repo --versions`
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `my-release` deployment:
+To uninstall/delete the `depscloud` deployment:
 
 ```bash
-$ helm delete my-release
+$ helm delete depscloud
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.

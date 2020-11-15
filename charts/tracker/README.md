@@ -5,7 +5,7 @@ It provides a gRPC API for interacting with modules and their dependencies.
 
 ## Introduction
 
-This chart bootstraps a Tracker deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart bootstraps a tracker deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
 
@@ -14,30 +14,31 @@ This chart bootstraps a Tracker deployment on a [Kubernetes](http://kubernetes.i
 
 ## Installing the Chart
 
-To install the chart with the release name `my-release`:
+To install the chart with the release name `tracker`:
 
 ```bash
-$ helm install my-release depscloud/tracker
+$ helm repo add depscloud https://depscloud.github.io/deploy/charts
+$ helm install tracker depscloud/tracker
 ```
 
-The command deploys Tracker on the Kubernetes cluster in the default configuration.
+The command deploys the tracker on the Kubernetes cluster in the default configuration.
 The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
-> **Tip**: List all releases using `helm list`
+> **Tip**: List all releases using `helm search repo --versions`
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `my-release` deployment:
+To uninstall/delete the `tracker` deployment:
 
 ```bash
-$ helm delete my-release
+$ helm delete tracker
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
 ## Parameters
 
-The following table lists the configurable parameters of the Tracker chart and their default values.
+The following table lists the configurable parameters of the tracker chart.
 
 | Parameter                                | Description                                                             | Default                       |
 |------------------------------------------|-------------------------------------------------------------------------|-------------------------------|

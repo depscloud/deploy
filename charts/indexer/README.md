@@ -1,11 +1,11 @@
 # Indexer
 
 Indexer crawls integrations supported by the [deps.cloud](https://deps.cloud) ecosystem.
-It's responsible for the aggregation of repositories and ensuring their data is stored in Tracker.
+It's responsible for cloning repositories and crawling their content.
 
 ## Introduction
 
-This chart bootstraps an Indexer cron on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart bootstraps an indexer cron on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
 
@@ -14,30 +14,31 @@ This chart bootstraps an Indexer cron on a [Kubernetes](http://kubernetes.io) cl
 
 ## Installing the Chart
 
-To install the chart with the release name `my-release`:
+To install the chart with the release name `indexer`:
 
 ```bash
-$ helm install my-release depscloud/indexer
+$ helm repo add depscloud https://depscloud.github.io/deploy/charts
+$ helm install indexer depscloud/indexer
 ```
 
-The command deploys Indexer on the Kubernetes cluster in the default configuration.
+The command deploys indexer on the Kubernetes cluster in the default configuration.
 The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
-> **Tip**: List all releases using `helm list`
+> **Tip**: List all releases using `helm search repo --versions`
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `my-release` deployment:
+To uninstall/delete the `indexer` deployment:
 
 ```bash
-$ helm delete my-release
+$ helm delete indexer
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
 ## Parameters
 
-The following table lists the configurable parameters of the Indexer chart and their default values.
+The following table lists the configurable parameters of the indexer chart.
 
 | Parameter                                | Description                                                     | Default                                |
 |------------------------------------------|-----------------------------------------------------------------|----------------------------------------|
