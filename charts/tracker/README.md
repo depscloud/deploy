@@ -1,7 +1,7 @@
 # Tracker
 
-Tracker is the main storage service to the [deps.cloud](https://deps.cloud) ecosystem.
-It provides a gRPC API for interacting with modules and their dependencies.
+Tracker is the primary API service in the [deps.cloud](https://deps.cloud) ecosystem.
+It manages the dependency graph stored in various relational databases.
 
 ## Introduction
 

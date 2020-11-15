@@ -8,6 +8,8 @@ Using this information, we’re able to answer questions about project dependenc
 * Which projects use _eslint_ as a non-dev dependency?
 * What open source libraries do we use the most? 
 
+[manifest files]: https://deps.cloud/docs/concepts/manifests/
+
 ## Introduction
 
 This chart bootstraps the deps.cloud ecosystem on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.

@@ -1,7 +1,7 @@
 # Indexer
 
-Indexer crawls integrations supported by the [deps.cloud](https://deps.cloud) ecosystem.
-It's responsible for cloning repositories and crawling their content.
+Indexer crawls version control providers supported by the [deps.cloud](https://deps.cloud) ecosystem.
+It's responsible for discovering, cloning, and crawling repositories and their content.
 
 ## Introduction
 
