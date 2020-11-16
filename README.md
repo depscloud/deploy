@@ -19,9 +19,6 @@ I do not recommend using the docker configuration in this repository for product
 
 ## Kubernetes
 
-* [ArgoCD](https://github.com/depscloud/deploy/tree/main/examples/argocd)
-* FluxCD's [HelmOperator](https://github.com/depscloud/deploy/tree/main/examples/helm-operator)
-* [Helm](https://github.com/depscloud/deploy/tree/main/examples/helm)
 * [Raw Manifests](https://deps.cloud/docs/deployment/k8s/)
 
 ## Helm
