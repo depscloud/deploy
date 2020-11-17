@@ -23,6 +23,7 @@ replicaCount: 1
 image:
   repository: ocr.sh/depscloud/tracker
   pullPolicy: IfNotPresent
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""

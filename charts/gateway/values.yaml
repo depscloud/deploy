@@ -23,6 +23,7 @@ replicaCount: 1
 image:
   repository: ocr.sh/depscloud/gateway
   pullPolicy: IfNotPresent
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
