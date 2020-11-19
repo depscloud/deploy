@@ -1,0 +1,52 @@
+# Extractor
+
+Extractor is one component of the [deps.cloud](https://deps.cloud) ecosystem.
+It handles matching, parsing, and extracting dependency information from manifest files (like `package.json`, `pom.xml`, etc).
+
+## Introduction
+
+This chart bootstraps a {{ template "chart.name" . }} deployment on a [Kubernetes] cluster using the [Helm] package manager.
+
+[Kubernetes]: https://kubernetes.io
+[Helm]: https://helm.sh
+
+Current chart version is `{{ template "chart.version" . }}`
+
+{{ template "chart.sourcesSection" . }}
+
+## Prerequisites
+
+- Kubernetes 1.15+
+- Helm 3.0+
+
+## Installing the Chart
+
+To install the chart with the release name `{{ template "chart.name" . }}`:
+
+```bash
+$ helm repo add depscloud https://depscloud.github.io/deploy/charts
+$ helm install {{ template "chart.name" . }} depscloud/{{ template "chart.name" . }}
+```
+
+The command deploys {{ template "chart.name" . }} on the Kubernetes cluster using the default configuration.
+The [Parameters](#parameters) section lists the parameters that can be configured during installation.
+
+> **Tip**: List all releases using `helm search repo --versions`
+
+## Uninstalling the Chart
+
+To uninstall/delete the `{{ template "chart.name" . }}` deployment:
+
+```bash
+$ helm delete {{ template "chart.name" . }}
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+{{ template "chart.requirementsSection" . }}
+
+## Parameters
+
+The following table lists the configurable parameters of the {{ template "chart.name" . }} chart and their default values.
+
+{{ template "chart.valuesTable" . }}

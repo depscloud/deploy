@@ -1,0 +1,60 @@
+# deps.cloud
+
+[deps.cloud] is a tool to help understand how projects relate to one another.
+It works by detecting dependencies defined in common [manifest files] (`pom.xml`, `package.json`, `go.mod`, etc).
+Using this information, we’re able to answer questions about project dependencies.
+
+* What versions of _k8s.io/client-go_ do we depend on?
+* Which projects use _eslint_ as a non-dev dependency?
+* What open source libraries do we use the most?
+
+[deps.cloud]: https://deps.cloud
+[manifest files]: https://deps.cloud/docs/concepts/manifests/
+
+## Introduction
+
+This chart bootstraps a {{ template "chart.name" . }} deployment on a [Kubernetes] cluster using the [Helm] package manager.
+
+[Kubernetes]: https://kubernetes.io
+[Helm]: https://helm.sh
+
+Current chart version is `{{ template "chart.version" . }}`
+
+{{ template "chart.sourcesSection" . }}
+
+## Prerequisites
+
+- Kubernetes 1.15+
+- Helm 3.0+
+
+## Installing the Chart
+
+To install the chart with the release name `{{ template "chart.name" . }}`:
+
+```bash
+$ helm repo add depscloud https://depscloud.github.io/deploy/charts
+$ helm install {{ template "chart.name" . }} depscloud/{{ template "chart.name" . }}
+```
+
+The command deploys {{ template "chart.name" . }} on the Kubernetes cluster using the default configuration.
+The [Parameters](#parameters) section lists the parameters that can be configured during installation.
+
+> **Tip**: List all releases using `helm search repo --versions`
+
+## Uninstalling the Chart
+
+To uninstall/delete the `{{ template "chart.name" . }}` deployment:
+
+```bash
+$ helm delete {{ template "chart.name" . }}
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+{{ template "chart.requirementsSection" . }}
+
+## Parameters
+
+The following table lists the configurable parameters of the {{ template "chart.name" . }} chart and their default values.
+
+{{ template "chart.valuesTable" . }}

@@ -19,6 +19,10 @@ jobs:
         with:
           go-version: '1.15'
 
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+
       - name: Setup helm
         run: |
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash

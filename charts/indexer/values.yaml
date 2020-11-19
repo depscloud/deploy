@@ -1,7 +1,7 @@
 # Configuration shared across all charts. Each chart supports per service and
 # global configuration, making it easy to configure and deploy the system.
 global:
-  # Common labels added to all resources.
+  # -- Common labels added to all resources.
   labels: {}
 
 image:
@@ -14,11 +14,11 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  # Specifies whether a service account should be created.
+  # -- Specifies whether a service account should be created.
   create: true
-  # Determine pods should automount the token.
+  # -- Determine pods should automount the token.
   automountToken: false
-  # The name of the service account to use.
+  # -- The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name:
 
@@ -33,11 +33,12 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-# We usually recommend not to specify default resources and to leave this as a conscious
-# choice for the user. This also increases chances charts run on environments with little
-# resources, such as Minikube. If you do want to specify resources, uncomment the following
-# lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+# -- Configure the resources allocated to the process.
 resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
   #   memory: 128Mi
@@ -51,30 +52,32 @@ tolerations: []
 
 affinity: {}
 
-# The schedule to run on. If not set, then the indexer will run as a job
+# -- The schedule to run on. If not set, then the indexer will run as a job
 # instead of on a recurring schedule.
 schedule: "@daily"
 
-# The number of worker threads to index repositories.
+# -- The number of worker threads to index repositories.
 workers: 5
 
-# Configure the connection information to the extractor service. The
-# `secretName` is used to configure mTLS for extractor. The secret needs 3
-# keys: `tls.crt`, `tls.key`, and `ca.crt`.
+# Configure the connection information to the extractor service.
 extractor:
+  # -- Configures the connection string for the extractor.
   address: "dns:///extractor:8090"
+  # -- Configures mTLS for the extractor. The secret needs 3 keys: `tls.crt`,
+  ## `tls.key`, and `ca.crt`.
   secretName: ""
 
-# Configure the connection information to the tracker service. The
-# `secretName` is used to configure mTLS for tracker. The secret needs 3
-# keys: `tls.crt`, `tls.key`, and `ca.crt`.
+# Configure the connection information to the tracker service.
 tracker:
+  # -- Configures the connection string for the tracker.
   address: "dns:///tracker:8090"
+  # -- Configures mTLS for the tracker. The secret needs 3 keys: `tls.crt`,
+  ## `tls.key`, and `ca.crt`.
   secretName: ""
 
-# Used to generate a config.yaml file that is fed into the indexer.
-# This drives which repositories are indexed and which ones aren't.
-# See https://deps.cloud/docs/deploy/config/indexing/
+# -- Configure the accounts to index.
+# See [the documentation](https://deps.cloud/docs/deploy/config/indexing/)
+# for more information.
 config:
   accounts:
     - github:
@@ -86,11 +89,13 @@ config:
 # we support storing the config information in a secret file.
 externalConfig:
   configMapRef:
+    # -- The name of the config map containing the `config.yaml` file.
     name: ""
   secretRef:
+    # -- The name of the secret containing the `config.yaml` file.
     name: ""
 
-# Labels added to all resources. These are joined with the global
+# -- Labels added to all resources. These are joined with the global
 # configuration for the deployment.
 labels: {}
 
@@ -98,15 +103,15 @@ metrics:
   # Deploy and manage the grafana dashboard as configuration using the
   # grafana sidecar process (default in the kube-prometheus-stack).
   dashboard:
-    # Enables the creation of the dashboard config map.
+    # -- Enables the creation of the dashboard config map.
     enabled: false
 
-    # Specify what namespace the config map should be deployed to.
+    # -- Specify what namespace the config map should be deployed to.
     # This may differ from your application configuration. Defaults
     # to the namespace of the release.
     namespace: ""
 
     # Configuration specific to the sidecar process.
     sidecar:
-      # The label used by the sidecar to select the dashboard.
+      # -- The label used by the sidecar to select the dashboard.
       label: "grafana_dashboard"

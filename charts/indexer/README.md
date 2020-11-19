@@ -5,11 +5,21 @@ It's responsible for discovering, cloning, and crawling repositories and their c
 
 ## Introduction
 
-This chart bootstraps an indexer cron on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart bootstraps an indexer deployment on a [Kubernetes] cluster using the [Helm] package manager.
+
+[kubernetes]: https://kubernetes.io
+[helm]: https://helm.sh
+
+Current chart version is `0.2.32`
+
+## Source Code
+
+- <https://github.com/depscloud/depscloud>
+- <https://github.com/depscloud/deploy>
 
 ## Prerequisites
 
-- Kubernetes 1.16+
+- Kubernetes 1.15+
 - Helm 3.0+
 
 ## Installing the Chart
@@ -21,7 +31,7 @@ $ helm repo add depscloud https://depscloud.github.io/deploy/charts
 $ helm install indexer depscloud/indexer
 ```
 
-The command deploys indexer on the Kubernetes cluster in the default configuration.
+The command deploys indexer on the Kubernetes cluster using the default configuration.
 The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
 > **Tip**: List all releases using `helm search repo --versions`
@@ -38,30 +48,36 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Parameters
 
-The following table lists the configurable parameters of the indexer chart.
+The following table lists the configurable parameters of the indexer chart and their default values.
 
-| Parameter                                | Description                                                     | Default                                |
-|------------------------------------------|-----------------------------------------------------------------|----------------------------------------|
-| `global.labels`                          | Labels applied to all deps.cloud resources                      | `{}`                                   |
-| `image.repository`                       | The address of the registry hosting the image                   | `depscloud/indexer`                    |
-| `image.pullPolicy`                       | The pull policy for the image                                   | `IfNotPresent`                         |
-| `image.tag`                              | The version of the image                                        | `.Chart.AppVersion`                    |
-| `imagePullSecrets`                       | Registry secret names                                           | `[]`                                   |
-| `nameOverride`                           | String to partially override the full name template             | `""`                                   |
-| `fullnameOverride`                       | String to completely override the full name                     | `""`                                   |
-| `serviceAccount.create`                  | Whether or not a service account should be created              | `true`                                 |
-| `serviceAccount.automountToken`          | Should we mount the service account token                       | `false`                                |
-| `serviceAccount.name`                    | The name of the service account                                 | `""`                                   |
-| `podSecurityContext`                     | Provide any pod security context attributes                     | `{}`                                   |
-| `securityContext`                        | Provide any security context attributes                         | `{}`                                   |
-| `resources`                              | Any resource constraints to place on the container              | `{}`                                   |
-| `nodeSelector`                           | Target the deployment to a certain class of nodes               | `{}`                                   |
-| `tolerations`                            | Identify any taints the process can tolerate                    | `[]`                                   |
-| `affinity`                               | Set up an an affinity based on attributes                       | `{}`                                   |
-| `extractor.address`                      | The address of the extractor process                            | `"{{ .Release.Name }}-extractor:8090"` |
-| `extractor.secretName`                   | The name of the secret containing certificates to the extractor | `""`                                   |
-| `tracker.address`                        | The address of the tracker process                              | `"{{ .Release.Name }}-tracker:8090"`   |
-| `tracker.secretName`                     | The name of the secret containing certificates to the tracker   | `""`                                   |
-| `workers`                                | The number of worker threads cloning and indexing repositories  | `5`                                    |
-| `config`                                 | YAML containing the configuration for the various accounts      | `{}`                                   |
-| `labels`                                 | Labels applied to the gateway resources                         | `{}`                                   |
+| Key                              | Type   | Default                                                                       | Description                                                                                                                                                 |
+| -------------------------------- | ------ | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| affinity                         | object | `{}`                                                                          |                                                                                                                                                             |
+| config                           | object | `{"accounts":[{"github":{"organizations":["depscloud"],"strategy":"HTTP"}}]}` | Configure the accounts to index. See [the documentation](https://deps.cloud/docs/deploy/config/indexing/) for more information.                             |
+| externalConfig.configMapRef.name | string | `""`                                                                          | The name of the config map containing the `config.yaml` file.                                                                                               |
+| externalConfig.secretRef.name    | string | `""`                                                                          | The name of the secret containing the `config.yaml` file.                                                                                                   |
+| extractor.address                | string | `"dns:///extractor:8090"`                                                     | Configures the connection string for the extractor.                                                                                                         |
+| extractor.secretName             | string | `""`                                                                          | Configures mTLS for the extractor. The secret needs 3 keys: `tls.crt`,                                                                                      |
+| fullnameOverride                 | string | `""`                                                                          |                                                                                                                                                             |
+| global.labels                    | object | `{}`                                                                          | Common labels added to all resources.                                                                                                                       |
+| image.pullPolicy                 | string | `"IfNotPresent"`                                                              |                                                                                                                                                             |
+| image.repository                 | string | `"ocr.sh/depscloud/indexer"`                                                  |                                                                                                                                                             |
+| image.tag                        | string | `""`                                                                          |                                                                                                                                                             |
+| imagePullSecrets                 | list   | `[]`                                                                          |                                                                                                                                                             |
+| labels                           | object | `{}`                                                                          | Labels added to all resources. These are joined with the global configuration for the deployment.                                                           |
+| metrics.dashboard.enabled        | bool   | `false`                                                                       | Enables the creation of the dashboard config map.                                                                                                           |
+| metrics.dashboard.namespace      | string | `""`                                                                          | Specify what namespace the config map should be deployed to. This may differ from your application configuration. Defaults to the namespace of the release. |
+| metrics.dashboard.sidecar.label  | string | `"grafana_dashboard"`                                                         | The label used by the sidecar to select the dashboard.                                                                                                      |
+| nameOverride                     | string | `""`                                                                          |                                                                                                                                                             |
+| nodeSelector                     | object | `{}`                                                                          |                                                                                                                                                             |
+| podSecurityContext               | object | `{}`                                                                          |                                                                                                                                                             |
+| resources                        | object | `{}`                                                                          | Configure the resources allocated to the process.                                                                                                           |
+| schedule                         | string | `"@daily"`                                                                    | The schedule to run on. If not set, then the indexer will run as a job instead of on a recurring schedule.                                                  |
+| securityContext                  | object | `{}`                                                                          |                                                                                                                                                             |
+| serviceAccount.automountToken    | bool   | `false`                                                                       | Determine pods should automount the token.                                                                                                                  |
+| serviceAccount.create            | bool   | `true`                                                                        | Specifies whether a service account should be created.                                                                                                      |
+| serviceAccount.name              | string | `nil`                                                                         | The name of the service account to use. If not set and create is true, a name is generated using the fullname template                                      |
+| tolerations                      | list   | `[]`                                                                          |                                                                                                                                                             |
+| tracker.address                  | string | `"dns:///tracker:8090"`                                                       | Configures the connection string for the tracker.                                                                                                           |
+| tracker.secretName               | string | `""`                                                                          | Configures mTLS for the tracker. The secret needs 3 keys: `tls.crt`,                                                                                        |
+| workers                          | int    | `5`                                                                           | The number of worker threads to index repositories.                                                                                                         |

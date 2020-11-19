@@ -17,6 +17,10 @@ all: public/monitoring public/charts public/k8s public/index.html
 .update:
 	@helm dependency update charts/$(CHART_NAME) 1>/dev/null
 
+.docs:
+	@helm-docs -c charts/$(CHART_NAME) --dry-run | \
+		prettier --parser markdown > charts/$(CHART_NAME)/README.md
+
 .package:
 	@helm package charts/$(CHART_NAME) -d public/charts/ 1>/dev/null
 
@@ -27,6 +31,8 @@ build-deps:
 	go get -u github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
 	go get -u github.com/google/go-jsonnet/cmd/jsonnet
 	go get -u github.com/gomarkdown/mdtohtml
+	go get github.com/norwoodj/helm-docs/cmd/helm-docs
+	npm install -g prettier
 
 public:
 	git clone -q --depth 1 -b gh-pages $(REPOSITORY_URL) public
@@ -35,6 +41,9 @@ public/charts: public .public/charts
 .public/charts:
 	@echo "[charts] preparing"
 	@ls -1 charts/ | xargs -I{} make .prepare CHART_NAME={}
+
+	@echo "[charts] updating docs"
+	@ls -1 charts/ | xargs -I{} make .docs CHART_NAME={}
 
 	@echo "[charts] linting templates"
 	@ls -1 charts/ | xargs -I{} make .lint CHART_NAME={}

@@ -1,9 +1,9 @@
 # Configuration shared across all charts. Each chart supports per service and
 # global configuration, making it easy to configure and deploy the system.
 global:
-  # Common labels added to all resources.
+  # -- Common labels added to all resources.
   labels: {}
-  # Common service configuration. Used to configure routing topology.
+  # -- Common service configuration. Used to configure routing topology.
   service: {}
   #  topology:
   #    - "kubernetes.io/hostname"
@@ -13,37 +13,52 @@ global:
   # Common metrics configuration.
   metrics:
     serviceMonitor:
+      # -- Create a Prometheus ServiceMonitor.
       enabled: false
+      # -- Configure the scrape interval used by the monitor.
       interval: 10s
-# Deploy a copy of MySQL alongside deps.cloud. Useful for quick testing.
-# Not recommended for production.
+
 mysql:
+  # -- Deploy a copy of MySQL alongside deps.cloud. Useful for quick testing.
+  # Not recommended for production.
   enabled: false
-# Deploy a copy of PostgreSQL alongside deps.cloud. Useful for quick testing.
-# Not recommended for production.
+
 postgres:
+  # -- Deploy a copy of PostgreSQL alongside deps.cloud. Useful for quick testing.
+  # Not recommended for production.
   enabled: false
-# Deploy and configure the extractor process.
+
 extractor:
+  # -- Deploy the extractor process.
   enabled: true
-# Deploy and configure the gateway process.
+
 gateway:
+  # -- Deploy the gateway process.
   enabled: true
   extractor:
+    # -- Configures the connection string for the extractor.
     address: ""
   tracker:
+    # -- Configures the connection string for the tracker.
     address: ""
-# Deploy and configure the indexer process.
+
 indexer:
+  # -- Deploy the indexer process.
   enabled: true
+  # -- When `""`, the indexer will run as a one-time job.
+  # Otherwise, it will run on the specified cron schedule.
   schedule: ""
   extractor:
+    # -- Configures the connection string for the extractor.
     address: ""
   tracker:
+    # -- Configures the connection string for the tracker.
     address: ""
-# Deploy and configure the tracker process.
+
 tracker:
+  # -- Deploy and configure the tracker process.
   enabled: true
+
 # Simple Google Analytics tracking beacon. Flip beacon.enabled=false to
 # disable. Note that by disabling this beacon, it makes it harder for us to
 # understand the current products usage. We figured by putting in it's own
@@ -52,17 +67,23 @@ tracker:
 # it in each would've been tedious. Only the information below is emit from
 # the beacon (application name and version).
 beacon:
+  # -- Deploy a beacon for version reporting. See comment in `values.yaml`
+  # for more information.
   enabled: true
   config:
+    # -- Preconfigured.
     trackingID: UA-143087272-3
+    # -- Currently unsupported.
     userID: ""
+    # -- Preconfigured.
     applicationName: depscloud
+    # -- Preconfigured.
     applicationVersion: 0.2.32
-# Enable ingress communication with depscloud.
+
 ingress:
-  # Enables the creation of the resources.
+  # -- Expose depscloud using an ingress controller. Must support gRPC.
   enabled: false
-  # Specify any ingress-controller specific annotations. The CLI
+  # -- Specify any ingress-controller specific annotations. The CLI
   # requires gRPC to work properly. Be sure your networking stack
   # supports it. Should you need help for your provider, don't hesitate
   # to reach out.
@@ -72,17 +93,18 @@ ingress:
     # nginx.ingress.kubernetes.io/ssl-redirect: "true"
     # nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
     # nginx.ingress.kubernetes.io/enable-cors: "true"
-  hosts:
-    - host: depscloud.example.local
-      paths:
-        - /
+  # -- Configures host / path pairings
+  hosts: []
+    # - host: depscloud.example.local
+    #   paths:
+    #     - /
+  # -- Configures TLS for the ingress route on some domain.
   tls: []
     # - secretName: depscloud-tls
     #   hosts:
     #     - depscloud.example.local
-  # Override the backend configuration for the ingress definition.
   backend:
-    # The name of the service to target. Defaults to "{{ .Release.Name }}-gateway".
+    # -- The name of the service to target. Defaults to "{{ .Release.Name }}-gateway".
     serviceName: ""
-    # The port to target.
+    # -- The port to target.
     servicePort: "http"
