@@ -2,8 +2,8 @@ name: branch
 
 on:
   pull_request:
-    paths:
-      - ".github/workflows/tag.yaml"
+    branches:
+      - "main"
   push:
     branches:
       - "*"
@@ -33,6 +33,7 @@ jobs:
 
       - name: Setup jsonnet
         run: |
+          export GO111MODULE=on
           export GOPATH="${HOME}/go"
           export PATH="${GOPATH}/bin:${PATH}"
           make build-deps

@@ -31,7 +31,7 @@ build-deps:
 	go get -u github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
 	go get -u github.com/google/go-jsonnet/cmd/jsonnet
 	go get -u github.com/gomarkdown/mdtohtml
-	go get github.com/norwoodj/helm-docs/cmd/helm-docs
+	go get -u github.com/norwoodj/helm-docs/cmd/helm-docs
 	npm install -g prettier
 
 public:
