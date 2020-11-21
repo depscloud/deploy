@@ -1,0 +1,15 @@
+extractor:
+  podAnnotations:
+    consul.hashicorp.com/connect-inject: 'true'
+
+gateway:
+  podAnnotations:
+    consul.hashicorp.com/connect-inject: 'true'
+
+indexer:
+  podAnnotations:
+    consul.hashicorp.com/connect-inject: 'true'
+
+tracker:
+  podAnnotations:
+    consul.hashicorp.com/connect-inject: 'true'

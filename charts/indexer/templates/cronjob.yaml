@@ -16,6 +16,10 @@ spec:
         metadata:
           labels:
             {{- include "indexer.labels" . | nindent 12 }}
+          {{- with .Values.podAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
         spec:
           restartPolicy: OnFailure
         {{- with .Values.imagePullSecrets }}

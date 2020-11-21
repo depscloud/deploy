@@ -4,12 +4,12 @@ global:
   # -- Common labels added to all resources.
   labels: {}
 
-  # -- Common service configuration. Used to configure routing topology.
-  service: {}
-  #  topology:
-  #    - "kubernetes.io/hostname"
-  #    - "topology.kubernetes.io/zone"
-  #    - "topology.kubernetes.io/region"
+  service:
+    # -- Configure the routing topology. Requires ServiceTopology feature gate and ClusterIP.
+    topology: []
+    #  - "kubernetes.io/hostname"
+    #  - "topology.kubernetes.io/zone"
+    #  - "topology.kubernetes.io/region"
 
   # Common metrics configuration.
   metrics:
@@ -38,7 +38,10 @@ serviceAccount:
   automountToken: false
   # -- The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name:
+  name: ""
+
+# -- Annotations for the pod.
+podAnnotations: {}
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -56,8 +59,12 @@ securityContext: {}
 service:
   # -- Configure the service type to use.
   type: Headless
-  # type: ClusterIP
-  # topology:
+
+  # -- Specify any annotations to add to the service.
+  annotations: {}
+
+  # -- Configure the routing topology. Requires ServiceTopology feature gate and ClusterIP.
+  topology: []
   #   - "kubernetes.io/hostname"
   #   - "topology.kubernetes.io/zone"
   #   - "topology.kubernetes.io/region"

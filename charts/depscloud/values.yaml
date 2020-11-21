@@ -3,12 +3,13 @@
 global:
   # -- Common labels added to all resources.
   labels: {}
-  # -- Common service configuration. Used to configure routing topology.
-  service: {}
-  #  topology:
-  #    - "kubernetes.io/hostname"
-  #    - "topology.kubernetes.io/zone"
-  #    - "topology.kubernetes.io/region"
+
+  service:
+    # -- Configure the routing topology. Requires ServiceTopology feature gate and ClusterIP.
+    topology: []
+    #  - "kubernetes.io/hostname"
+    #  - "topology.kubernetes.io/zone"
+    #  - "topology.kubernetes.io/region"
 
   # Common metrics configuration.
   metrics:
