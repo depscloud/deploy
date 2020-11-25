@@ -1,24 +1,49 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>deps.cloud Deployment Configuration</title>
-  </head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>deps.cloud deployment configuration</title>
+  <meta name="GENERATOR" content="github.com/gomarkdown/markdown markdown processor for Go" />
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
 
-  <body>
-    <p><a href='charts/index.yaml'>charts/index.yaml</a></p>
+<h1>deps.cloud deployment configuration</h1>
 
-    <h1>Raw Kubernetes Manifests</h1>
-    <p><a href='k8s/depscloud.yaml'>k8s/depscloud.yaml</a></p>
-    <p><a href='k8s/mysql.yaml'>k8s/mysql.yaml</a></p>
-    <p><a href='k8s/depscloud-system.yaml'>k8s/depscloud-system.yaml</a></p>
-    <p><a href='k8s/postgres.yaml'>k8s/postgres.yaml</a></p>
+<p><a href="https://artifacthub.io/packages/search?repo=depscloud"><img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/depscloud" alt="Artifact HUB" /></a>
+<img src="https://img.shields.io/github/license/depscloud/deploy.svg" alt="license" /></p>
 
-    <h1>Monitoring</h1>
-    <p><a href='monitoring/depscloud_prometheus_rules.yaml'>monitoring/depscloud_prometheus_rules.yaml</a></p>
-    <p><a href='monitoring/depscloud-tracker-grafana.json'>monitoring/depscloud-tracker-grafana.json</a></p>
-    <p><a href='monitoring/depscloud-indexer-grafana.json'>monitoring/depscloud-indexer-grafana.json</a></p>
-    <p><a href='monitoring/depscloud_prometheus_alerts.yaml'>monitoring/depscloud_prometheus_alerts.yaml</a></p>
-    <p><a href='monitoring/depscloud-gateway-grafana.json'>monitoring/depscloud-gateway-grafana.json</a></p>
-    <p><a href='monitoring/depscloud-extractor-grafana.json'>monitoring/depscloud-extractor-grafana.json</a></p>
-  </body>
+<p>Please see our <a href="https://deps.cloud/docs/deploy">documentation</a> for proper use.</p>
+
+<h3>Kubernetes Manifests</h3>
+
+<pre><code class="language-bash">$ kubectl apply -f https://depscloud.github.io/deploy/k8s/depscloud.yaml
+</code></pre>
+
+<ul>
+<li><a href="/k8s/depscloud.yaml">depscloud</a></li>
+<li><a href="/k8s/mysql.yaml">mysql</a></li>
+<li><a href="/k8s/postgres.yaml">postgres</a></li>
+</ul>
+
+<h3>Helm</h3>
+
+<pre><code class="language-bash">$ helm repo add depscloud https://depscloud.github.io/deploy/charts
+&quot;depscloud&quot; has been added to your repositories
+</code></pre>
+
+<ul>
+<li><a href="https://artifacthub.io/packages/search?page=1&amp;ts_query_web=depscloud">ArtifactHub</a></li>
+</ul>
+
+<h3>Grafana Dashboards</h3>
+
+<ul>
+<li><a href="/monitoring/depscloud-extractor-grafana.json">extractor</a></li>
+<li><a href="/monitoring/depscloud-gateway-grafana.json">gateway</a></li>
+<li><a href="/monitoring/depscloud-indexer-grafana.json">indexer</a></li>
+<li><a href="/monitoring/depscloud-tracker-grafana.json">tracker</a></li>
+</ul>
+
+</body>
 </html>
