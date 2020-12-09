@@ -90,8 +90,6 @@ spec:
                 {{- end }}
                 - --workers={{ .Values.workers }}
                 - --config=/etc/indexer/config.yaml
-                - --ssh-keypath=
-                - --ssh-user=
               resources:
                 {{- toYaml .Values.resources | nindent 16 }}
           {{- with .Values.nodeSelector }}
