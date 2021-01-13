@@ -19,7 +19,7 @@ dependencies:
     version: 0.0.2
   - name: mysql
     repository: https://charts.bitnami.com/bitnami
-    version: 8.2.3
+    version: 8.2.4
     condition: mysql.enabled
   - name: postgresql
     repository: https://charts.bitnami.com/bitnami
