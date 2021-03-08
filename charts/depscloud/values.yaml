@@ -70,7 +70,7 @@ beacon:
     # -- Preconfigured.
     applicationName: depscloud
     # -- Preconfigured.
-    applicationVersion: 0.2.33
+    applicationVersion: 0.2.34
 ingress:
   # -- Expose depscloud using an ingress controller. Must support gRPC.
   enabled: false

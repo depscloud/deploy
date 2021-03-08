@@ -11,8 +11,8 @@ maintainers:
   - name: Mya Pitzeruse
     email: mjpitz@deps.cloud
     url: https://mjpitz.com
-version: 0.2.33
-appVersion: 0.2.33
+version: 0.2.34
+appVersion: 0.2.34
 dependencies:
   - name: beacon
     repository: https://mjpitz.github.io/charts/
@@ -27,17 +27,17 @@ dependencies:
     condition: postgres.enabled
   - name: extractor
     repository: file://../extractor
-    version: 0.2.33
+    version: 0.2.34
     condition: extractor.enabled
   - name: gateway
     repository: file://../gateway
-    version: 0.2.33
+    version: 0.2.34
     condition: gateway.enabled
   - name: indexer
     repository: file://../indexer
-    version: 0.2.33
+    version: 0.2.34
     condition: indexer.enabled
   - name: tracker
     repository: file://../tracker
-    version: 0.2.33
+    version: 0.2.34
     condition: tracker.enabled
