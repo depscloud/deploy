@@ -125,6 +125,7 @@
                "decimals": 3,
                "description": "How much error budget is left looking at our 99.000% availability guarantees",
                "fill": 10,
+               "fillGradient": 0,
                "gridPos": { },
                "id": 4,
                "legend": {
@@ -220,6 +221,7 @@
                "dashes": false,
                "datasource": "$datasource",
                "fill": 10,
+               "fillGradient": 0,
                "gridPos": { },
                "id": 5,
                "legend": {
@@ -300,6 +302,7 @@
                "dashes": false,
                "datasource": "$datasource",
                "fill": 1,
+               "fillGradient": 0,
                "gridPos": { },
                "id": 6,
                "legend": {
@@ -380,6 +383,7 @@
                "dashes": false,
                "datasource": "$datasource",
                "fill": 1,
+               "fillGradient": 0,
                "gridPos": { },
                "id": 7,
                "legend": {
@@ -473,6 +477,7 @@
                "dashes": false,
                "datasource": "$datasource",
                "fill": 1,
+               "fillGradient": 0,
                "gridPos": { },
                "id": 8,
                "legend": {
@@ -553,6 +558,7 @@
                "dashes": false,
                "datasource": "$datasource",
                "fill": 1,
+               "fillGradient": 0,
                "gridPos": { },
                "id": 9,
                "legend": {
@@ -633,6 +639,7 @@
                "dashes": false,
                "datasource": "$datasource",
                "fill": 1,
+               "fillGradient": 0,
                "gridPos": { },
                "id": 10,
                "legend": {

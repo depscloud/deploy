@@ -18,7 +18,7 @@ This chart bootstraps a depscloud deployment on a [Kubernetes] cluster using the
 [kubernetes]: https://kubernetes.io
 [helm]: https://helm.sh
 
-Current chart version is `0.2.32`
+Current chart version is `0.3.0`
 
 ## Source Code
 
@@ -58,12 +58,12 @@ The command removes all the Kubernetes components associated with the chart and 
 
 | Repository                         | Name       | Version |
 | ---------------------------------- | ---------- | ------- |
-| file://../extractor                | extractor  | 0.2.32  |
-| file://../gateway                  | gateway    | 0.2.32  |
-| file://../indexer                  | indexer    | 0.2.32  |
-| file://../tracker                  | tracker    | 0.2.32  |
-| https://charts.bitnami.com/bitnami | mysql      | 7.1.0   |
-| https://charts.bitnami.com/bitnami | postgresql | 9.8.12  |
+| file://../extractor                | extractor  | 0.3.0   |
+| file://../gateway                  | gateway    | 0.3.0   |
+| file://../indexer                  | indexer    | 0.3.0   |
+| file://../tracker                  | tracker    | 0.3.0   |
+| https://charts.bitnami.com/bitnami | mysql      | 8.2.8   |
+| https://charts.bitnami.com/bitnami | postgresql | 10.3.4  |
 | https://mjpitz.github.io/charts/   | beacon     | 0.0.2   |
 
 ## Parameters
@@ -73,7 +73,7 @@ The following table lists the configurable parameters of the depscloud chart and
 | Key                                    | Type   | Default            | Description                                                                                                                                                                                                  |
 | -------------------------------------- | ------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | beacon.config.applicationName          | string | `"depscloud"`      | Preconfigured.                                                                                                                                                                                               |
-| beacon.config.applicationVersion       | string | `"0.2.32"`         | Preconfigured.                                                                                                                                                                                               |
+| beacon.config.applicationVersion       | string | `"0.3.0"`          | Preconfigured.                                                                                                                                                                                               |
 | beacon.config.trackingID               | string | `"UA-143087272-3"` | Preconfigured.                                                                                                                                                                                               |
 | beacon.config.userID                   | string | `""`               | Currently unsupported.                                                                                                                                                                                       |
 | beacon.enabled                         | bool   | `true`             | Deploy a beacon for version reporting. See comment in `values.yaml` for more information.                                                                                                                    |

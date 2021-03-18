@@ -1,4 +1,4 @@
-LATEST_VERSION=$(shell (curl -sSL https://api.github.com/repos/depscloud/depscloud/releases/latest | jq -r .tag_name | cut -c 2-))
+LATEST_VERSION ?= $(shell (curl -sSL https://api.github.com/repos/depscloud/depscloud/releases/latest | jq -r .tag_name | cut -c 2-))
 
 CHART_REPOSITORY_URL = "https://depscloud.github.io/deploy"
 REPOSITORY_URL = "https://github.com/depscloud/deploy.git"
