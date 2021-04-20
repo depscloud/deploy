@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   cockroachdb:
-    image: cockroachdb/cockroach:v20.2.6
+    image: cockroachdb/cockroach:v20.2.7
     hostname: cockroachdb
     ports:
       - 26257:26257
