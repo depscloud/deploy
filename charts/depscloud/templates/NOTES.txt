@@ -10,7 +10,7 @@ To inspect the status of your release, try:
 
 {{- if .Values.ingress.enabled }}
 {{- $host := first .Values.ingress.hosts -}}
-{{- $scheme := ternary "https" "http" .Values.ingress.tls -}}
+{{- $scheme := ternary "https" "http" (len .Values.ingress.tls | gt 0) -}}
 {{- $baseURL := printf "%s://%s" $scheme $host.host -}}
 Once running, deps.cloud will be available at {{ $baseURL }}.
 
