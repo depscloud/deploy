@@ -12,7 +12,7 @@ This chart bootstraps a gateway deployment on a [Kubernetes] cluster using the [
 [kubernetes]: https://kubernetes.io
 [helm]: https://helm.sh
 
-Current chart version is `0.3.0`
+Current chart version is `0.3.1`
 
 ## Source Code
 

@@ -16,17 +16,21 @@ global:
       enabled: false
       # -- Configure the scrape interval used by the monitor.
       interval: 10s
+
 mysql:
   # -- Deploy a copy of MySQL alongside deps.cloud. Useful for quick testing.
   # Not recommended for production.
   enabled: false
+
 postgres:
   # -- Deploy a copy of PostgreSQL alongside deps.cloud. Useful for quick testing.
   # Not recommended for production.
   enabled: false
+
 extractor:
   # -- Deploy the extractor process.
   enabled: true
+
 gateway:
   # -- Deploy the gateway process.
   enabled: true
@@ -36,6 +40,7 @@ gateway:
   tracker:
     # -- Configures the connection string for the tracker.
     address: ""
+
 indexer:
   # -- Deploy the indexer process.
   enabled: true
@@ -48,29 +53,11 @@ indexer:
   tracker:
     # -- Configures the connection string for the tracker.
     address: ""
+
 tracker:
   # -- Deploy and configure the tracker process.
   enabled: true
-# Simple Google Analytics tracking beacon. Flip beacon.enabled=false to
-# disable. Note that by disabling this beacon, it makes it harder for us to
-# understand the current products usage. We figured by putting in it's own
-# dedicated process, we weren't hiding it from users and it could easily be
-# shutoff if desired. Since deps.cloud contains several processes, disabling
-# it in each would've been tedious. Only the information below is emit from
-# the beacon (application name and version).
-beacon:
-  # -- Deploy a beacon for version reporting. See comment in `values.yaml`
-  # for more information.
-  enabled: true
-  config:
-    # -- Preconfigured.
-    trackingID: UA-143087272-3
-    # -- Currently unsupported.
-    userID: ""
-    # -- Preconfigured.
-    applicationName: depscloud
-    # -- Preconfigured.
-    applicationVersion: 0.3.1
+
 ingress:
   # -- Expose depscloud using an ingress controller. Must support gRPC.
   enabled: false

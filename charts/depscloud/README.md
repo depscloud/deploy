@@ -18,7 +18,7 @@ This chart bootstraps a depscloud deployment on a [Kubernetes] cluster using the
 [kubernetes]: https://kubernetes.io
 [helm]: https://helm.sh
 
-Current chart version is `0.3.0`
+Current chart version is `0.3.1`
 
 ## Source Code
 
@@ -58,43 +58,37 @@ The command removes all the Kubernetes components associated with the chart and 
 
 | Repository                         | Name       | Version |
 | ---------------------------------- | ---------- | ------- |
-| file://../extractor                | extractor  | 0.3.0   |
-| file://../gateway                  | gateway    | 0.3.0   |
-| file://../indexer                  | indexer    | 0.3.0   |
-| file://../tracker                  | tracker    | 0.3.0   |
-| https://charts.bitnami.com/bitnami | mysql      | 8.2.8   |
-| https://charts.bitnami.com/bitnami | postgresql | 10.3.4  |
-| https://mjpitz.github.io/charts/   | beacon     | 0.0.2   |
+| file://../extractor                | extractor  | 0.3.1   |
+| file://../gateway                  | gateway    | 0.3.1   |
+| file://../indexer                  | indexer    | 0.3.1   |
+| file://../tracker                  | tracker    | 0.3.1   |
+| https://charts.bitnami.com/bitnami | mysql      | 8.5.1   |
+| https://charts.bitnami.com/bitnami | postgresql | 10.3.13 |
 
 ## Parameters
 
 The following table lists the configurable parameters of the depscloud chart and their default values.
 
-| Key                                    | Type   | Default            | Description                                                                                                                                                                                                  |
-| -------------------------------------- | ------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| beacon.config.applicationName          | string | `"depscloud"`      | Preconfigured.                                                                                                                                                                                               |
-| beacon.config.applicationVersion       | string | `"0.3.0"`          | Preconfigured.                                                                                                                                                                                               |
-| beacon.config.trackingID               | string | `"UA-143087272-3"` | Preconfigured.                                                                                                                                                                                               |
-| beacon.config.userID                   | string | `""`               | Currently unsupported.                                                                                                                                                                                       |
-| beacon.enabled                         | bool   | `true`             | Deploy a beacon for version reporting. See comment in `values.yaml` for more information.                                                                                                                    |
-| extractor.enabled                      | bool   | `true`             | Deploy the extractor process.                                                                                                                                                                                |
-| gateway.enabled                        | bool   | `true`             | Deploy the gateway process.                                                                                                                                                                                  |
-| gateway.extractor.address              | string | `""`               | Configures the connection string for the extractor.                                                                                                                                                          |
-| gateway.tracker.address                | string | `""`               | Configures the connection string for the tracker.                                                                                                                                                            |
-| global.labels                          | object | `{}`               | Common labels added to all resources.                                                                                                                                                                        |
-| global.metrics.serviceMonitor.enabled  | bool   | `false`            | Create a Prometheus ServiceMonitor.                                                                                                                                                                          |
-| global.metrics.serviceMonitor.interval | string | `"10s"`            | Configure the scrape interval used by the monitor.                                                                                                                                                           |
-| global.service.topology                | list   | `[]`               | Configure the routing topology. Requires ServiceTopology feature gate and ClusterIP.                                                                                                                         |
-| indexer.enabled                        | bool   | `true`             | Deploy the indexer process.                                                                                                                                                                                  |
-| indexer.extractor.address              | string | `""`               | Configures the connection string for the extractor.                                                                                                                                                          |
-| indexer.schedule                       | string | `""`               | When `""`, the indexer will run as a one-time job. Otherwise, it will run on the specified cron schedule.                                                                                                    |
-| indexer.tracker.address                | string | `""`               | Configures the connection string for the tracker.                                                                                                                                                            |
-| ingress.annotations                    | object | `{}`               | Specify any ingress-controller specific annotations. The CLI requires gRPC to work properly. Be sure your networking stack supports it. Should you need help for your provider, don't hesitate to reach out. |
-| ingress.backend.serviceName            | string | `""`               | The name of the service to target. Defaults to "{{ .Release.Name }}-gateway".                                                                                                                                |
-| ingress.backend.servicePort            | string | `"http"`           | The port to target.                                                                                                                                                                                          |
-| ingress.enabled                        | bool   | `false`            | Expose depscloud using an ingress controller. Must support gRPC.                                                                                                                                             |
-| ingress.hosts                          | list   | `[]`               |                                                                                                                                                                                                              |
-| ingress.tls                            | list   | `[]`               |                                                                                                                                                                                                              |
-| mysql.enabled                          | bool   | `false`            | Deploy a copy of MySQL alongside deps.cloud. Useful for quick testing. Not recommended for production.                                                                                                       |
-| postgres.enabled                       | bool   | `false`            | Deploy a copy of PostgreSQL alongside deps.cloud. Useful for quick testing. Not recommended for production.                                                                                                  |
-| tracker.enabled                        | bool   | `true`             | Deploy and configure the tracker process.                                                                                                                                                                    |
+| Key                                    | Type   | Default  | Description                                                                                                                                                                                                  |
+| -------------------------------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| extractor.enabled                      | bool   | `true`   | Deploy the extractor process.                                                                                                                                                                                |
+| gateway.enabled                        | bool   | `true`   | Deploy the gateway process.                                                                                                                                                                                  |
+| gateway.extractor.address              | string | `""`     | Configures the connection string for the extractor.                                                                                                                                                          |
+| gateway.tracker.address                | string | `""`     | Configures the connection string for the tracker.                                                                                                                                                            |
+| global.labels                          | object | `{}`     | Common labels added to all resources.                                                                                                                                                                        |
+| global.metrics.serviceMonitor.enabled  | bool   | `false`  | Create a Prometheus ServiceMonitor.                                                                                                                                                                          |
+| global.metrics.serviceMonitor.interval | string | `"10s"`  | Configure the scrape interval used by the monitor.                                                                                                                                                           |
+| global.service.topology                | list   | `[]`     | Configure the routing topology. Requires ServiceTopology feature gate and ClusterIP.                                                                                                                         |
+| indexer.enabled                        | bool   | `true`   | Deploy the indexer process.                                                                                                                                                                                  |
+| indexer.extractor.address              | string | `""`     | Configures the connection string for the extractor.                                                                                                                                                          |
+| indexer.schedule                       | string | `""`     | When `""`, the indexer will run as a one-time job. Otherwise, it will run on the specified cron schedule.                                                                                                    |
+| indexer.tracker.address                | string | `""`     | Configures the connection string for the tracker.                                                                                                                                                            |
+| ingress.annotations                    | object | `{}`     | Specify any ingress-controller specific annotations. The CLI requires gRPC to work properly. Be sure your networking stack supports it. Should you need help for your provider, don't hesitate to reach out. |
+| ingress.backend.serviceName            | string | `""`     | The name of the service to target. Defaults to "{{ .Release.Name }}-gateway".                                                                                                                                |
+| ingress.backend.servicePort            | string | `"http"` | The port to target.                                                                                                                                                                                          |
+| ingress.enabled                        | bool   | `false`  | Expose depscloud using an ingress controller. Must support gRPC.                                                                                                                                             |
+| ingress.hosts                          | list   | `[]`     |                                                                                                                                                                                                              |
+| ingress.tls                            | list   | `[]`     |                                                                                                                                                                                                              |
+| mysql.enabled                          | bool   | `false`  | Deploy a copy of MySQL alongside deps.cloud. Useful for quick testing. Not recommended for production.                                                                                                       |
+| postgres.enabled                       | bool   | `false`  | Deploy a copy of PostgreSQL alongside deps.cloud. Useful for quick testing. Not recommended for production.                                                                                                  |
+| tracker.enabled                        | bool   | `true`   | Deploy and configure the tracker process.                                                                                                                                                                    |

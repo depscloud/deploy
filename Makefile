@@ -109,7 +109,6 @@ sync-tag:
 	@make .sync-chart CHART_NAME=indexer
 	@make .sync-chart CHART_NAME=tracker
 	@make .sync-chart CHART_NAME=depscloud
-	@yq w -i ./charts/depscloud/values.yaml "beacon.config.applicationVersion"  $(LATEST_VERSION)
 
 tag-release:
 	@git commit -a -m "$(LATEST_VERSION)"
