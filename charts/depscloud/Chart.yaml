@@ -11,8 +11,8 @@ maintainers:
   - name: Mya Pitzeruse
     email: mjpitz@deps.cloud
     url: https://mjpitz.com
-version: 0.3.4
-appVersion: 0.3.4
+version: 0.3.5
+appVersion: 0.3.5
 dependencies:
   - name: mysql
     repository: https://charts.bitnami.com/bitnami
@@ -24,17 +24,17 @@ dependencies:
     condition: postgres.enabled
   - name: extractor
     repository: file://../extractor
-    version: 0.3.4
+    version: 0.3.5
     condition: extractor.enabled
   - name: gateway
     repository: file://../gateway
-    version: 0.3.4
+    version: 0.3.5
     condition: gateway.enabled
   - name: indexer
     repository: file://../indexer
-    version: 0.3.4
+    version: 0.3.5
     condition: indexer.enabled
   - name: tracker
     repository: file://../tracker
-    version: 0.3.4
+    version: 0.3.5
     condition: tracker.enabled
