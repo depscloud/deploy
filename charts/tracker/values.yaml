@@ -23,7 +23,7 @@ global:
 replicaCount: 1
 
 image:
-  repository: ocr.sh/depscloud/tracker
+  repository: registry.pitz.tech/depscloud/tracker
   pullPolicy: IfNotPresent
   tag: ""
 

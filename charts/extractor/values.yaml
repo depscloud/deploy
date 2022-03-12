@@ -23,7 +23,7 @@ global:
 replicaCount: 1
 
 image:
-  repository: ocr.sh/depscloud/extractor
+  repository: registry.pitz.tech/depscloud/extractor
   pullPolicy: IfNotPresent
   tag: ""
 

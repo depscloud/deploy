@@ -5,7 +5,7 @@ global:
   labels: {}
 
 image:
-  repository: ocr.sh/depscloud/indexer
+  repository: registry.pitz.tech/depscloud/indexer
   pullPolicy: IfNotPresent
   tag: ""
 
