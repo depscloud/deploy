@@ -23,7 +23,7 @@ global:
 replicaCount: 1
 
 image:
-  repository: registry.pitz.tech/depscloud/gateway
+  repository: img.pitz.tech/depscloud/gateway
   pullPolicy: IfNotPresent
   tag: ""
 

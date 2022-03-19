@@ -10,7 +10,7 @@ This chart bootstraps an indexer deployment on a [Kubernetes] cluster using the 
 [kubernetes]: https://kubernetes.io
 [helm]: https://helm.sh
 
-Current chart version is `0.3.1`
+Current chart version is `0.3.5`
 
 ## Source Code
 
@@ -61,7 +61,7 @@ The following table lists the configurable parameters of the indexer chart and t
 | fullnameOverride                 | string | `""`                                                                          |                                                                                                                                                             |
 | global.labels                    | object | `{}`                                                                          | Common labels added to all resources.                                                                                                                       |
 | image.pullPolicy                 | string | `"IfNotPresent"`                                                              |                                                                                                                                                             |
-| image.repository                 | string | `"registry.pitz.tech/depscloud/indexer"`                                                  |                                                                                                                                                             |
+| image.repository                 | string | `"img.pitz.tech/depscloud/indexer"`                                           |                                                                                                                                                             |
 | image.tag                        | string | `""`                                                                          |                                                                                                                                                             |
 | imagePullSecrets                 | list   | `[]`                                                                          |                                                                                                                                                             |
 | labels                           | object | `{}`                                                                          | Labels added to all resources. These are joined with the global configuration for the deployment.                                                           |

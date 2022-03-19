@@ -23,7 +23,7 @@ global:
 replicaCount: 1
 
 image:
-  repository: registry.pitz.tech/depscloud/extractor
+  repository: img.pitz.tech/depscloud/extractor
   pullPolicy: IfNotPresent
   tag: ""
 

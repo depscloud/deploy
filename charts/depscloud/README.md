@@ -18,7 +18,7 @@ This chart bootstraps a depscloud deployment on a [Kubernetes] cluster using the
 [kubernetes]: https://kubernetes.io
 [helm]: https://helm.sh
 
-Current chart version is `0.3.1`
+Current chart version is `0.3.5`
 
 ## Source Code
 
@@ -58,12 +58,12 @@ The command removes all the Kubernetes components associated with the chart and 
 
 | Repository                         | Name       | Version |
 | ---------------------------------- | ---------- | ------- |
-| file://../extractor                | extractor  | 0.3.1   |
-| file://../gateway                  | gateway    | 0.3.1   |
-| file://../indexer                  | indexer    | 0.3.1   |
-| file://../tracker                  | tracker    | 0.3.1   |
-| https://charts.bitnami.com/bitnami | mysql      | 8.5.1   |
-| https://charts.bitnami.com/bitnami | postgresql | 10.3.13 |
+| file://../extractor                | extractor  | 0.3.5   |
+| file://../gateway                  | gateway    | 0.3.5   |
+| file://../indexer                  | indexer    | 0.3.5   |
+| file://../tracker                  | tracker    | 0.3.5   |
+| https://charts.bitnami.com/bitnami | mysql      | 8.5.9   |
+| https://charts.bitnami.com/bitnami | postgresql | 10.4.7  |
 
 ## Parameters
 
@@ -87,8 +87,8 @@ The following table lists the configurable parameters of the depscloud chart and
 | ingress.backend.serviceName            | string | `""`     | The name of the service to target. Defaults to "{{ .Release.Name }}-gateway".                                                                                                                                |
 | ingress.backend.servicePort            | string | `"http"` | The port to target.                                                                                                                                                                                          |
 | ingress.enabled                        | bool   | `false`  | Expose depscloud using an ingress controller. Must support gRPC.                                                                                                                                             |
-| ingress.hosts                          | list   | `[]`     |                                                                                                                                                                                                              |
-| ingress.tls                            | list   | `[]`     |                                                                                                                                                                                                              |
+| ingress.hosts                          | list   | `[]`     | Configures host / path pairings                                                                                                                                                                              |
+| ingress.tls                            | list   | `[]`     | Configures TLS for the ingress route on some domain.                                                                                                                                                         |
 | mysql.enabled                          | bool   | `false`  | Deploy a copy of MySQL alongside deps.cloud. Useful for quick testing. Not recommended for production.                                                                                                       |
 | postgres.enabled                       | bool   | `false`  | Deploy a copy of PostgreSQL alongside deps.cloud. Useful for quick testing. Not recommended for production.                                                                                                  |
 | tracker.enabled                        | bool   | `true`   | Deploy and configure the tracker process.                                                                                                                                                                    |
