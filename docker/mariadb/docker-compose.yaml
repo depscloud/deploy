@@ -3,7 +3,7 @@ version: "3.8"
 services:
   mariadb:
     restart: always
-    image: mariadb:10
+    image: mariadb:11
     hostname: mariadb
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
