@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   postgres:
-    image: postgres:13.6
+    image: postgres:16.4
     hostname: postgres
     environment:
       POSTGRES_USER: user
