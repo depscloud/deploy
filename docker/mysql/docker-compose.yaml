@@ -3,7 +3,7 @@ version: "3.8"
 services:
   mysql:
     restart: always
-    image: mysql:8
+    image: mysql:9
     hostname: mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
